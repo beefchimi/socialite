@@ -1,0 +1,19 @@
+{
+  "extends": "@beefchimi/typescript-config/library.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "rootDir": ".",
+    "types": ["vitest/global"],
+    "declarationDir": "dist/types",
+    "declarationMap": false,
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "skipLibCheck": false,
+    "useDefineForClassFields": true
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./node_modules/**/*"]
+}

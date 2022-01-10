@@ -1,0 +1,56 @@
+{
+  "name": "socialite",
+  "version": "0.0.0",
+  "description": "Social network URL parsing for aristocrats ",
+  "author": "Curtis Dulmage",
+  "license": "ISC",
+  "keywords": [
+    "web",
+    "development"
+  ],
+  "homepage": "https://github.com/beefchimi/socialite#readme",
+  "bugs": {
+    "url": "https://github.com/beefchimi/socialite/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beefchimi/socialite.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
+  "main": "./dist/socialite.umd.js",
+  "module": "./dist/socialite.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/socialite.es.js",
+      "require": "./dist/socialite.umd.js"
+    }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browserslist": [
+    "extends @beefchimi/browserslist-config"
+  ],
+  "prettier": "@beefchimi/prettier-config",
+  "scripts": {
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "test": "vitest",
+    "coverage": "vitest --coverage",
+    "build": "npm run clean && tsc && vite build",
+    "clean": "rm -rf dist",
+    "nuke": "npm run clean && rm -rf node_modules && rm -rf package-lock.json && npm cache clean --force"
+  },
+  "devDependencies": {
+    "@beefchimi/browserslist-config": "^0.0.7",
+    "@beefchimi/eslint-plugin": "^0.0.7",
+    "@beefchimi/prettier-config": "^0.0.7",
+    "@beefchimi/typescript-config": "^0.0.7",
+    "@types/node": "^17.0.8",
+    "vite": "^2.7.10",
+    "vitest": "^0.0.139",
+    "vite-plugin-dts": "^0.9.8"
+  }
+}
