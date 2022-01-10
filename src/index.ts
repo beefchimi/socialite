@@ -1,5 +1,11 @@
-import type {SocialiteTest} from './types';
+export {DEFAULT_SOCIAL_NETWORKS} from './data';
+export {Socialite} from './socialite';
 
-export function socialite({message = '@beefchimi'}: SocialiteTest) {
-  return `This is a ${message} package!`;
-}
+export {UrlCaptureId, SocialCaptureId} from './types';
+export type {
+  UrlAnatomy,
+  SocialNetwork,
+  SocialNetworkProperty,
+  SocialNetworkProperties,
+  SocialProfile,
+} from './types';
