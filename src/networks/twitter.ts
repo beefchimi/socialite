@@ -1,18 +1,17 @@
-import {replacement} from '../capture';
+import {profileReplacement} from '../capture';
+import {socialNetworkPrefixes} from '../prefixes';
 import type {SocialNetwork} from '../types';
 
-const prefix = '@';
+const {twitter: prefix} = socialNetworkPrefixes;
 
 export const twitter: SocialNetwork = {
   id: 'twitter',
   title: 'Twitter',
-  preferredUrl: `https://twitter.com/${prefix}${replacement.user}`,
-  overrides: {
-    subdomain: '',
-    tldomain: '',
-    leadingPath: '',
-    trailingPath: '',
+  preferredUrl: `https://twitter.com/${prefix}${profileReplacement.user}`,
+  matcher: {
+    domain: 'twitter',
+    user: `${prefix}[^\\/]+`,
   },
-  appUrl: `https://mobile.twitter.com/${prefix}${replacement.user}`,
+  appUrl: `https://mobile.twitter.com/${prefix}${profileReplacement.user}`,
   prefix,
 };

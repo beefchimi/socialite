@@ -1,15 +1,14 @@
-import {urlRegExp} from './capture';
+import {profileReplacement, urlRegExp} from './capture';
 import type {
   BasicUrl,
-  UrlAnatomy,
+  UrlGroupSubset,
   ParsedUrlGroups,
   SocialNetwork,
-  // SocialNetworkMap,
+  SocialNetworkMap,
+  SocialNetworkSubset,
   SocialNetworkProperties,
 } from './types';
 import {filterNullishValuesFromObject} from './utilities';
-
-type SocialNetworkSubset = Partial<SocialNetwork>;
 
 export function filterNetworkProperties(
   network: SocialNetwork,
@@ -32,18 +31,36 @@ export function filterNetworkProperties(
   );
 }
 
-/*
-export function getSocialNetworkUnion(networks: SocialNetworkMap) {
-  return networks.size ? [...networks.keys()].join('|') : null;
+export function getNetworkFromDomain(
+  networks: SocialNetworkMap,
+  domain: string,
+) {
+  let matchedNetwork: SocialNetwork | null = null;
+
+  for (const [_id, network] of networks) {
+    const match = new RegExp(network.matcher.domain).test(domain);
+
+    if (match) {
+      matchedNetwork = network;
+      break;
+    }
+  }
+
+  return matchedNetwork;
 }
-*/
 
 export function getUrlGroups(url: BasicUrl): ParsedUrlGroups {
   const matched = url.match(urlRegExp);
 
-  if (matched === null || matched.groups === undefined) {
+  if (!matched?.groups) {
     return null;
   }
 
-  return filterNullishValuesFromObject<Partial<UrlAnatomy>>(matched.groups);
+  return filterNullishValuesFromObject<UrlGroupSubset>(matched.groups);
+}
+
+export function getUrlWithSubstitutions(url: BasicUrl, user = '', prefix = '') {
+  return url
+    .replace(profileReplacement.user, user)
+    .replace(profileReplacement.prefix, prefix);
 }

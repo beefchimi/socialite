@@ -12,3 +12,7 @@ export function filterNullishValuesFromObject<T = BasicObject>(obj: T) {
         };
   }, {} as T);
 }
+
+export function constructRegExp(...captureGroups: string[]) {
+  return new RegExp(['^', ...captureGroups, '$'].join(''));
+}

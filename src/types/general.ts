@@ -2,6 +2,10 @@ export interface BasicObject {
   [key: string]: unknown;
 }
 
+export type BasicUrl = string;
+
+// Consider revisions to this interface:
+// ...insert issue url...
 export interface UrlAnatomy {
   scheme: string;
   subdomain: string;
@@ -12,5 +16,3 @@ export interface UrlAnatomy {
   parameters: string;
   anchor: string;
 }
-
-export type BasicUrl = string;

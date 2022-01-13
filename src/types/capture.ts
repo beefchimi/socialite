@@ -15,10 +15,10 @@ export enum UrlCaptureId {
   Anchor = 'anchor',
 }
 
-export enum SocialCaptureId {
-  Network = 'network',
-  Prefix = 'prefix',
-  User = 'user',
-}
+export type UrlGroupSubset = Partial<UrlAnatomy>;
+export type ParsedUrlGroups = UrlGroupSubset | null;
 
-export type ParsedUrlGroups = Partial<UrlAnatomy> | null;
+export interface UrlMinCriteria extends UrlGroupSubset {
+  domain: UrlAnatomy['domain'];
+  tldomain: UrlAnatomy['tldomain'];
+}

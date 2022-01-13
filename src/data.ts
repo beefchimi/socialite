@@ -1,3 +1,4 @@
 import * as networks from './networks';
 
-export const DEFAULT_SOCIAL_NETWORKS = Object.values(networks);
+export const allSocialNetworks = Object.values(networks);
+export const defaultSocialNetworks = [networks.facebook, networks.twitter];

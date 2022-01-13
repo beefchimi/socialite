@@ -1,2 +1,3 @@
 export {customNetworks} from './networks';
-export {validUrls} from './urls';
+export {invalidUrls} from './invalid-urls';
+export {validUrls} from './valid-urls';

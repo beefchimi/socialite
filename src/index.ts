@@ -1,7 +1,11 @@
-export {DEFAULT_SOCIAL_NETWORKS} from './data';
+export {urlCaptureGroup, defaultSocialMatcher} from './capture';
+
+export {allSocialNetworks, defaultSocialNetworks} from './data';
+export {socialNetworkPrefixes} from './prefixes';
+
 export {Socialite} from './socialite';
 
-export {UrlCaptureId, SocialCaptureId} from './types';
+export {UrlCaptureId} from './types';
 export type {
   UrlAnatomy,
   SocialNetwork,

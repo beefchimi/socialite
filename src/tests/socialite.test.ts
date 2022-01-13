@@ -1,4 +1,4 @@
-import {DEFAULT_SOCIAL_NETWORKS} from '../data';
+import {defaultSocialNetworks} from '../data';
 import {Socialite} from '../socialite';
 import type {SocialNetwork} from '../types';
 import {customNetworks} from './fixtures';
@@ -11,7 +11,7 @@ describe('Socialite class instance', () => {
 
   test('Contains the default networks', () => {
     const mockSocialite = new Socialite();
-    expect(mockSocialite.getNetworks()).toEqual(DEFAULT_SOCIAL_NETWORKS);
+    expect(mockSocialite.getNetworks()).toEqual(defaultSocialNetworks);
   });
 
   test('Constructor argument overwrites the default networks', () => {
@@ -23,6 +23,6 @@ describe('Socialite class instance', () => {
     const mockNetworks: SocialNetwork[] = [];
     const mockSocialite = new Socialite(mockNetworks);
 
-    expect(mockSocialite.getNetworks()).toEqual(DEFAULT_SOCIAL_NETWORKS);
+    expect(mockSocialite.getNetworks()).toEqual(defaultSocialNetworks);
   });
 });

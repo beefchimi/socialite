@@ -4,20 +4,25 @@ import {BasicUrl} from './general';
 export type SocialNetworkId = string;
 export type SocialNetworkTitle = string;
 
-// export type SocialNetworkType = 'default' | 'custom';
-
 export type UserName = string;
 export type UserPrefix = string;
+
+export interface SocialNetworkMatcher {
+  domain: string;
+  user?: string;
+}
 
 export interface SocialNetwork {
   id: SocialNetworkId;
   title: SocialNetworkTitle;
+  matcher: SocialNetworkMatcher;
   preferredUrl: BasicUrl;
-  overrides?: {[key: string]: string};
   appUrl?: BasicUrl;
   prefix?: UserPrefix;
 }
 
 export type SocialNetworkMap = Map<SocialNetworkId, SocialNetwork>;
+export type SocialNetworkSubset = Partial<SocialNetwork>;
+
 export type SocialNetworkProperty = keyof SocialNetwork;
 export type SocialNetworkProperties = SocialNetworkProperty[];
