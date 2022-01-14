@@ -75,6 +75,10 @@ export function getUrlGroups(url: BasicUrl): ParsedUrlGroups {
     port = filtered.port.replace(':', '').replace('/', '');
   }
 
+  if (filtered.path === '/') {
+    delete filtered.path;
+  }
+
   return {
     ...filtered,
     ...(subdomain ? {subdomain} : {}),

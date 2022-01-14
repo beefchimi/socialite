@@ -92,8 +92,7 @@ export class Socialite {
         : {}),
     };
 
-    // TODO: Avoid passing only a single `/` to `path`.
-    if (!path || path.length <= 1) {
+    if (!path) {
       return minimumResult;
     }
 
