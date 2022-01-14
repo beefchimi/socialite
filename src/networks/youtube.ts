@@ -14,16 +14,3 @@ export const youtube: SocialNetwork = {
     user: /^(?:\/channel\/|\/c\/)?(?:\/)?([^/]+)/,
   },
 };
-
-// Should capture domain:
-// youtube.com
-// youtu.be
-// www.youtube.com
-// m.youtu.be
-
-// Should capture path:
-// /channel/f00_Uz3r!
-// /channel/f00_Uz3r!/trail-123
-// /c/f00_Uz3r!
-// /c/f00_Uz3r!/123-trail
-// /f00_Uz3r!

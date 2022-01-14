@@ -9,9 +9,3 @@ export const discord: SocialNetwork = {
     user: /^(?:\/users\/)?(?:\/)?([^/]+)/,
   },
 };
-
-// Should pass:
-// /users/f00_Uz3r!
-// /users/f00_Uz3r!/trail-123
-// /f00_Uz3r!/123-trail
-// f00_Uz3r!

@@ -8,15 +8,3 @@ export const telegram: SocialNetwork = {
     domain: /telegram|t$/,
   },
 };
-
-// Should capture:
-// t
-// telegram
-// sub.t
-// sub.telegram
-
-// Should NOT capture:
-// twitter
-// www.twitter
-// facebook
-// www.facebook

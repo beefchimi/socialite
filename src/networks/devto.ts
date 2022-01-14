@@ -5,6 +5,6 @@ export const devto: SocialNetwork = {
   id: 'dev_to',
   preferredUrl: `https://dev.to/${profileReplacement.user}`,
   matcher: {
-    domain: /dev_to/,
+    domain: /^dev$/,
   },
 };

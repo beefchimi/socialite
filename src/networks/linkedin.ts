@@ -10,10 +10,3 @@ export const linkedin: SocialNetwork = {
     user: /^(?:\/mwlite\/)?(?:[/]?in\/)?(?:\/)?([^/]+)/,
   },
 };
-
-// Should pass:
-// /in/f00_Uz3r!
-// /in/f00_Uz3r!/trail-123
-// /mwlite/in/f00_Uz3r!/123-trail
-// /f00_Uz3r!/trail-123
-// f00_Uz3r!

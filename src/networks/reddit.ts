@@ -9,9 +9,3 @@ export const reddit: SocialNetwork = {
     user: /^(?:\/user\/)?(?:\/)?([^/]+)/,
   },
 };
-
-// Should pass:
-// /user/f00_Uz3r!
-// /user/f00_Uz3r!/trail-123
-// /f00_Uz3r!/123-trail
-// f00_Uz3r!
