@@ -6,7 +6,7 @@ import type {
   SocialNetworkSubset,
   SocialNetworkProperties,
 } from '../types';
-import {customNetworks} from './fixtures';
+import {mockCustomNetworks} from './fixtures';
 
 describe('Socialite network methods', () => {
   describe('getNetworks() > subset', () => {
@@ -44,7 +44,7 @@ describe('Socialite network methods', () => {
     });
 
     test('Returns `true` when requesting a non-default network that has been added', () => {
-      const mockSocialite = new Socialite(customNetworks);
+      const mockSocialite = new Socialite(mockCustomNetworks);
       expect(mockSocialite.hasNetwork('foo')).toBe(true);
     });
 
@@ -56,7 +56,7 @@ describe('Socialite network methods', () => {
 
   describe('addNetwork()', () => {
     test('Returns the full network Map when an individual network is successfully added', () => {
-      const mockNetwork = customNetworks[0];
+      const mockNetwork = mockCustomNetworks[0];
       const mockSocialite = new Socialite();
 
       expect(mockSocialite.hasNetwork('foo')).toBe(false);

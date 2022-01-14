@@ -1,39 +1,100 @@
+import {facebook as networkFacebook} from '../networks';
 import {Socialite} from '../socialite';
-import type {UrlGroupSubset} from '../types';
-import {invalidUrls, validUrls} from './fixtures';
+import {
+  mockFacebookUrl,
+  mockFacebookProfile,
+  mockFooUrl,
+  mockFooNetwork,
+  mockFooProfile,
+  mockMinimalUrl,
+  mockMinimalProfile,
+  mockTwitterPrefix,
+  mockTwitterUrl,
+  mockTwitterProfile,
+  invalidProfileUrls,
+} from './fixtures';
 
 describe('Socialite > parseProfile()', () => {
-  const urlMinCriteria: UrlGroupSubset = {
-    domain: 'domain',
-    tldomain: '.com',
-  };
-
   test('Returns `false` when minimum criteria is not met', () => {
     const mockSocialite = new Socialite();
-    const allResultsInvalid = invalidUrls.every(
+    const allResultsInvalid = invalidProfileUrls.every(
       (url) => mockSocialite.parseProfile(url) === false,
     );
 
     expect(allResultsInvalid).toBe(true);
   });
 
-  test('Returns only `domain` and `tldomain` when the minimum criteria is met', () => {
+  test('Returns `false` when the social network does not exist', () => {
     const mockSocialite = new Socialite();
-    const result = mockSocialite.parseProfile(validUrls[0]);
+    const result = mockSocialite.parseProfile(mockFooUrl);
 
-    // expect(result).toStrictEqual(urlMinCriteria);
-    expect(result).toBe(true);
+    expect(result).toBe(false);
   });
 
-  test.todo('trims input', () => {});
-
-  test('This is just a test', () => {
+  test('Returns profile when the custom social network has been added', () => {
     const mockSocialite = new Socialite();
-    const result = mockSocialite.parseProfile(
-      'https://www.facebook.com/Curtis-Dulmage',
-    );
+    mockSocialite.addNetwork(mockFooNetwork);
+    const result = mockSocialite.parseProfile(mockFooUrl);
 
-    // expect(result).toStrictEqual(urlMinCriteria);
-    expect(result).toBe(true);
+    expect(result).toStrictEqual(mockFooProfile);
+  });
+
+  test('Returns profile for a default network', () => {
+    const mockSocialite = new Socialite();
+    const result = mockSocialite.parseProfile(mockFacebookUrl);
+
+    expect(result).toStrictEqual(mockFacebookProfile);
+  });
+
+  test('Returns minimum profile when no `path` is found', () => {
+    const mockSocialite = new Socialite();
+    const result = mockSocialite.parseProfile(mockMinimalUrl);
+
+    expect(result).toStrictEqual(mockMinimalProfile);
+  });
+
+  describe('prefix', () => {
+    test('Property is omitted from profile when absent from the network', () => {
+      const mockSocialite = new Socialite();
+      const result = mockSocialite.parseProfile(mockFacebookUrl);
+
+      expect(result).not.toHaveProperty('prefix');
+    });
+
+    test('Property is present in profle when included by the network', () => {
+      const mockSocialite = new Socialite();
+      const result = mockSocialite.parseProfile(mockTwitterUrl);
+
+      expect(result).toHaveProperty('prefix', mockTwitterPrefix);
+    });
+
+    test('Is omitted from the parsed user name', () => {
+      const mockSocialite = new Socialite();
+      const result = mockSocialite.parseProfile(mockTwitterUrl);
+
+      expect(result).toStrictEqual(mockTwitterProfile);
+    });
+  });
+
+  describe('id', () => {
+    test('Returns `false` when provided but network does not exist', () => {
+      const mockSocialite = new Socialite();
+      const result = mockSocialite.parseProfile(
+        'https://foo.com/FooBar',
+        'foo',
+      );
+
+      expect(result).toBe(false);
+    });
+
+    test('Returns profile when provided and network exists', () => {
+      const mockSocialite = new Socialite();
+      const result = mockSocialite.parseProfile(
+        mockFacebookUrl,
+        networkFacebook.id,
+      );
+
+      expect(result).toStrictEqual(mockFacebookProfile);
+    });
   });
 });

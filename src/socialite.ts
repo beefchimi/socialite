@@ -93,7 +93,8 @@ export class Socialite {
         : {}),
     };
 
-    if (!path) {
+    // TODO: Avoid passing only a single `/` to `path`.
+    if (!path || path.length <= 1) {
       return minimumResult;
     }
 
@@ -101,8 +102,13 @@ export class Socialite {
       ? new RegExp(targetNetwork.matcher.user)
       : defaultUserRegExp;
 
-    const prefix = targetNetwork.prefix ?? '';
-    const user = path.match(userRegExp)?.[0].replace(prefix, '');
+    const prefix = targetNetwork.prefix;
+    const matchedUser = path.match(userRegExp);
+    // Grab the last "match", since its common for `.match()`
+    // to include the full string as its first "match".
+    const user = matchedUser
+      ? matchedUser[matchedUser.length - 1].replace(prefix ?? '', '')
+      : undefined;
 
     const preferredUrl = getUrlWithSubstitutions(
       targetNetwork.preferredUrl,
@@ -116,10 +122,10 @@ export class Socialite {
     return user
       ? {
           ...minimumResult,
-          preferredUrl,
           ...(appUrl ? {appUrl} : {}),
+          ...(prefix ? {prefix} : {}),
+          preferredUrl,
           user,
-          prefix,
         }
       : minimumResult;
   }
