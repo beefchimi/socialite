@@ -5,14 +5,14 @@ export const mockCustomNetworks: SocialNetwork[] = [
     id: 'foo',
     preferredUrl: 'https://foo.com',
     matcher: {
-      domain: 'foo',
+      domain: /foo/,
     },
   },
   {
     id: 'bar',
     preferredUrl: 'www.bar.com',
     matcher: {
-      domain: '(bar|baz)',
+      domain: /(bar|baz)/,
     },
   },
 ];

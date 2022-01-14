@@ -1,4 +1,4 @@
-export type {BasicObject, BasicUrl, UrlAnatomy} from './general';
+export type {BasicObject, BasicUrl, MergedRegExp, UrlAnatomy} from './general';
 
 export {UrlCaptureId} from './capture';
 export type {ParsedUrlGroups, UrlGroupSubset, UrlMinCriteria} from './capture';

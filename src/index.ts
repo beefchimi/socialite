@@ -13,3 +13,9 @@ export type {
   SocialNetworkProperties,
   SocialProfile,
 } from './types';
+
+export {
+  filterNullishValuesFromObject,
+  mergeRegExp,
+  constructFullLineRegExp,
+} from './utilities';

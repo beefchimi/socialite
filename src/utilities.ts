@@ -1,4 +1,4 @@
-import type {BasicObject} from './types';
+import type {BasicObject, MergedRegExp} from './types';
 
 export function filterNullishValuesFromObject<T = BasicObject>(obj: T) {
   const keys = Object.keys(obj) as (keyof typeof obj)[];
@@ -13,6 +13,15 @@ export function filterNullishValuesFromObject<T = BasicObject>(obj: T) {
   }, {} as T);
 }
 
-export function constructRegExp(...captureGroups: string[]) {
+export function mergeRegExp(...expressions: RegExp[]): MergedRegExp {
+  const source = expressions.map((exp) => exp.source).join('');
+  const flags = [
+    ...new Set(expressions.map((exp) => exp.flags.split('')).flat()),
+  ].join('');
+
+  return {source, flags};
+}
+
+export function constructFullLineRegExp(...captureGroups: (string | RegExp)[]) {
   return new RegExp(['^', ...captureGroups, '$'].join(''));
 }

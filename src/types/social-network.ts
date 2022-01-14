@@ -6,8 +6,8 @@ export type UserName = string;
 export type UserPrefix = string;
 
 export interface SocialNetworkMatcher {
-  domain: string;
-  user?: string;
+  domain: string | RegExp;
+  user?: string | RegExp;
 }
 
 export interface SocialNetwork {

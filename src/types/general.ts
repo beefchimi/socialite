@@ -4,6 +4,11 @@ export interface BasicObject {
 
 export type BasicUrl = string;
 
+export interface MergedRegExp {
+  source: RegExp['source'];
+  flags: RegExp['flags'];
+}
+
 // Consider revisions to this interface:
 // ...insert issue url...
 export interface UrlAnatomy {

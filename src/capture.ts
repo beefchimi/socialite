@@ -1,6 +1,6 @@
 import {UrlCaptureId} from './types';
 import type {UrlAnatomy} from './types';
-import {constructRegExp} from './utilities';
+import {constructFullLineRegExp} from './utilities';
 
 // NOTE: Don't be mislead by the `\\` in some capture groups.
 // This is a consequence of embedding within a `string`.
@@ -17,7 +17,7 @@ export const urlCaptureGroup: UrlAnatomy = {
   anchor: `(?<${UrlCaptureId.Anchor}>\\#.+?)?`,
 };
 
-export const urlRegExp = constructRegExp(
+export const urlRegExp = constructFullLineRegExp(
   urlCaptureGroup.scheme,
   urlCaptureGroup.subdomain,
   urlCaptureGroup.domain,
@@ -36,8 +36,6 @@ export const profileReplacement = {
 export const defaultSocialMatcher = {
   // NOTE: `domain` is not used internally,
   // but it may be useful for consumers.
-  domain: '[^\\.]+$',
-  user: '[^\\/]+',
+  domain: /[^.]+$/,
+  user: /[^/]+/,
 };
-
-export const defaultUserRegExp = new RegExp(defaultSocialMatcher.user);
