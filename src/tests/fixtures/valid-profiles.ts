@@ -15,7 +15,6 @@ export const mockMinimalUser: UserName = '';
 export const mockMinimalUrl: BasicUrl = `https://www.facebook.com/${mockMinimalUser}`;
 export const mockMinimalProfile: SocialProfile = {
   id: networkFacebook.id,
-  title: networkFacebook.title,
   urlGroups: {
     scheme: 'https://',
     subdomain: 'www.',
@@ -33,7 +32,6 @@ export const mockFacebookUser: UserName = 'Uz3r_N@me!';
 export const mockFacebookUrl: BasicUrl = `https://www.facebook.com/${mockFacebookUser}/`;
 export const mockFacebookProfile: SocialProfile = {
   id: networkFacebook.id,
-  title: networkFacebook.title,
   urlGroups: {
     scheme: 'https://',
     subdomain: 'www.',
@@ -54,7 +52,6 @@ export const mockTwitterUser: UserName = '123ABC=human0';
 export const mockTwitterUrl: BasicUrl = `https://mobile.twitter.com/${mockTwitterPrefix}${mockTwitterUser}/`;
 export const mockTwitterProfile: SocialProfile = {
   id: networkTwitter.id,
-  title: networkTwitter.title,
   urlGroups: {
     scheme: 'https://',
     // subdomain: 'mobile.',
@@ -81,7 +78,6 @@ export const mockFooUser: UserName = '_F00z-+-Uz3r_';
 export const mockFooUrl: BasicUrl = `https://social.fuzz.biz/user/${mockFooUser}/profile`;
 export const mockFooNetwork: SocialNetwork = {
   id: 'foo',
-  title: 'Foo Corp',
   preferredUrl: `https://foo.com/user-profile/${mockFooUser}`,
   appUrl: `https://app.foo.io/${mockFooUser}`,
   matcher: {
@@ -91,7 +87,6 @@ export const mockFooNetwork: SocialNetwork = {
 };
 export const mockFooProfile: SocialProfile = {
   id: mockFooNetwork.id,
-  title: mockFooNetwork.title,
   urlGroups: {
     scheme: 'https://',
     domain: 'social.fuzz',

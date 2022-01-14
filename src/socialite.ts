@@ -84,7 +84,6 @@ export class Socialite {
 
     const minimumResult: SocialProfile = {
       id: targetNetwork.id,
-      title: targetNetwork.title,
       urlGroups: matches,
       originalUrl: url,
       preferredUrl: getUrlWithSubstitutions(targetNetwork.preferredUrl),

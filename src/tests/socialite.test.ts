@@ -11,18 +11,18 @@ describe('Socialite class instance', () => {
 
   test('Contains the default networks', () => {
     const mockSocialite = new Socialite();
-    expect(mockSocialite.getNetworks()).toEqual(defaultSocialNetworks);
+    expect(mockSocialite.getNetworks()).toStrictEqual(defaultSocialNetworks);
   });
 
   test('Constructor argument overwrites the default networks', () => {
     const mockSocialite = new Socialite(mockCustomNetworks);
-    expect(mockSocialite.getNetworks()).toEqual(mockCustomNetworks);
+    expect(mockSocialite.getNetworks()).toStrictEqual(mockCustomNetworks);
   });
 
   test('Constructor argument ignores an empty array', () => {
     const mockNetworks: SocialNetwork[] = [];
     const mockSocialite = new Socialite(mockNetworks);
 
-    expect(mockSocialite.getNetworks()).toEqual(defaultSocialNetworks);
+    expect(mockSocialite.getNetworks()).toStrictEqual(defaultSocialNetworks);
   });
 });

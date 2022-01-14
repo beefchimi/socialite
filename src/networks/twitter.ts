@@ -6,7 +6,6 @@ const {twitter: prefix} = socialNetworkPrefixes;
 
 export const twitter: SocialNetwork = {
   id: 'twitter',
-  title: 'Twitter',
   preferredUrl: `https://twitter.com/${prefix}${profileReplacement.user}`,
   matcher: {
     domain: 'twitter',

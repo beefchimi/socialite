@@ -1,9 +1,7 @@
 import {BasicUrl} from './general';
 
-// These could be more complex types (ex: enums)
+// TODO: This could be a more complex type (ex: enums)
 export type SocialNetworkId = string;
-export type SocialNetworkTitle = string;
-
 export type UserName = string;
 export type UserPrefix = string;
 
@@ -14,7 +12,6 @@ export interface SocialNetworkMatcher {
 
 export interface SocialNetwork {
   id: SocialNetworkId;
-  title: SocialNetworkTitle;
   matcher: SocialNetworkMatcher;
   preferredUrl: BasicUrl;
   appUrl?: BasicUrl;

@@ -11,7 +11,7 @@ import {mockCustomNetworks} from './fixtures';
 describe('Socialite network methods', () => {
   describe('getNetworks() > subset', () => {
     test('Returns only the properties requested', () => {
-      const mockSubset: SocialNetworkProperties = ['title', 'preferredUrl'];
+      const mockSubset: SocialNetworkProperties = ['preferredUrl', 'matcher'];
       const mockSocialite = new Socialite();
 
       const networks = mockSocialite.getNetworks(mockSubset);
@@ -22,18 +22,18 @@ describe('Socialite network methods', () => {
 
       const firstNetworkSubset = networks[0];
       const defaultFirstNetworkSubset = {
-        title: defaultFirstNetwork.title,
         preferredUrl: defaultFirstNetwork.preferredUrl,
+        matcher: defaultFirstNetwork.matcher,
       };
 
       const lastNetworkSubset = networks[networks.length - 1];
       const defaultLastNetworkSubset = {
-        title: defaultLastNetwork.title,
         preferredUrl: defaultLastNetwork.preferredUrl,
+        matcher: defaultLastNetwork.matcher,
       };
 
-      expect(firstNetworkSubset).toEqual(defaultFirstNetworkSubset);
-      expect(lastNetworkSubset).toEqual(defaultLastNetworkSubset);
+      expect(firstNetworkSubset).toStrictEqual(defaultFirstNetworkSubset);
+      expect(lastNetworkSubset).toStrictEqual(defaultLastNetworkSubset);
     });
   });
 
@@ -71,7 +71,7 @@ describe('Socialite network methods', () => {
         mockSocialite.getNetworks(),
       );
 
-      expect(networkKeysFromMap).toEqual(networkKeysFromObjects);
+      expect(networkKeysFromMap).toStrictEqual(networkKeysFromObjects);
       expect(networkKeysFromMap).toHaveLength(defaultSocialNetworks.length + 1);
     });
 
