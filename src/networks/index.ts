@@ -13,6 +13,7 @@ export {patreon} from './patreon';
 export {pinterest} from './pinterest';
 export {reddit} from './reddit';
 export {stackoverflow} from './stackoverflow';
+export {substack} from './substack';
 export {telegram} from './telegram';
 export {tiktok} from './tiktok';
 export {twitch} from './twitch';

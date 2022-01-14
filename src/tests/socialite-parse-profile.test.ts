@@ -1,4 +1,7 @@
-import {behance as networkBehance} from '../networks';
+import {
+  behance as networkBehance,
+  substack as networkSubstack,
+} from '../networks';
 import {Socialite} from '../socialite';
 import {
   mockBehanceUrl,
@@ -10,6 +13,8 @@ import {
   mockFacebookProfile,
   mockMinimalUrl,
   mockMinimalProfile,
+  mockSubstackUrl,
+  mockSubstackProfile,
   mockTwitterPrefix,
   mockTwitterUrl,
   mockTwitterProfile,
@@ -53,6 +58,14 @@ describe('Socialite > parseProfile()', () => {
     const result = mockSocialite.parseProfile(mockMinimalUrl);
 
     expect(result).toStrictEqual(mockMinimalProfile);
+  });
+
+  test('Returns minimum profile when no `subdomain` is found and `userSource` specifies `subdomain`', () => {
+    const mockSocialite = new Socialite();
+    mockSocialite.addNetwork(networkSubstack);
+    const result = mockSocialite.parseProfile(mockSubstackUrl);
+
+    expect(result).toStrictEqual(mockSubstackProfile);
   });
 
   describe('prefix', () => {

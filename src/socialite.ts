@@ -1,5 +1,5 @@
 import {defaultSocialNetworks} from './data';
-import {defaultPathUserMatcher} from './capture';
+import {defaultUserMatcher} from './capture';
 
 import {
   filterNetworkProperties,
@@ -7,6 +7,7 @@ import {
   getUrlGroups,
   getUrlWithSubstitutions,
 } from './helpers';
+import {MatchUserSource} from './types';
 import type {
   BasicUrl,
   ParsedUrlGroups,
@@ -70,13 +71,11 @@ export class Socialite {
       return false;
     }
 
-    const {domain, path} = matches;
-
     // TypeScript thinks that `.get(id)` can return `undefined`.
     const targetNetwork =
       id && this.hasNetwork(id)
         ? this._networks.get(id)
-        : getNetworkFromDomain(this._networks, domain);
+        : getNetworkFromDomain(this._networks, matches.domain);
 
     if (!targetNetwork) {
       return false;
@@ -92,16 +91,23 @@ export class Socialite {
         : {}),
     };
 
-    if (!path) {
+    const useSubdomain =
+      targetNetwork.matcher.userSource === MatchUserSource.Subdomain;
+    const userSource = useSubdomain ? matches.subdomain : matches.path;
+    const fallbackMatcher = useSubdomain
+      ? defaultUserMatcher.subdomain
+      : defaultUserMatcher.path;
+
+    if (!userSource) {
       return minimumResult;
     }
 
     const userRegExp = targetNetwork.matcher.user
       ? new RegExp(targetNetwork.matcher.user)
-      : defaultPathUserMatcher;
+      : fallbackMatcher;
 
     const prefix = targetNetwork.prefix;
-    const matchedUser = path.match(userRegExp);
+    const matchedUser = userSource.match(userRegExp);
     // Grab the last "match", since its common for `.match()`
     // to include the full string as its first "match".
     const user = matchedUser

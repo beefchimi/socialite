@@ -1,11 +1,11 @@
-export {urlCaptureGroup, defaultPathUserMatcher} from './capture';
+export {urlCaptureGroup, defaultUserMatcher} from './capture';
 
 export {allSocialNetworks, defaultSocialNetworks} from './data';
 export {socialNetworkPrefixes} from './prefixes';
 
 export {Socialite} from './socialite';
 
-export {UrlCaptureId} from './types';
+export {MatchUserSource, UrlCaptureId} from './types';
 export type {
   UrlAnatomy,
   SocialNetwork,

@@ -30,4 +30,7 @@ export const profileReplacement = {
   prefix: '{REPLACE_PROFILE_PREFIX}',
 };
 
-export const defaultPathUserMatcher = /[^/]+/;
+export const defaultUserMatcher = {
+  subdomain: /[^.]+/,
+  path: /[^/]+/,
+};

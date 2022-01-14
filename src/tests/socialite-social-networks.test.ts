@@ -414,6 +414,30 @@ describe('Socialite > social networks', () => {
     });
   });
 
+  describe('substack', () => {
+    const mockSubdomainUser = 'UserName';
+    const mockCommonUrl = `https://${mockSubdomainUser}.substack.com/`;
+
+    test('Returns expected `id` and `user` from common url', () => {
+      const {id, user} = mockSocialite.parseProfile(
+        mockCommonUrl,
+      ) as SocialProfile;
+
+      expect(id).toBe(networks.substack.id);
+      expect(user).toBe(mockSubdomainUser);
+    });
+
+    test('Returns expected `id` and `user` from url with multiple subdomains', () => {
+      const mockUncommonUrl = `https://${mockSubdomainUser}.trail-123.substack.com/`;
+      const {id, user} = mockSocialite.parseProfile(
+        mockUncommonUrl,
+      ) as SocialProfile;
+
+      expect(id).toBe(networks.substack.id);
+      expect(user).toBe(mockSubdomainUser);
+    });
+  });
+
   describe('telegram', () => {
     const mockCommonUrl = `https://www.telegram.me/${mockUserName}`;
 

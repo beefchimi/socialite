@@ -5,8 +5,16 @@ export type SocialNetworkId = string;
 export type UserName = string;
 export type UserPrefix = string;
 
+export enum MatchUserSource {
+  // TODO: Future social networks could potentially
+  // store user info in the `parameters` (or otherwise).
+  Subdomain = 'subdomain',
+  Path = 'path',
+}
+
 export interface SocialNetworkMatcher {
   domain: string | RegExp;
+  userSource?: MatchUserSource;
   user?: string | RegExp;
 }
 

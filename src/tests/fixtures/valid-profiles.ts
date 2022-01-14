@@ -3,6 +3,7 @@ import {socialNetworkPrefixes} from '../../prefixes';
 import {
   behance as networkBehance,
   facebook as networkFacebook,
+  substack as networkSubstack,
   twitter as networkTwitter,
 } from '../../networks';
 import type {
@@ -86,8 +87,7 @@ export const mockFacebookProfile: SocialProfile = {
   user: mockFacebookUser,
 };
 
-export const mockMinimalUser: UserName = '';
-export const mockMinimalUrl: BasicUrl = `https://m.facebook.com/${mockMinimalUser}`;
+export const mockMinimalUrl: BasicUrl = `https://m.facebook.com/`;
 export const mockMinimalProfile: SocialProfile = {
   id: networkFacebook.id,
   urlGroups: {
@@ -97,14 +97,20 @@ export const mockMinimalProfile: SocialProfile = {
     tldomain: '.com/',
   },
   originalUrl: mockMinimalUrl,
-  preferredUrl: getUrlWithSubstitutions(
-    networkFacebook.preferredUrl,
-    mockMinimalUser,
-  ),
-  appUrl: getUrlWithSubstitutions(
-    networkFacebook.appUrl as BasicUrl,
-    mockMinimalUser,
-  ),
+  preferredUrl: getUrlWithSubstitutions(networkFacebook.preferredUrl, ''),
+  appUrl: getUrlWithSubstitutions(networkFacebook.appUrl as BasicUrl, ''),
+};
+
+export const mockSubstackUrl = 'https://substack.com/';
+export const mockSubstackProfile: SocialProfile = {
+  id: networkSubstack.id,
+  urlGroups: {
+    scheme: 'https://',
+    domain: 'substack',
+    tldomain: '.com/',
+  },
+  originalUrl: mockSubstackUrl,
+  preferredUrl: getUrlWithSubstitutions(networkSubstack.preferredUrl, ''),
 };
 
 export const mockTwitterPrefix = socialNetworkPrefixes.twitter;
