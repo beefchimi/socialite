@@ -1,4 +1,4 @@
-export {urlCaptureGroup, defaultSocialMatcher} from './capture';
+export {urlCaptureGroup, defaultPathUserMatcher} from './capture';
 
 export {allSocialNetworks, defaultSocialNetworks} from './data';
 export {socialNetworkPrefixes} from './prefixes';

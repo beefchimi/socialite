@@ -1,10 +1,9 @@
-import type {BasicUrl} from './general';
-import type {UrlGroupSubset} from './capture';
+import type {BasicUrl, UrlAnatomy} from './general';
 import type {SocialNetworkId, UserName, UserPrefix} from './social-network';
 
 export interface SocialProfile {
   id: SocialNetworkId;
-  urlGroups: UrlGroupSubset;
+  urlGroups: UrlAnatomy;
   originalUrl: BasicUrl;
   preferredUrl: BasicUrl;
   appUrl?: BasicUrl;

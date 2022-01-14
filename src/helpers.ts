@@ -56,7 +56,31 @@ export function getUrlGroups(url: BasicUrl): ParsedUrlGroups {
     return null;
   }
 
-  return filterNullishValuesFromObject<UrlGroupSubset>(matched.groups);
+  const filtered = filterNullishValuesFromObject<UrlGroupSubset>(
+    matched.groups,
+  );
+
+  let subdomain: UrlGroupSubset['subdomain'];
+  let domain: UrlGroupSubset['domain'];
+
+  if (filtered.domain) {
+    const lastDot = filtered.domain.lastIndexOf('.');
+    subdomain = lastDot === -1 ? undefined : filtered.domain.slice(0, lastDot);
+    domain = lastDot === -1 ? undefined : filtered.domain.slice(lastDot + 1);
+  }
+
+  let port: UrlGroupSubset['port'];
+
+  if (filtered.port) {
+    port = filtered.port.replace(':', '').replace('/', '');
+  }
+
+  return {
+    ...filtered,
+    ...(subdomain ? {subdomain} : {}),
+    ...(domain ? {domain} : {}),
+    ...(port ? {port} : {}),
+  };
 }
 
 export function getUrlWithSubstitutions(url: BasicUrl, user = '', prefix = '') {

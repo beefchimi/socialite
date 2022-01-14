@@ -1,9 +1,9 @@
 import {Socialite} from '../socialite';
-import type {UrlGroupSubset} from '../types';
+import type {UrlAnatomy} from '../types';
 import {invalidUrls, validUrls} from './fixtures';
 
 describe('Socialite > parseUrl()', () => {
-  const urlMinCriteria: UrlGroupSubset = {
+  const urlMinCriteria: UrlAnatomy = {
     domain: 'domain',
     tldomain: '.com',
   };
@@ -33,13 +33,13 @@ describe('Socialite > parseUrl()', () => {
     expect(allResultsValid).toBe(true);
   });
 
-  test('Returns `subdomain` (www.) when present', () => {
+  test('Returns `subdomain` (www) when present', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[1]);
 
     expect(result).toStrictEqual({
       ...urlMinCriteria,
-      subdomain: 'www.',
+      subdomain: 'www',
     });
   });
 
@@ -79,17 +79,17 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toMatchObject({
       ...urlMinCriteria,
-      port: ':123',
+      port: '123',
     });
   });
 
-  test('Returns `port` with trailing `/` when present and not followed by anything', () => {
+  test('Returns `port` with trailing `/` removed', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[8]);
 
     expect(result).toMatchObject({
       ...urlMinCriteria,
-      port: ':123/',
+      port: '123',
     });
   });
 
@@ -153,10 +153,10 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toStrictEqual({
       scheme: 'https://',
-      subdomain: 'www.',
-      domain: 'sub.domain',
+      subdomain: 'www.sub',
+      domain: 'domain',
       tldomain: '.com',
-      port: ':123',
+      port: '123',
       path: '/path/to/',
       parameters: '?query=param',
       anchor: '#hash-anchor',
@@ -169,10 +169,10 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toStrictEqual({
       scheme: 'https://',
-      subdomain: 'www.',
-      domain: 'sub1.sub2.domain',
+      subdomain: 'www.sub1.sub2',
+      domain: 'domain',
       tldomain: '.com',
-      port: ':123',
+      port: '123',
       path: '/!url*()-_.~[]&=+$%path@/@to!*()-_.~[]@&=+$%user!/!*()-_.~[]@&=+$%',
       parameters: '?query!*()-_.~[]@&=+$%param',
       anchor: '#hash!*()-_.~[]@&=+$%anchor',

@@ -1,5 +1,5 @@
 import {defaultSocialNetworks} from './data';
-import {defaultSocialMatcher} from './capture';
+import {defaultPathUserMatcher} from './capture';
 
 import {
   filterNetworkProperties,
@@ -99,7 +99,7 @@ export class Socialite {
 
     const userRegExp = targetNetwork.matcher.user
       ? new RegExp(targetNetwork.matcher.user)
-      : defaultSocialMatcher.user;
+      : defaultPathUserMatcher;
 
     const prefix = targetNetwork.prefix;
     const matchedUser = path.match(userRegExp);

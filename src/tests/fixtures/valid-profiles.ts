@@ -18,7 +18,7 @@ export const mockBehanceProfile: SocialProfile = {
   id: networkBehance.id,
   urlGroups: {
     scheme: 'https://',
-    subdomain: 'www.',
+    subdomain: 'www',
     domain: 'behance',
     tldomain: '.net',
     path: `/${mockBehanceUser}/`,
@@ -46,7 +46,8 @@ export const mockCustomProfile: SocialProfile = {
   id: mockCustomNetwork.id,
   urlGroups: {
     scheme: 'https://',
-    domain: 'social.foo',
+    subdomain: 'social',
+    domain: 'foo',
     tldomain: '.biz',
     path: `/user/${mockCustomUser}/profile`,
   },
@@ -63,12 +64,13 @@ export const mockCustomProfile: SocialProfile = {
 };
 
 export const mockFacebookUser: UserName = 'FacebookUser1';
-export const mockFacebookUrl: BasicUrl = `https://m.facebook.com/${mockFacebookUser}`;
+export const mockFacebookUrl: BasicUrl = `https://sub.facebook.com/${mockFacebookUser}`;
 export const mockFacebookProfile: SocialProfile = {
   id: networkFacebook.id,
   urlGroups: {
     scheme: 'https://',
-    domain: 'm.facebook',
+    subdomain: 'sub',
+    domain: 'facebook',
     tldomain: '.com',
     path: `/${mockFacebookUser}`,
   },
@@ -90,7 +92,8 @@ export const mockMinimalProfile: SocialProfile = {
   id: networkFacebook.id,
   urlGroups: {
     scheme: 'https://',
-    domain: 'm.facebook',
+    subdomain: 'm',
+    domain: 'facebook',
     tldomain: '.com/',
   },
   originalUrl: mockMinimalUrl,
@@ -111,8 +114,8 @@ export const mockTwitterProfile: SocialProfile = {
   id: networkTwitter.id,
   urlGroups: {
     scheme: 'https://',
-    // subdomain: 'mobile.',
-    domain: 'mobile.twitter',
+    subdomain: 'mobile',
+    domain: 'twitter',
     tldomain: '.com',
     path: `/${mockTwitterPrefix}${mockTwitterUser}/`,
   },

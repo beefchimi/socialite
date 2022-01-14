@@ -4,9 +4,7 @@ import type {UrlAnatomy} from './general';
 // as a valid RegExp named capture group.
 
 export enum UrlCaptureId {
-  // NOTE: This `enum` must be kept in sync with `UrlAnatomy`.
   Scheme = 'scheme',
-  Subdomain = 'subdomain',
   Domain = 'domain',
   Tldomain = 'tldomain',
   Port = 'port',

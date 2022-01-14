@@ -1,14 +1,12 @@
 import {UrlCaptureId} from './types';
-import type {UrlAnatomy} from './types';
 import {constructFullLineRegExp} from './utilities';
 
 // NOTE: Don't be mislead by the `\\` in some capture groups.
 // This is a consequence of embedding within a `string`.
 // Once constructed by `RegExp()`, it will be properly reduced to a single `\`.
 
-export const urlCaptureGroup: UrlAnatomy = {
+export const urlCaptureGroup = {
   scheme: `(?<${UrlCaptureId.Scheme}>https?://)?`,
-  subdomain: `(?<${UrlCaptureId.Subdomain}>www\\.)?`,
   domain: `(?<${UrlCaptureId.Domain}>[\\w\\.-]+?)`,
   tldomain: `(?<${UrlCaptureId.Tldomain}>\\.\\w{2,5}[/]?)?`,
   port: `(?<${UrlCaptureId.Port}>:\\d+?[/]?)?`,
@@ -19,7 +17,6 @@ export const urlCaptureGroup: UrlAnatomy = {
 
 export const urlRegExp = constructFullLineRegExp(
   urlCaptureGroup.scheme,
-  urlCaptureGroup.subdomain,
   urlCaptureGroup.domain,
   urlCaptureGroup.tldomain,
   urlCaptureGroup.port,
@@ -33,9 +30,4 @@ export const profileReplacement = {
   prefix: '{REPLACE_PROFILE_PREFIX}',
 };
 
-export const defaultSocialMatcher = {
-  // NOTE: `domain` is not used internally,
-  // but it may be useful for consumers.
-  domain: /[^.]+$/,
-  user: /[^/]+/,
-};
+export const defaultPathUserMatcher = /[^/]+/;
