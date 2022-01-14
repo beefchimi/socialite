@@ -2,13 +2,16 @@ export {mockCustomNetworks} from './networks';
 
 export {invalidProfileUrls} from './invalid-profiles';
 export {
+  mockBehanceUser,
+  mockBehanceUrl,
+  mockBehanceProfile,
   mockFacebookUser,
   mockFacebookUrl,
   mockFacebookProfile,
-  mockFooUser,
-  mockFooUrl,
-  mockFooNetwork,
-  mockFooProfile,
+  mockCustomUser,
+  mockCustomUrl,
+  mockCustomNetwork,
+  mockCustomProfile,
   mockMinimalUser,
   mockMinimalUrl,
   mockMinimalProfile,

@@ -1,11 +1,13 @@
-import {facebook as networkFacebook} from '../networks';
+import {behance as networkBehance} from '../networks';
 import {Socialite} from '../socialite';
 import {
+  mockBehanceUrl,
+  mockBehanceProfile,
+  mockCustomUrl,
+  mockCustomNetwork,
+  mockCustomProfile,
   mockFacebookUrl,
   mockFacebookProfile,
-  mockFooUrl,
-  mockFooNetwork,
-  mockFooProfile,
   mockMinimalUrl,
   mockMinimalProfile,
   mockTwitterPrefix,
@@ -26,17 +28,17 @@ describe('Socialite > parseProfile()', () => {
 
   test('Returns `false` when the social network does not exist', () => {
     const mockSocialite = new Socialite();
-    const result = mockSocialite.parseProfile(mockFooUrl);
+    const result = mockSocialite.parseProfile(mockCustomUrl);
 
     expect(result).toBe(false);
   });
 
   test('Returns profile when the custom social network has been added', () => {
     const mockSocialite = new Socialite();
-    mockSocialite.addNetwork(mockFooNetwork);
-    const result = mockSocialite.parseProfile(mockFooUrl);
+    mockSocialite.addNetwork(mockCustomNetwork);
+    const result = mockSocialite.parseProfile(mockCustomUrl);
 
-    expect(result).toStrictEqual(mockFooProfile);
+    expect(result).toStrictEqual(mockCustomProfile);
   });
 
   test('Returns profile for a default network', () => {
@@ -56,7 +58,7 @@ describe('Socialite > parseProfile()', () => {
   describe('prefix', () => {
     test('Property is omitted from profile when absent from the network', () => {
       const mockSocialite = new Socialite();
-      const result = mockSocialite.parseProfile(mockFacebookUrl);
+      const result = mockSocialite.parseProfile(mockBehanceUrl);
 
       expect(result).not.toHaveProperty('prefix');
     });
@@ -89,12 +91,13 @@ describe('Socialite > parseProfile()', () => {
 
     test('Returns profile when provided and network exists', () => {
       const mockSocialite = new Socialite();
+      mockSocialite.addNetwork(networkBehance);
       const result = mockSocialite.parseProfile(
-        mockFacebookUrl,
-        networkFacebook.id,
+        mockBehanceUrl,
+        networkBehance.id,
       );
 
-      expect(result).toStrictEqual(mockFacebookProfile);
+      expect(result).toStrictEqual(mockBehanceProfile);
     });
   });
 });
