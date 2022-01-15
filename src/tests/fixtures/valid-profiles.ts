@@ -13,6 +13,8 @@ import type {
   UserName,
 } from '../../types';
 
+export const mockGenericUser = '~f00+96%Hum@n_123-!';
+
 export const mockBehanceUser: UserName = 'Uz3r_N@me!';
 export const mockBehanceUrl: BasicUrl = `https://www.behance.net/${mockBehanceUser}/`;
 export const mockBehanceProfile: SocialProfile = {

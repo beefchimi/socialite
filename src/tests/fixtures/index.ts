@@ -2,6 +2,7 @@ export {mockCustomNetworks} from './networks';
 
 export {invalidProfileUrls} from './invalid-profiles';
 export {
+  mockGenericUser,
   mockBehanceUser,
   mockBehanceUrl,
   mockBehanceProfile,
