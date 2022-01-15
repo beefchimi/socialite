@@ -44,13 +44,13 @@
     "nuke": "npm run clean && rm -rf node_modules && rm -rf package-lock.json && npm cache clean --force"
   },
   "devDependencies": {
-    "@beefchimi/browserslist-config": "^0.0.7",
-    "@beefchimi/eslint-plugin": "^0.0.7",
-    "@beefchimi/prettier-config": "^0.0.7",
-    "@beefchimi/typescript-config": "^0.0.7",
+    "@beefchimi/browserslist-config": "^0.0.8",
+    "@beefchimi/eslint-plugin": "^0.0.8",
+    "@beefchimi/prettier-config": "^0.0.8",
+    "@beefchimi/typescript-config": "^0.0.8",
     "@types/node": "^17.0.8",
-    "vite": "^2.7.10",
-    "vitest": "^0.0.139",
-    "vite-plugin-dts": "^0.9.8"
+    "vite": "^2.7.12",
+    "vitest": "^0.1.16",
+    "vite-plugin-dts": "^0.9.9"
   }
 }
