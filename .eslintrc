@@ -2,6 +2,7 @@
   "extends": [
     "plugin:@beefchimi/esnext",
     "plugin:@beefchimi/typescript",
+    "plugin:@beefchimi/jest",
     "plugin:@beefchimi/prettier"
   ]
 }
