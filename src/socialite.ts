@@ -1,12 +1,6 @@
 import {defaultSocialNetworks} from './data';
 import {defaultUserMatcher} from './capture';
 
-import {
-  filterNetworkProperties,
-  getNetworkFromDomain,
-  getUrlGroups,
-  getUrlWithSubstitutions,
-} from './helpers';
 import {MatchUserSource} from './types';
 import type {
   BasicUrl,
@@ -18,6 +12,12 @@ import type {
   SocialProfile,
   UrlMinCriteria,
 } from './types';
+import {
+  filterNetworkProperties,
+  getNetworkFromDomain,
+  getUrlGroups,
+  getUrlWithSubstitutions,
+} from './utilities';
 
 export class Socialite {
   // Since this is a Map, we do not want to expose a getter.

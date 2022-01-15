@@ -1,4 +1,3 @@
-import {getUrlWithSubstitutions} from '../../helpers';
 import {socialNetworkPrefixes} from '../../prefixes';
 import {
   behance as networkBehance,
@@ -12,6 +11,7 @@ import type {
   SocialNetwork,
   UserName,
 } from '../../types';
+import {getUrlWithSubstitutions} from '../../utilities';
 
 export const mockGenericUser = '~f00+96%Hum@n_123-!';
 
