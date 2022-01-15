@@ -10,7 +10,7 @@ import {mockCustomNetworks} from './fixtures';
 
 describe('Socialite network methods', () => {
   describe('getNetworks() > subset', () => {
-    test('Returns only the properties requested', () => {
+    it('returns only the properties requested', () => {
       const mockSubset: SocialNetworkProperties = ['preferredUrl', 'matcher'];
       const mockSocialite = new Socialite();
 
@@ -38,24 +38,24 @@ describe('Socialite network methods', () => {
   });
 
   describe('hasNetwork()', () => {
-    test('Returns `true` when requesting a default network', () => {
+    it('returns `true` when requesting a default network', () => {
       const mockSocialite = new Socialite();
       expect(mockSocialite.hasNetwork('facebook')).toBe(true);
     });
 
-    test('Returns `true` when requesting a non-default network that has been added', () => {
+    it('returns `true` when requesting a non-default network that has been added', () => {
       const mockSocialite = new Socialite(mockCustomNetworks);
       expect(mockSocialite.hasNetwork('foo')).toBe(true);
     });
 
-    test('Returns `false` when requesting a non-default network that has not been added', () => {
+    it('returns `false` when requesting a non-default network that has not been added', () => {
       const mockSocialite = new Socialite();
       expect(mockSocialite.hasNetwork('foo')).toBe(false);
     });
   });
 
   describe('addNetwork()', () => {
-    test('Returns the full network Map when an individual network is successfully added', () => {
+    it('returns the full network Map when an individual network is successfully added', () => {
       const mockNetwork = mockCustomNetworks[0];
       const mockSocialite = new Socialite();
 
@@ -75,7 +75,7 @@ describe('Socialite network methods', () => {
       expect(networkKeysFromMap).toHaveLength(defaultSocialNetworks.length + 1);
     });
 
-    test('Does not overwrite an existing network by default', () => {
+    it('does not overwrite an existing network by default', () => {
       const mockNetwork: SocialNetwork = {
         ...defaultSocialNetworks[0],
         preferredUrl: 'overwritten',
@@ -95,7 +95,7 @@ describe('Socialite network methods', () => {
       expect(updatedNetworks[0]).not.toBe(mockNetwork);
     });
 
-    test('Overwrites an existing network when `overwrite` is `true`', () => {
+    it('overwrites an existing network when `overwrite` is `true`', () => {
       const mockNetwork: SocialNetwork = {
         ...defaultSocialNetworks[0],
         preferredUrl: 'overwritten',
@@ -118,7 +118,7 @@ describe('Socialite network methods', () => {
   });
 
   describe('removeNetwork()', () => {
-    test('Removes the requested network and returns `true`', () => {
+    it('removes the requested network and returns `true`', () => {
       const mockRemovedId = defaultSocialNetworks[0].id;
       const mockSocialite = new Socialite();
 
@@ -138,7 +138,7 @@ describe('Socialite network methods', () => {
       );
     });
 
-    test('Returns `false` when requesting a network that does not exist', () => {
+    it('returns `false` when requesting a network that does not exist', () => {
       const mockRemovedId = 'baz';
       const mockSocialite = new Socialite();
 
@@ -158,7 +158,7 @@ describe('Socialite network methods', () => {
   });
 
   describe('emptyNetwork()', () => {
-    test('Completely empties the network Map', () => {
+    it('completely empties the network Map', () => {
       const mockSocialite = new Socialite();
 
       const initialNetworks = mockSocialite.getNetworks();

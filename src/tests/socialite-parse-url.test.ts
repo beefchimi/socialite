@@ -8,7 +8,7 @@ describe('Socialite > parseUrl()', () => {
     tldomain: '.com',
   };
 
-  test('Returns `false` when minimum criteria is not met', () => {
+  it('returns `false` when minimum criteria is not met', () => {
     const mockSocialite = new Socialite();
     const allResultsInvalid = invalidUrls.every(
       (url) => mockSocialite.parseUrl(url) === false,
@@ -17,14 +17,14 @@ describe('Socialite > parseUrl()', () => {
     expect(allResultsInvalid).toBe(true);
   });
 
-  test('Returns only `domain` and `tldomain` when the minimum criteria is met', () => {
+  it('returns only `domain` and `tldomain` when the minimum criteria is met', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[0]);
 
     expect(result).toStrictEqual(urlMinCriteria);
   });
 
-  test('Returns a valid result for every `url` when minimum criteria is met', () => {
+  it('returns a valid result for `url` when minimum criteria is met', () => {
     const mockSocialite = new Socialite();
     const allResultsValid = validUrls.every((url) =>
       Boolean(mockSocialite.parseUrl(url)),
@@ -33,7 +33,7 @@ describe('Socialite > parseUrl()', () => {
     expect(allResultsValid).toBe(true);
   });
 
-  test('Returns `subdomain` (www) when present', () => {
+  it('returns `subdomain` (www) when present', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[1]);
 
@@ -43,7 +43,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Returns `scheme` (http://) when present', () => {
+  it('returns `scheme` (http://) when present', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[2]);
 
@@ -53,7 +53,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Returns `scheme` (https://) when present', () => {
+  it('returns `scheme` (https://) when present', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[3]);
 
@@ -63,7 +63,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Returns `tldomain` with trailing `/` when present and not followed by anything', () => {
+  it('returns `tldomain` with trailing `/` when present and not followed by anything', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[4]);
 
@@ -73,7 +73,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Returns with `port` when present', () => {
+  it('returns with `port` when present', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[5]);
 
@@ -83,7 +83,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Returns `port` with trailing `/` removed', () => {
+  it('returns `port` with trailing `/` removed', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[8]);
 
@@ -93,7 +93,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Returns `path` with trailing slash when present', () => {
+  it('returns `path` with trailing slash when present', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[9]);
 
@@ -103,7 +103,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Returns `path` without trailing slash when absent', () => {
+  it('returns `path` without trailing slash when absent', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[10]);
 
@@ -113,7 +113,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Returns `parameters` when present', () => {
+  it('returns `parameters` when present', () => {
     const mockSocialite = new Socialite();
 
     const result1 = mockSocialite.parseUrl(validUrls[11]);
@@ -130,7 +130,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Returns `anchor` when present', () => {
+  it('returns `anchor` when present', () => {
     const mockSocialite = new Socialite();
 
     const result1 = mockSocialite.parseUrl(validUrls[13]);
@@ -147,7 +147,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Returns every matched group when present', () => {
+  it('returns matched group when present', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[24]);
 
@@ -163,7 +163,7 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  test('Does not break when various special characters are present', () => {
+  it('does not break when various special characters are present', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[26]);
 

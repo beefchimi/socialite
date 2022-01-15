@@ -4,22 +4,22 @@ import type {SocialNetwork} from '../types';
 import {mockCustomNetworks} from './fixtures';
 
 describe('Socialite class instance', () => {
-  test('Instantiates a Socialite instance', () => {
+  it('instantiates a Socialite instance', () => {
     const mockSocialite = new Socialite();
     expect(mockSocialite).toBeInstanceOf(Socialite);
   });
 
-  test('Contains the default networks', () => {
+  it('contains the default networks', () => {
     const mockSocialite = new Socialite();
     expect(mockSocialite.getNetworks()).toStrictEqual(defaultSocialNetworks);
   });
 
-  test('Constructor argument overwrites the default networks', () => {
+  it('constructor argument overwrites the default networks', () => {
     const mockSocialite = new Socialite(mockCustomNetworks);
     expect(mockSocialite.getNetworks()).toStrictEqual(mockCustomNetworks);
   });
 
-  test('Constructor argument ignores an empty array', () => {
+  it('constructor argument ignores an empty array', () => {
     const mockNetworks: SocialNetwork[] = [];
     const mockSocialite = new Socialite(mockNetworks);
 

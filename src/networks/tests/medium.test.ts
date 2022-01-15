@@ -8,7 +8,7 @@ describe('Social networks > medium', () => {
   const mockSocialite = new Socialite(allSocialNetworks);
   const mockCommonUrl = `https://www.medium.com/${medium.prefix}${mockGenericUser}`;
 
-  test('Returns expected `id`, `user`, and `prefix` from common url', () => {
+  it('returns expected `id`, `user`, and `prefix` from common url', () => {
     const {id, user, prefix} = mockSocialite.parseProfile(
       mockCommonUrl,
     ) as SocialProfile;
@@ -18,7 +18,7 @@ describe('Social networks > medium', () => {
     expect(prefix).toBe(medium.prefix);
   });
 
-  test('Returns expected `id`, `user`, and `prefix` from url with trailing path', () => {
+  it('returns expected `id`, `user`, and `prefix` from url with trailing path', () => {
     const mockUncommonUrl = `${mockCommonUrl}/trail-123`;
     const {id, user, prefix} = mockSocialite.parseProfile(
       mockUncommonUrl,

@@ -8,7 +8,7 @@ describe('Social networks > telegram', () => {
   const mockSocialite = new Socialite(allSocialNetworks);
   const mockCommonUrl = `https://www.telegram.me/${mockGenericUser}`;
 
-  test('Returns expected `id` and `user` from common url', () => {
+  it('returns expected `id` and `user` from common url', () => {
     const {id, user} = mockSocialite.parseProfile(
       mockCommonUrl,
     ) as SocialProfile;
@@ -17,7 +17,7 @@ describe('Social networks > telegram', () => {
     expect(user).toBe(mockGenericUser);
   });
 
-  test('Returns expected `id` and `user` from url with trailing path', () => {
+  it('returns expected `id` and `user` from url with trailing path', () => {
     const mockUncommonUrl = `${mockCommonUrl}/trail-123`;
     const {id, user} = mockSocialite.parseProfile(
       mockUncommonUrl,
@@ -27,7 +27,7 @@ describe('Social networks > telegram', () => {
     expect(user).toBe(mockGenericUser);
   });
 
-  test('Returns expected `id` and `user` when using the short url', () => {
+  it('returns expected `id` and `user` when using the short url', () => {
     const mockUncommonUrl = `https://t.me/${mockGenericUser}`;
     const {id, user} = mockSocialite.parseProfile(
       mockUncommonUrl,
