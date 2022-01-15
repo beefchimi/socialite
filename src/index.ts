@@ -13,7 +13,6 @@ export {
   filterNullishValuesFromObject,
   filterNetworkProperties,
   getNetworkFromDomain,
-  constructFullLineRegExp,
   mergeRegExp,
   getUrlGroups,
   getUrlWithSubstitutions,

@@ -1,9 +1,12 @@
 import {UrlCaptureId} from './types';
-import {constructFullLineRegExp} from './utilities';
 
 // NOTE: Don't be mislead by the `\\` in some capture groups.
 // This is a consequence of embedding within a `string`.
 // Once constructed by `RegExp()`, it will be properly reduced to a single `\`.
+
+function constructFullLineRegExp(...captureGroups: (string | RegExp)[]) {
+  return new RegExp(['^', ...captureGroups, '$'].join(''));
+}
 
 export const urlCaptureGroup = {
   scheme: `(?<${UrlCaptureId.Scheme}>https?://)?`,
