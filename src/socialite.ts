@@ -14,7 +14,6 @@ import type {
 } from './types';
 import {
   filterNetworkProperties,
-  getNetworkFromDomain,
   getUrlGroups,
   getUrlWithSubstitutions,
 } from './utilities';
@@ -26,13 +25,13 @@ export class Socialite {
   private _networks: SocialNetworkMap;
 
   constructor(customNetworks: SocialNetwork[] = []) {
-    const networks = customNetworks.length
+    const initialNetworks = customNetworks.length
       ? customNetworks
       : defaultSocialNetworks;
 
     this._networks = new Map();
 
-    networks.forEach((network) => this.addNetwork(network));
+    initialNetworks.forEach((network) => this.addNetwork(network));
   }
 
   hasNetwork(id: SocialNetworkId) {
@@ -71,36 +70,31 @@ export class Socialite {
       return false;
     }
 
-    // TypeScript thinks that `.get(id)` can return `undefined`.
+    // BUG: TypeScript thinks that `.get(id)` can return `undefined`.
     const targetNetwork =
       id && this.hasNetwork(id)
         ? this._networks.get(id)
-        : getNetworkFromDomain(this._networks, matches.domain);
+        : this.getNetworkFromDomain(matches.domain);
 
     if (!targetNetwork) {
       return false;
     }
 
-    const minimumResult: SocialProfile = {
-      id: targetNetwork.id,
-      urlGroups: matches,
-      originalUrl: url,
-      preferredUrl: getUrlWithSubstitutions(targetNetwork.preferredUrl),
-      ...(targetNetwork.appUrl
-        ? {appUrl: getUrlWithSubstitutions(targetNetwork.appUrl)}
-        : {}),
-    };
+    const minResult = this.getMinimumResult(targetNetwork, matches, url);
 
+    // TODO: This logic should be improved if we ever want to
+    // support addition `userSource` values.
     const useSubdomain =
       targetNetwork.matcher.userSource === MatchUserSource.Subdomain;
     const userSource = useSubdomain ? matches.subdomain : matches.path;
+
+    if (!userSource) {
+      return minResult;
+    }
+
     const fallbackMatcher = useSubdomain
       ? defaultUserMatcher.subdomain
       : defaultUserMatcher.path;
-
-    if (!userSource) {
-      return minimumResult;
-    }
 
     const userRegExp = targetNetwork.matcher.user
       ? new RegExp(targetNetwork.matcher.user)
@@ -114,6 +108,10 @@ export class Socialite {
       ? matchedUser[matchedUser.length - 1].replace(prefix ?? '', '')
       : undefined;
 
+    if (!user) {
+      return minResult;
+    }
+
     const preferredUrl = getUrlWithSubstitutions(
       targetNetwork.preferredUrl,
       user,
@@ -123,21 +121,49 @@ export class Socialite {
       ? getUrlWithSubstitutions(targetNetwork.appUrl, user, prefix)
       : undefined;
 
-    return user
-      ? {
-          ...minimumResult,
-          ...(appUrl ? {appUrl} : {}),
-          ...(prefix ? {prefix} : {}),
-          preferredUrl,
-          user,
-        }
-      : minimumResult;
+    return {
+      ...minResult,
+      ...(appUrl ? {appUrl} : {}),
+      ...(prefix ? {prefix} : {}),
+      preferredUrl,
+      user,
+    };
   }
 
   private validateUrl(groups: ParsedUrlGroups) {
-    // `domains` and `tldomain` are minimum requirements for a valid URL.
-    // We need a way to tell TypeScript that, if this returns `true`,
-    // we for sure have an object with `domain` and `tldomain`
+    // TODO: We need a way to tell TypeScript that, if this returns `true`,
+    // we for sure have an object with `domain` and `tldomain`.
     return Boolean(groups?.domain && groups?.tldomain);
+  }
+
+  private getNetworkFromDomain(domain: string) {
+    let matchedNetwork: SocialNetwork | null = null;
+
+    for (const [_id, network] of this._networks) {
+      const match = new RegExp(network.matcher.domain).test(domain);
+
+      if (match) {
+        matchedNetwork = network;
+        break;
+      }
+    }
+
+    return matchedNetwork;
+  }
+
+  private getMinimumResult(
+    network: SocialNetwork,
+    matches: UrlMinCriteria,
+    url: BasicUrl,
+  ): SocialProfile {
+    return {
+      id: network.id,
+      urlGroups: matches,
+      originalUrl: url,
+      preferredUrl: getUrlWithSubstitutions(network.preferredUrl),
+      ...(network.appUrl
+        ? {appUrl: getUrlWithSubstitutions(network.appUrl)}
+        : {}),
+    };
   }
 }

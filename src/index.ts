@@ -12,7 +12,6 @@ export {Socialite} from './socialite';
 export {
   filterNullishValuesFromObject,
   filterNetworkProperties,
-  getNetworkFromDomain,
   mergeRegExp,
   getUrlGroups,
   getUrlWithSubstitutions,

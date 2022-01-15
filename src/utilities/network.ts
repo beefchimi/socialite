@@ -1,6 +1,5 @@
 import type {
   SocialNetwork,
-  SocialNetworkMap,
   SocialNetworkSubset,
   SocialNetworkProperties,
 } from '../types';
@@ -24,22 +23,4 @@ export function filterNetworkProperties(
         : filtered,
     {} as SocialNetworkSubset,
   );
-}
-
-export function getNetworkFromDomain(
-  networks: SocialNetworkMap,
-  domain: string,
-) {
-  let matchedNetwork: SocialNetwork | null = null;
-
-  for (const [_id, network] of networks) {
-    const match = new RegExp(network.matcher.domain).test(domain);
-
-    if (match) {
-      matchedNetwork = network;
-      break;
-    }
-  }
-
-  return matchedNetwork;
 }
