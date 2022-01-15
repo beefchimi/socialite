@@ -49,6 +49,57 @@ export function getNetworkFromDomain(
   return matchedNetwork;
 }
 
+export function getUrlWithSubstitutions(url: BasicUrl, user = '', prefix = '') {
+  return url
+    .replace(profileReplacement.user, user)
+    .replace(profileReplacement.prefix, prefix);
+}
+
+function updateGroupsWithSubdomain(groups: UrlGroupSubset): UrlGroupSubset {
+  const {domain} = groups;
+
+  let updatedSubdomain: UrlGroupSubset['subdomain'];
+  let updatedDomain: UrlGroupSubset['domain'];
+
+  if (domain) {
+    const lastDot = domain.lastIndexOf('.');
+    updatedSubdomain = lastDot === -1 ? undefined : domain.slice(0, lastDot);
+    updatedDomain = lastDot === -1 ? undefined : domain.slice(lastDot + 1);
+  }
+
+  return {
+    ...groups,
+    ...(updatedSubdomain ? {subdomain: updatedSubdomain} : {}),
+    ...(updatedDomain ? {domain: updatedDomain} : {}),
+  };
+}
+
+function sanitizePort({port, ...groups}: UrlGroupSubset): UrlGroupSubset {
+  return port
+    ? {
+        ...groups,
+        port: port.replace(':', '').replace('/', ''),
+      }
+    : groups;
+}
+
+function sanitizePath({path, ...groups}: UrlGroupSubset): UrlGroupSubset {
+  return path && path !== '/'
+    ? {
+        ...groups,
+        path,
+      }
+    : groups;
+}
+
+function sanitizeUrlGroups(groups: UrlGroupSubset): UrlGroupSubset {
+  const filtered = filterNullishValuesFromObject<UrlGroupSubset>(groups);
+  const updatedWithSubdomain = updateGroupsWithSubdomain(filtered);
+  const sanitizedWithPort = sanitizePort(updatedWithSubdomain);
+
+  return sanitizePath(sanitizedWithPort);
+}
+
 export function getUrlGroups(url: BasicUrl): ParsedUrlGroups {
   const matched = url.match(urlRegExp);
 
@@ -56,39 +107,5 @@ export function getUrlGroups(url: BasicUrl): ParsedUrlGroups {
     return null;
   }
 
-  const filtered = filterNullishValuesFromObject<UrlGroupSubset>(
-    matched.groups,
-  );
-
-  let subdomain: UrlGroupSubset['subdomain'];
-  let domain: UrlGroupSubset['domain'];
-
-  if (filtered.domain) {
-    const lastDot = filtered.domain.lastIndexOf('.');
-    subdomain = lastDot === -1 ? undefined : filtered.domain.slice(0, lastDot);
-    domain = lastDot === -1 ? undefined : filtered.domain.slice(lastDot + 1);
-  }
-
-  let port: UrlGroupSubset['port'];
-
-  if (filtered.port) {
-    port = filtered.port.replace(':', '').replace('/', '');
-  }
-
-  if (filtered.path === '/') {
-    delete filtered.path;
-  }
-
-  return {
-    ...filtered,
-    ...(subdomain ? {subdomain} : {}),
-    ...(domain ? {domain} : {}),
-    ...(port ? {port} : {}),
-  };
-}
-
-export function getUrlWithSubstitutions(url: BasicUrl, user = '', prefix = '') {
-  return url
-    .replace(profileReplacement.user, user)
-    .replace(profileReplacement.prefix, prefix);
+  return sanitizeUrlGroups(matched.groups);
 }
