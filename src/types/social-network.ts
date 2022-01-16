@@ -1,6 +1,7 @@
 import {BasicUrl} from './general';
 
 // TODO: This could be a more complex type (ex: enums)
+// https://github.com/beefchimi/socialite/issues/3
 export type SocialNetworkId = string;
 export type UserName = string;
 export type UserPrefix = string;
@@ -8,6 +9,7 @@ export type UserPrefix = string;
 export enum MatchUserSource {
   // TODO: Future social networks could potentially
   // store user info in the `parameters` (or otherwise).
+  // https://github.com/beefchimi/socialite/issues/2
   Subdomain = 'subdomain',
   Path = 'path',
 }

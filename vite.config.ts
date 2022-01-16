@@ -15,7 +15,6 @@ const testConfig: vitestTypes.InlineConfig = {
   global: true,
 };
 
-// TODO: Do we actually need to include React DOM?
 export default defineConfig({
   test: testConfig,
   plugins: [

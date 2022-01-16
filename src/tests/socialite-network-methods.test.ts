@@ -173,6 +173,7 @@ describe('Socialite network methods', () => {
 });
 
 function filterNetworkIds(networks: SocialNetworkSubset[]) {
-  // Bug: TypeScript things `undefined` could be in the array.
+  // BUG: TypeScript thinks `undefined` could be in the array.
+  // https://github.com/beefchimi/socialite/issues/8
   return networks.map(({id}) => id).filter(Boolean);
 }

@@ -9,8 +9,6 @@ export interface MergedRegExp {
   flags: RegExp['flags'];
 }
 
-// Consider revisions to this interface:
-// ...insert issue url...
 export interface UrlAnatomy {
   domain: string;
   tldomain: string;

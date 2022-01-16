@@ -17,8 +17,9 @@ export function filterNetworkProperties(
           uniqueProperties.includes(property)
             ? {
                 ...filtered,
-                // Bug: At the moment, TypeScript seems to think that
+                // BUG: At the moment, TypeScript seems to think that
                 // any `{key: value}` pair is acceptable here.
+                // https://github.com/beefchimi/socialite/issues/9
                 [property]: network[property],
               }
             : filtered,

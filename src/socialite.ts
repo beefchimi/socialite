@@ -60,6 +60,7 @@ export class Socialite {
 
   parseUrl(url: BasicUrl) {
     const groups = getUrlGroups(url);
+    // TODO: https://github.com/beefchimi/socialite/issues/5
     return this.validateUrl(groups) ? (groups as UrlMinCriteria) : false;
   }
 
@@ -71,6 +72,7 @@ export class Socialite {
     }
 
     // BUG: TypeScript thinks that `.get(id)` can return `undefined`.
+    // https://github.com/beefchimi/socialite/issues/4
     const targetNetwork =
       id && this.hasNetwork(id)
         ? this._networks.get(id)
@@ -84,6 +86,7 @@ export class Socialite {
 
     // TODO: This logic should be improved if we ever want to
     // support addition `userSource` values.
+    // https://github.com/beefchimi/socialite/issues/2
     const useSubdomain =
       targetNetwork.matcher.userSource === MatchUserSource.Subdomain;
     const userSource = useSubdomain ? matches.subdomain : matches.path;
@@ -133,11 +136,12 @@ export class Socialite {
   private validateUrl(groups: ParsedUrlGroups) {
     // TODO: We need a way to tell TypeScript that, if this returns `true`,
     // we for sure have an object with `domain` and `tldomain`.
+    // https://github.com/beefchimi/socialite/issues/5
     return Boolean(groups?.domain && groups?.tldomain);
   }
 
   private getNetworkFromDomain(domain: string) {
-    let matchedNetwork: SocialNetwork | null = null;
+    let matchedNetwork: SocialNetwork | undefined;
 
     for (const [_id, network] of this._networks) {
       const match = new RegExp(network.matcher.domain).test(domain);
