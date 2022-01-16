@@ -64,7 +64,7 @@ export class Socialite {
   }
 
   parseProfile(url: BasicUrl, id?: SocialNetworkId): SocialProfile | false {
-    const matches = this.parseUrl(url.trim());
+    const matches = this.parseUrl(url);
 
     if (!matches || (id && !this.hasNetwork(id))) {
       return false;

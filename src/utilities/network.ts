@@ -11,16 +11,18 @@ export function filterNetworkProperties(
   const uniqueProperties: SocialNetworkProperties = [...new Set(subset)];
   const keys = Object.keys(network) as SocialNetworkProperties;
 
-  return keys.reduce<SocialNetworkSubset>(
-    (filtered, property) =>
-      uniqueProperties.includes(property)
-        ? {
-            ...filtered,
-            // Bug: At the moment, TypeScript seems to think that
-            // any `{key: value}` pair is acceptable here.
-            [property]: network[property],
-          }
-        : filtered,
-    {} as SocialNetworkSubset,
-  );
+  return uniqueProperties.length
+    ? keys.reduce<SocialNetworkSubset>(
+        (filtered, property) =>
+          uniqueProperties.includes(property)
+            ? {
+                ...filtered,
+                // Bug: At the moment, TypeScript seems to think that
+                // any `{key: value}` pair is acceptable here.
+                [property]: network[property],
+              }
+            : filtered,
+        {} as SocialNetworkSubset,
+      )
+    : network;
 }

@@ -31,6 +31,9 @@ function sanitizePort({port, ...groups}: UrlGroupSubset): UrlGroupSubset {
 }
 
 function sanitizePath({path, ...groups}: UrlGroupSubset): UrlGroupSubset {
+  // NOTE: Technically, a single `/` isn't a condition that will be met,
+  // since `tldomain` or `port` will capture that character.
+  // But, this condition may be relevant in the future.
   return path && path !== '/'
     ? {
         ...groups,
@@ -48,7 +51,7 @@ function sanitizeUrlGroups(groups: UrlGroupSubset): UrlGroupSubset {
 }
 
 export function getUrlGroups(url: BasicUrl): ParsedUrlGroups {
-  const matched = url.match(urlRegExp);
+  const matched = url.trim().match(urlRegExp);
 
   if (!matched?.groups) {
     return null;
