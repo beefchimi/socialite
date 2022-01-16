@@ -1,8 +1,8 @@
 👽️ dependency:
-  - any: ['**/package*', '**/yarn.lock', '.pnp.*']
-📝 documentation: '**/!(CHANGELOG|LICENSE|MIGRATION).@(md|mdx)'
-🔖 release: '**/CHANGELOG.md'
-🧪 testing: '**/*.@(spec|test).@(js|jsx|ts|tsx)'
+  - any: ['package*', 'yarn.lock', '.pnp.*']
+📝 documentation: 'docs/**/*'
+🔖 release: 'CHANGELOG.md'
+🧪 testing: '**/*.test.ts'
 🔧 tooling:
   - any:
       [
