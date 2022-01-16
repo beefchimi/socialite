@@ -5,8 +5,13 @@
   "author": "Curtis Dulmage",
   "license": "ISC",
   "keywords": [
-    "web",
-    "development"
+    "social",
+    "network",
+    "parse",
+    "url",
+    "user",
+    "handle",
+    "profile"
   ],
   "homepage": "https://github.com/beefchimi/socialite#readme",
   "bugs": {
@@ -15,6 +20,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/beefchimi/socialite.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "files": [
     "dist"
@@ -41,7 +50,9 @@
     "coverage": "vitest --coverage --run",
     "build": "npm run clean && tsc && vite build",
     "clean": "rm -rf coverage && rm -rf dist",
-    "nuke": "npm run clean && rm -rf node_modules && rm -rf package-lock.json && npm cache clean --force"
+    "nuke": "npm run clean && rm -rf node_modules && rm -rf package-lock.json && npm cache clean --force",
+    "report": "changeset",
+    "release": "npm run build && changeset publish"
   },
   "devDependencies": {
     "@beefchimi/browserslist-config": "^0.0.8",
