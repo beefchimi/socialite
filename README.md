@@ -37,7 +37,7 @@ const parsedSocialUrl = socialiteInstance.parseProfile(mySocialUrl);
 console.log(parsedSocialUrl);
 ```
 
-The above will log the following `SocialProfile` _(object)_ to the console:
+The above will log the following `SocialiteProfile` _(object)_ to the console:
 
 ```ts
 {

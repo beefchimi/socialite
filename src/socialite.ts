@@ -9,7 +9,7 @@ import type {
   SocialNetwork,
   SocialNetworkMap,
   SocialNetworkProperties,
-  SocialProfile,
+  SocialiteProfile,
   UrlMinCriteria,
 } from './types';
 import {
@@ -64,7 +64,7 @@ export class Socialite {
     return this.validateUrl(groups) ? (groups as UrlMinCriteria) : false;
   }
 
-  parseProfile(url: BasicUrl, id?: SocialNetworkId): SocialProfile | false {
+  parseProfile(url: BasicUrl, id?: SocialNetworkId): SocialiteProfile | false {
     const matches = this.parseUrl(url);
 
     if (!matches || (id && !this.hasNetwork(id))) {
@@ -159,7 +159,7 @@ export class Socialite {
     network: SocialNetwork,
     matches: UrlMinCriteria,
     url: BasicUrl,
-  ): SocialProfile {
+  ): SocialiteProfile {
     return {
       id: network.id,
       urlGroups: matches,

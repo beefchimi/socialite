@@ -23,7 +23,7 @@ export {
 export {MatchUserSource, UrlCaptureId} from './types';
 export type {
   UrlAnatomy,
-  SocialProfile,
+  SocialiteProfile,
   SocialNetwork,
   SocialNetworkProperty,
   SocialNetworkProperties,

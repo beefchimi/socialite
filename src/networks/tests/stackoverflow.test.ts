@@ -1,5 +1,5 @@
 import {Socialite} from '../../socialite';
-import type {SocialProfile} from '../../types';
+import type {SocialiteProfile} from '../../types';
 import {allSocialiteNetworks, mockGenericUser} from '../../tests/fixtures';
 import {stackoverflow} from '../stackoverflow';
 
@@ -10,7 +10,7 @@ describe('Social networks > stackoverflow', () => {
   it('returns expected `id` and `user` from common url', () => {
     const {id, user} = mockSocialite.parseProfile(
       mockCommonUrl,
-    ) as SocialProfile;
+    ) as SocialiteProfile;
 
     expect(id).toBe(stackoverflow.id);
     expect(user).toBe(mockGenericUser);
@@ -20,7 +20,7 @@ describe('Social networks > stackoverflow', () => {
     const mockUncommonUrl = `${mockCommonUrl}/trail-123`;
     const {id, user} = mockSocialite.parseProfile(
       mockUncommonUrl,
-    ) as SocialProfile;
+    ) as SocialiteProfile;
 
     expect(id).toBe(stackoverflow.id);
     expect(user).toBe(mockGenericUser);
@@ -30,7 +30,7 @@ describe('Social networks > stackoverflow', () => {
     const mockUncommonUrl = `https://stackoverflow.com/${mockGenericUser}/`;
     const {id, user} = mockSocialite.parseProfile(
       mockUncommonUrl,
-    ) as SocialProfile;
+    ) as SocialiteProfile;
 
     expect(id).toBe(stackoverflow.id);
     expect(user).toBe(mockGenericUser);

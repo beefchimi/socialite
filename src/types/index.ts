@@ -16,4 +16,4 @@ export type {
   SocialNetworkProperties,
 } from './social-network';
 
-export type {SocialProfile} from './social-profile';
+export type {SocialiteProfile} from './social-profile';

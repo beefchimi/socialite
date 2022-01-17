@@ -7,7 +7,7 @@ import {
 } from '../../networks';
 import type {
   BasicUrl,
-  SocialProfile,
+  SocialiteProfile,
   SocialNetwork,
   UserName,
 } from '../../types';
@@ -17,7 +17,7 @@ export const mockGenericUser = '~f00+96%Hum@n_123-!';
 
 export const mockBehanceUser: UserName = 'Uz3r_N@me!';
 export const mockBehanceUrl: BasicUrl = `https://www.behance.net/${mockBehanceUser}/`;
-export const mockBehanceProfile: SocialProfile = {
+export const mockBehanceProfile: SocialiteProfile = {
   id: networkBehance.id,
   urlGroups: {
     scheme: 'https://',
@@ -45,7 +45,7 @@ export const mockCustomNetwork: SocialNetwork = {
     user: /^(?:\/user\/)?(?:\/)?([^/]+)/,
   },
 };
-export const mockCustomProfile: SocialProfile = {
+export const mockCustomProfile: SocialiteProfile = {
   id: mockCustomNetwork.id,
   urlGroups: {
     scheme: 'https://',
@@ -68,7 +68,7 @@ export const mockCustomProfile: SocialProfile = {
 
 export const mockFacebookUser: UserName = 'FacebookUser1';
 export const mockFacebookUrl: BasicUrl = `https://sub.facebook.com/${mockFacebookUser}`;
-export const mockFacebookProfile: SocialProfile = {
+export const mockFacebookProfile: SocialiteProfile = {
   id: networkFacebook.id,
   urlGroups: {
     scheme: 'https://',
@@ -90,7 +90,7 @@ export const mockFacebookProfile: SocialProfile = {
 };
 
 export const mockMinimalUrl: BasicUrl = `https://m.facebook.com/`;
-export const mockMinimalProfile: SocialProfile = {
+export const mockMinimalProfile: SocialiteProfile = {
   id: networkFacebook.id,
   urlGroups: {
     scheme: 'https://',
@@ -104,7 +104,7 @@ export const mockMinimalProfile: SocialProfile = {
 };
 
 export const mockSubstackUrl = 'https://substack.com/';
-export const mockSubstackProfile: SocialProfile = {
+export const mockSubstackProfile: SocialiteProfile = {
   id: networkSubstack.id,
   urlGroups: {
     scheme: 'https://',
@@ -118,7 +118,7 @@ export const mockSubstackProfile: SocialProfile = {
 export const mockTwitterPrefix = socialitePrefix.twitter;
 export const mockTwitterUser: UserName = '123ABC=human0';
 export const mockTwitterUrl: BasicUrl = `https://mobile.twitter.com/${mockTwitterPrefix}${mockTwitterUser}/`;
-export const mockTwitterProfile: SocialProfile = {
+export const mockTwitterProfile: SocialiteProfile = {
   id: networkTwitter.id,
   urlGroups: {
     scheme: 'https://',

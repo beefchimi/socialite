@@ -1,7 +1,7 @@
 import type {BasicUrl, UrlAnatomy} from './general';
 import type {SocialNetworkId, UserName, UserPrefix} from './social-network';
 
-export interface SocialProfile {
+export interface SocialiteProfile {
   id: SocialNetworkId;
   urlGroups: UrlAnatomy;
   originalUrl: BasicUrl;
