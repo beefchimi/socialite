@@ -5,7 +5,7 @@ import {MatchUserSource} from './types';
 import type {
   BasicUrl,
   ParsedUrlGroups,
-  SocialNetworkId,
+  NetworkId,
   SocialNetwork,
   SocialNetworkMap,
   SocialNetworkProperties,
@@ -34,7 +34,7 @@ export class Socialite {
     initialNetworks.forEach((network) => this.addNetwork(network));
   }
 
-  hasNetwork(id: SocialNetworkId) {
+  hasNetwork(id: NetworkId) {
     return this._networks.has(id);
   }
 
@@ -44,7 +44,7 @@ export class Socialite {
       : this._networks.set(network.id, network);
   }
 
-  removeNetwork(id: SocialNetworkId) {
+  removeNetwork(id: NetworkId) {
     return this._networks.delete(id);
   }
 
@@ -64,7 +64,7 @@ export class Socialite {
     return this.validateUrl(groups) ? (groups as UrlMinCriteria) : false;
   }
 
-  parseProfile(url: BasicUrl, id?: SocialNetworkId): SocialiteProfile | false {
+  parseProfile(url: BasicUrl, id?: NetworkId): SocialiteProfile | false {
     const matches = this.parseUrl(url);
 
     if (!matches || (id && !this.hasNetwork(id))) {

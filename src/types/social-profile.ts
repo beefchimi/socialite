@@ -1,8 +1,8 @@
 import type {BasicUrl, UrlAnatomy} from './general';
-import type {SocialNetworkId, UserName, UserPrefix} from './social-network';
+import type {NetworkId, UserName, UserPrefix} from './social-network';
 
 export interface SocialiteProfile {
-  id: SocialNetworkId;
+  id: NetworkId;
   urlGroups: UrlAnatomy;
   originalUrl: BasicUrl;
   preferredUrl: BasicUrl;

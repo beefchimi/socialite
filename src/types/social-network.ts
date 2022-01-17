@@ -1,6 +1,6 @@
 import {BasicUrl} from './general';
 
-export type SocialNetworkId = string;
+export type NetworkId = string;
 export type UserName = string;
 export type UserPrefix = string;
 
@@ -19,14 +19,14 @@ export interface SocialNetworkMatcher {
 }
 
 export interface SocialNetwork {
-  id: SocialNetworkId;
+  id: NetworkId;
   matcher: SocialNetworkMatcher;
   preferredUrl: BasicUrl;
   appUrl?: BasicUrl;
   prefix?: UserPrefix;
 }
 
-export type SocialNetworkMap = Map<SocialNetworkId, SocialNetwork>;
+export type SocialNetworkMap = Map<NetworkId, SocialNetwork>;
 export type SocialNetworkSubset = Partial<SocialNetwork>;
 
 export type SocialNetworkProperty = keyof SocialNetwork;
