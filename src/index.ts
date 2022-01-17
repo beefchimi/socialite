@@ -25,6 +25,6 @@ export type {
   UrlAnatomy,
   SocialiteProfile,
   SocialNetwork,
-  SocialNetworkProperty,
+  SocialiteNetworkProperty,
   SocialNetworkProperties,
 } from './types';

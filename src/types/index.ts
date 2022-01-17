@@ -12,7 +12,7 @@ export type {
   SocialNetwork,
   NetworkMap,
   NetworkSubset,
-  SocialNetworkProperty,
+  SocialiteNetworkProperty,
   SocialNetworkProperties,
 } from './social-network';
 
