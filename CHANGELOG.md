@@ -1,4 +1,4 @@
-# @beefchimi/socialite
+# Socialite
 
 ## 0.0.1
 

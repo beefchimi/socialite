@@ -1,5 +1,5 @@
 👽️ dependency:
-  - any: ['package*', 'yarn.lock', '.pnp.*']
+  - any: ['package.json', 'package-lock.json', 'yarn.lock', '.pnp.*']
 📝 documentation: ['README.md', 'docs/**/*']
 🔖 release: 'CHANGELOG.md'
 🧪 testing: '**/*.test.ts'
