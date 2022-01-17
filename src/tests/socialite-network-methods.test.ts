@@ -1,7 +1,7 @@
 import {defaultSocialiteNetworks} from '../data';
 import {Socialite} from '../socialite';
 import type {
-  SocialNetwork,
+  SocialiteNetwork,
   NetworkMap,
   NetworkSubset,
   SocialiteNetworkProperties,
@@ -81,7 +81,7 @@ describe('Socialite network methods', () => {
     });
 
     it('does not overwrite an existing network by default', () => {
-      const mockNetwork: SocialNetwork = {
+      const mockNetwork: SocialiteNetwork = {
         ...defaultSocialiteNetworks[0],
         preferredUrl: 'overwritten',
       };
@@ -101,7 +101,7 @@ describe('Socialite network methods', () => {
     });
 
     it('overwrites an existing network when `overwrite` is `true`', () => {
-      const mockNetwork: SocialNetwork = {
+      const mockNetwork: SocialiteNetwork = {
         ...defaultSocialiteNetworks[0],
         preferredUrl: 'overwritten',
       };

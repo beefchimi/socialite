@@ -6,7 +6,7 @@ import type {
   BasicUrl,
   ParsedUrlGroups,
   NetworkId,
-  SocialNetwork,
+  SocialiteNetwork,
   NetworkMap,
   SocialiteNetworkProperties,
   SocialiteProfile,
@@ -24,7 +24,7 @@ export class Socialite {
   // which circumvents how we want to control this data.
   private _networks: NetworkMap;
 
-  constructor(customNetworks: SocialNetwork[] = []) {
+  constructor(customNetworks: SocialiteNetwork[] = []) {
     const initialNetworks = customNetworks.length
       ? customNetworks
       : defaultSocialiteNetworks;
@@ -38,7 +38,7 @@ export class Socialite {
     return this._networks.has(id);
   }
 
-  addNetwork(network: SocialNetwork, overwrite = false) {
+  addNetwork(network: SocialiteNetwork, overwrite = false) {
     return !overwrite && this.hasNetwork(network.id)
       ? false
       : this._networks.set(network.id, network);
@@ -141,7 +141,7 @@ export class Socialite {
   }
 
   private getNetworkFromDomain(domain: string) {
-    let matchedNetwork: SocialNetwork | undefined;
+    let matchedNetwork: SocialiteNetwork | undefined;
 
     for (const [_id, network] of this._networks) {
       const match = new RegExp(network.matcher.domain).test(domain);
@@ -156,7 +156,7 @@ export class Socialite {
   }
 
   private getMinimumResult(
-    network: SocialNetwork,
+    network: SocialiteNetwork,
     matches: UrlMinCriteria,
     url: BasicUrl,
   ): SocialiteProfile {

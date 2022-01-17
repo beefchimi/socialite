@@ -1,10 +1,10 @@
 import {profileReplacement} from '../capture';
 import {socialitePrefix} from '../prefixes';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
 const {medium: prefix} = socialitePrefix;
 
-export const medium: SocialNetwork = {
+export const medium: SocialiteNetwork = {
   id: 'medium',
   preferredUrl: `https://medium.com/${prefix}${profileReplacement.user}`,
   matcher: {

@@ -8,7 +8,7 @@ import {
 import type {
   BasicUrl,
   SocialiteProfile,
-  SocialNetwork,
+  SocialiteNetwork,
   UserName,
 } from '../../types';
 import {getUrlWithSubstitutions} from '../../utilities';
@@ -36,7 +36,7 @@ export const mockBehanceProfile: SocialiteProfile = {
 
 export const mockCustomUser: UserName = '_F00z-+-Uz3r_';
 export const mockCustomUrl: BasicUrl = `https://social.foo.biz/user/${mockCustomUser}/profile`;
-export const mockCustomNetwork: SocialNetwork = {
+export const mockCustomNetwork: SocialiteNetwork = {
   id: 'custom',
   preferredUrl: `https://custom.com/user-profile/${mockCustomUser}`,
   appUrl: `https://app.custom.io/${mockCustomUser}`,

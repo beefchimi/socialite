@@ -1,6 +1,6 @@
 import {defaultSocialiteNetworks} from '../data';
 import {Socialite} from '../socialite';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 import {mockCustomNetworks} from './fixtures';
 
 describe('Socialite class instance', () => {
@@ -20,7 +20,7 @@ describe('Socialite class instance', () => {
   });
 
   it('constructor argument ignores an empty array', () => {
-    const mockNetworks: SocialNetwork[] = [];
+    const mockNetworks: SocialiteNetwork[] = [];
     const mockSocialite = new Socialite(mockNetworks);
 
     expect(mockSocialite.getNetworks()).toStrictEqual(defaultSocialiteNetworks);

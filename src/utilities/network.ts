@@ -1,11 +1,11 @@
 import type {
-  SocialNetwork,
+  SocialiteNetwork,
   NetworkSubset,
   SocialiteNetworkProperties,
 } from '../types';
 
 export function filterNetworkProperties(
-  network: SocialNetwork,
+  network: SocialiteNetwork,
   subset: SocialiteNetworkProperties,
 ) {
   const uniqueProperties: SocialiteNetworkProperties = [...new Set(subset)];

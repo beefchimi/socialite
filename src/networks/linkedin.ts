@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const linkedin: SocialNetwork = {
+export const linkedin: SocialiteNetwork = {
   id: 'linkedin',
   preferredUrl: `https://linkedin.com/in/${profileReplacement.user}`,
   appUrl: `https://linkedin.com/mwlite/in/${profileReplacement.user}`,

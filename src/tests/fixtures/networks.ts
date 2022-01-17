@@ -1,9 +1,9 @@
 import {socialiteNetworks} from '../../data';
-import type {SocialNetwork} from '../../types';
+import type {SocialiteNetwork} from '../../types';
 
 export const allSocialiteNetworks = Object.values(socialiteNetworks);
 
-export const mockCustomNetworks: SocialNetwork[] = [
+export const mockCustomNetworks: SocialiteNetwork[] = [
   {
     id: 'foo',
     preferredUrl: 'https://foo.com',

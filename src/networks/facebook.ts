@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const facebook: SocialNetwork = {
+export const facebook: SocialiteNetwork = {
   id: 'facebook',
   preferredUrl: `https://facebook.com/${profileReplacement.user}`,
   appUrl: `https://m.facebook.com/${profileReplacement.user}`,

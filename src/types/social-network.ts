@@ -18,7 +18,7 @@ export interface NetworkMatcher {
   user?: string | RegExp;
 }
 
-export interface SocialNetwork {
+export interface SocialiteNetwork {
   id: NetworkId;
   matcher: NetworkMatcher;
   preferredUrl: BasicUrl;
@@ -26,8 +26,8 @@ export interface SocialNetwork {
   prefix?: UserPrefix;
 }
 
-export type NetworkMap = Map<NetworkId, SocialNetwork>;
-export type NetworkSubset = Partial<SocialNetwork>;
+export type NetworkMap = Map<NetworkId, SocialiteNetwork>;
+export type NetworkSubset = Partial<SocialiteNetwork>;
 
-export type SocialiteNetworkProperty = keyof SocialNetwork;
+export type SocialiteNetworkProperty = keyof SocialiteNetwork;
 export type SocialiteNetworkProperties = SocialiteNetworkProperty[];

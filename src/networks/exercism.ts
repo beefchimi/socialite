@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const exercism: SocialNetwork = {
+export const exercism: SocialiteNetwork = {
   id: 'exercism',
   preferredUrl: `https://exercism.io/profiles/${profileReplacement.user}`,
   matcher: {
