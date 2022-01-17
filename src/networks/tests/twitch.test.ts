@@ -1,11 +1,10 @@
-import {allSocialNetworks} from '../../data';
 import {Socialite} from '../../socialite';
 import type {SocialProfile} from '../../types';
-import {mockGenericUser} from '../../tests/fixtures';
+import {allSocialiteNetworks, mockGenericUser} from '../../tests/fixtures';
 import {twitch} from '../twitch';
 
 describe('Social networks > twitch', () => {
-  const mockSocialite = new Socialite(allSocialNetworks);
+  const mockSocialite = new Socialite(allSocialiteNetworks);
   const mockCommonUrl = `https://www.twitch.tv/${mockGenericUser}`;
 
   it('returns expected `id` and `user` from common url', () => {

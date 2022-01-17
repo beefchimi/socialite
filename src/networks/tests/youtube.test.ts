@@ -1,11 +1,10 @@
-import {allSocialNetworks} from '../../data';
 import {Socialite} from '../../socialite';
 import type {SocialProfile} from '../../types';
-import {mockGenericUser} from '../../tests/fixtures';
+import {allSocialiteNetworks, mockGenericUser} from '../../tests/fixtures';
 import {youtube} from '../youtube';
 
 describe('Social networks > youtube', () => {
-  const mockSocialite = new Socialite(allSocialNetworks);
+  const mockSocialite = new Socialite(allSocialiteNetworks);
   const mockCommonUrl = `https://www.youtube.com/channel/${mockGenericUser}`;
 
   it('returns expected `id` and `user` from common url', () => {

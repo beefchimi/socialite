@@ -1,11 +1,10 @@
-import {allSocialNetworks} from '../../data';
 import {Socialite} from '../../socialite';
 import type {SocialProfile} from '../../types';
-import {mockGenericUser} from '../../tests/fixtures';
+import {allSocialiteNetworks, mockGenericUser} from '../../tests/fixtures';
 import {behance} from '../behance';
 
 describe('Social networks > behance', () => {
-  const mockSocialite = new Socialite(allSocialNetworks);
+  const mockSocialite = new Socialite(allSocialiteNetworks);
   const mockCommonUrl = `https://www.behance.net/${mockGenericUser}`;
 
   it('returns expected `id` and `user` from common url', () => {

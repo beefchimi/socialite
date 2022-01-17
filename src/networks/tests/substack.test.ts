@@ -1,10 +1,10 @@
-import {allSocialNetworks} from '../../data';
 import {Socialite} from '../../socialite';
 import type {SocialProfile} from '../../types';
+import {allSocialiteNetworks} from '../../tests/fixtures';
 import {substack} from '../substack';
 
 describe('Social networks > substack', () => {
-  const mockSocialite = new Socialite(allSocialNetworks);
+  const mockSocialite = new Socialite(allSocialiteNetworks);
   const mockSubdomainUser = 'UserName';
   const mockCommonUrl = `https://${mockSubdomainUser}.substack.com/`;
 

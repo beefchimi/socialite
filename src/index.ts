@@ -5,8 +5,11 @@ export {
   defaultUserMatcher,
 } from './capture';
 
-export {allSocialNetworks, defaultSocialNetworks} from './data';
+export {socialiteNetworks, defaultSocialiteNetworks} from './data';
+export type {SocialiteId} from './data';
+
 export {socialNetworkPrefixes} from './prefixes';
+
 export {Socialite} from './socialite';
 
 export {

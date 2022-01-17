@@ -1,11 +1,10 @@
-import {allSocialNetworks} from '../../data';
 import {Socialite} from '../../socialite';
 import type {SocialProfile} from '../../types';
-import {mockGenericUser} from '../../tests/fixtures';
+import {allSocialiteNetworks, mockGenericUser} from '../../tests/fixtures';
 import {twitter} from '../twitter';
 
 describe('Social networks > twitter', () => {
-  const mockSocialite = new Socialite(allSocialNetworks);
+  const mockSocialite = new Socialite(allSocialiteNetworks);
   const mockCommonUrl = `https://www.twitter.com/${twitter.prefix}${mockGenericUser}`;
 
   it('returns expected `id`, `user`, and `prefix` from common url', () => {

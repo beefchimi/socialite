@@ -1,10 +1,10 @@
-import {allSocialNetworks} from '../../data';
 import {Socialite} from '../../socialite';
 import type {SocialProfile} from '../../types';
+import {allSocialiteNetworks} from '../../tests/fixtures';
 import {yat} from '../yat';
 
 describe('Social networks > yat', () => {
-  const mockSocialite = new Socialite(allSocialNetworks);
+  const mockSocialite = new Socialite(allSocialiteNetworks);
   const mockYat = '🥃🍑💎🌭💔';
   const mockCommonUrl = `https://www.y.at/${mockYat}`;
 

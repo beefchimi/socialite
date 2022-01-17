@@ -1,4 +1,4 @@
-import {defaultSocialNetworks} from './data';
+import {defaultSocialiteNetworks} from './data';
 import {defaultUserMatcher} from './capture';
 
 import {MatchUserSource} from './types';
@@ -27,7 +27,7 @@ export class Socialite {
   constructor(customNetworks: SocialNetwork[] = []) {
     const initialNetworks = customNetworks.length
       ? customNetworks
-      : defaultSocialNetworks;
+      : defaultSocialiteNetworks;
 
     this._networks = new Map();
 

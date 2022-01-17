@@ -1,4 +1,7 @@
+import {socialiteNetworks} from '../../data';
 import type {SocialNetwork} from '../../types';
+
+export const allSocialiteNetworks = Object.values(socialiteNetworks);
 
 export const mockCustomNetworks: SocialNetwork[] = [
   {

@@ -25,7 +25,7 @@ npm install socialitejs
 
 ## How to use
 
-By default, `Socialite` includes only a small collection of the most common social networks. A typical use case looks like:
+By default, `Socialite` includes only a small collection of the most common social networks. The exact networks included can be found in the `defaultSocialiteNetworks` array. A typical use case looks like:
 
 ```ts
 import {Socialite} from 'socialitejs';
@@ -58,15 +58,30 @@ The above will log the following `SocialProfile` _(object)_ to the console:
 }
 ```
 
-For a more robust collection of social networks, you can import and pass in `allSocialNetworks`:
+For a more robust collection of social networks, you can import the `socialiteNetworks` object and use it _(at least)_ one of two ways:
 
 ```ts
-import {Socialite, allSocialNetworks} from 'socialitejs';
+import {Socialite, socialiteNetworks} from 'socialitejs';
+import type {SocialiteId} from 'socialitejs';
 
-const socialiteInstance = new Socialite(allSocialNetworks);
-console.log(socialiteInstance.getNetworks());
+// Adding all social networks in bulk:
+const allNetworksInstance = new Socialite(Object.values(socialiteNetworks));
 
 // Logs to the console all social networks included in the code base.
+console.log(allNetworksInstance.getNetworks());
+
+// Initializing `Socialite` without any networks (pass empty `array`):
+const selectiveNetworksInstance = new Socialite([]);
+const excludedNetworks: SocialiteId[] = ['discord', 'facebook', 'reddit'];
+
+Object.keys(socialiteNetworks).forEach((network) => {
+  if (!excludedNetworks.includes(network.id)) {
+    selectiveNetworksInstance.addNetwork(network);
+  }
+});
+
+// Logs to the console all social networks not found in `excludedNetworks`.
+console.log(selectiveNetworksInstance.getNetworks());
 ```
 
 ## Features

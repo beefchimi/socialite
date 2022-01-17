@@ -1,4 +1,4 @@
-export {mockCustomNetworks} from './networks';
+export {allSocialiteNetworks, mockCustomNetworks} from './networks';
 
 export {invalidProfileUrls} from './invalid-profiles';
 export {
