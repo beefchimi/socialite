@@ -21,7 +21,7 @@ jobs:
           node-version: 17.x
           # Requires `scope` and `url` so I can install my
           # private `@beefchimi` dependencies.
-          registry-url: https://npm.pkg.github.com/
+          registry-url: https://npm.pkg.github.com
           scope: '@beefchimi'
 
       - name: Install dependencies and build (with cache)
@@ -31,6 +31,8 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          registry-url: https://registry.npmjs.org
+          scope: '@beefchimi'
           publish: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
