@@ -1,4 +1,4 @@
-export const socialNetworkPrefixes = {
+export const socialitePrefix = {
   medium: '@',
   tiktok: '@',
   twitter: '@',

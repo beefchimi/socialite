@@ -1,17 +1,16 @@
-import {allSocialNetworks} from '../../data';
 import {Socialite} from '../../socialite';
-import type {SocialProfile} from '../../types';
-import {mockGenericUser} from '../../tests/fixtures';
+import type {SocialiteProfile} from '../../types';
+import {allSocialiteNetworks, mockGenericUser} from '../../tests/fixtures';
 import {discord} from '../discord';
 
 describe('Social networks > discord', () => {
-  const mockSocialite = new Socialite(allSocialNetworks);
+  const mockSocialite = new Socialite(allSocialiteNetworks);
   const mockCommonUrl = `https://www.discordapp.com/users/${mockGenericUser}`;
 
   it('returns expected `id` and `user` from common url', () => {
     const {id, user} = mockSocialite.parseProfile(
       mockCommonUrl,
-    ) as SocialProfile;
+    ) as SocialiteProfile;
 
     expect(id).toBe(discord.id);
     expect(user).toBe(mockGenericUser);
@@ -21,7 +20,7 @@ describe('Social networks > discord', () => {
     const mockUncommonUrl = `${mockCommonUrl}/trail-123`;
     const {id, user} = mockSocialite.parseProfile(
       mockUncommonUrl,
-    ) as SocialProfile;
+    ) as SocialiteProfile;
 
     expect(id).toBe(discord.id);
     expect(user).toBe(mockGenericUser);
@@ -31,7 +30,7 @@ describe('Social networks > discord', () => {
     const mockUncommonUrl = `https://discordapp.com/${mockGenericUser}/`;
     const {id, user} = mockSocialite.parseProfile(
       mockUncommonUrl,
-    ) as SocialProfile;
+    ) as SocialiteProfile;
 
     expect(id).toBe(discord.id);
     expect(user).toBe(mockGenericUser);

@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const dribbble: SocialNetwork = {
+export const dribbble: SocialiteNetwork = {
   id: 'dribbble',
   preferredUrl: `https://dribbble.com/${profileReplacement.user}`,
   matcher: {

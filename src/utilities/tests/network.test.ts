@@ -1,5 +1,5 @@
 import {facebook} from '../../networks';
-import type {SocialNetworkProperties} from '../../types';
+import type {SocialiteNetworkProperties} from '../../types';
 import {filterNetworkProperties} from '../network';
 
 describe('Network utilities', () => {
@@ -10,7 +10,7 @@ describe('Network utilities', () => {
     });
 
     it('removes all properties passed by `subset`', () => {
-      const mockSubset: SocialNetworkProperties = ['id', 'matcher'];
+      const mockSubset: SocialiteNetworkProperties = ['id', 'matcher'];
       const result = filterNetworkProperties(facebook, mockSubset);
 
       expect(result).toStrictEqual({

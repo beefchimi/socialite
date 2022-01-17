@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const stackoverflow: SocialNetwork = {
+export const stackoverflow: SocialiteNetwork = {
   id: 'stackoverflow',
   preferredUrl: `https://stackoverflow.com/users/${profileReplacement.user}`,
   matcher: {

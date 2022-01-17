@@ -1,15 +1,15 @@
-import {defaultSocialNetworks} from './data';
+import {defaultSocialiteNetworks} from './data';
 import {defaultUserMatcher} from './capture';
 
 import {MatchUserSource} from './types';
 import type {
   BasicUrl,
   ParsedUrlGroups,
-  SocialNetworkId,
-  SocialNetwork,
-  SocialNetworkMap,
-  SocialNetworkProperties,
-  SocialProfile,
+  NetworkId,
+  SocialiteNetwork,
+  NetworkMap,
+  SocialiteNetworkProperties,
+  SocialiteProfile,
   UrlMinCriteria,
 } from './types';
 import {
@@ -22,29 +22,29 @@ export class Socialite {
   // Since this is a Map, we do not want to expose a getter.
   // That would allow users access to Map methods,
   // which circumvents how we want to control this data.
-  private _networks: SocialNetworkMap;
+  private _networks: NetworkMap;
 
-  constructor(customNetworks: SocialNetwork[] = []) {
+  constructor(customNetworks: SocialiteNetwork[] = []) {
     const initialNetworks = customNetworks.length
       ? customNetworks
-      : defaultSocialNetworks;
+      : defaultSocialiteNetworks;
 
     this._networks = new Map();
 
     initialNetworks.forEach((network) => this.addNetwork(network));
   }
 
-  hasNetwork(id: SocialNetworkId) {
+  hasNetwork(id: NetworkId) {
     return this._networks.has(id);
   }
 
-  addNetwork(network: SocialNetwork, overwrite = false) {
+  addNetwork(network: SocialiteNetwork, overwrite = false) {
     return !overwrite && this.hasNetwork(network.id)
       ? false
       : this._networks.set(network.id, network);
   }
 
-  removeNetwork(id: SocialNetworkId) {
+  removeNetwork(id: NetworkId) {
     return this._networks.delete(id);
   }
 
@@ -52,7 +52,7 @@ export class Socialite {
     this._networks.clear();
   }
 
-  getNetworks(subset?: SocialNetworkProperties) {
+  getNetworks(subset?: SocialiteNetworkProperties) {
     return [...this._networks.values()].map((network) =>
       subset ? filterNetworkProperties(network, subset) : network,
     );
@@ -64,7 +64,7 @@ export class Socialite {
     return this.validateUrl(groups) ? (groups as UrlMinCriteria) : false;
   }
 
-  parseProfile(url: BasicUrl, id?: SocialNetworkId): SocialProfile | false {
+  parseProfile(url: BasicUrl, id?: NetworkId): SocialiteProfile | false {
     const matches = this.parseUrl(url);
 
     if (!matches || (id && !this.hasNetwork(id))) {
@@ -141,7 +141,7 @@ export class Socialite {
   }
 
   private getNetworkFromDomain(domain: string) {
-    let matchedNetwork: SocialNetwork | undefined;
+    let matchedNetwork: SocialiteNetwork | undefined;
 
     for (const [_id, network] of this._networks) {
       const match = new RegExp(network.matcher.domain).test(domain);
@@ -156,10 +156,10 @@ export class Socialite {
   }
 
   private getMinimumResult(
-    network: SocialNetwork,
+    network: SocialiteNetwork,
     matches: UrlMinCriteria,
     url: BasicUrl,
-  ): SocialProfile {
+  ): SocialiteProfile {
     return {
       id: network.id,
       urlGroups: matches,

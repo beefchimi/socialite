@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const vimeo: SocialNetwork = {
+export const vimeo: SocialiteNetwork = {
   id: 'vimeo',
   preferredUrl: `https://vimeo.com/${profileReplacement.user}`,
   matcher: {

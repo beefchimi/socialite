@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const discord: SocialNetwork = {
+export const discord: SocialiteNetwork = {
   id: 'discord',
   preferredUrl: `https://discordapp.com/users/${profileReplacement.user}`,
   matcher: {

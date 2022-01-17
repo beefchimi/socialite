@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const youtube: SocialNetwork = {
+export const youtube: SocialiteNetwork = {
   id: 'youtube',
   preferredUrl: `https://youtube.com/channel/${profileReplacement.user}`,
   appUrl: `https://m.youtube.com/c/${profileReplacement.user}`,

@@ -1,8 +1,6 @@
 import {BasicUrl} from './general';
 
-// TODO: This could be a more complex type (ex: enums)
-// https://github.com/beefchimi/socialite/issues/3
-export type SocialNetworkId = string;
+export type NetworkId = string;
 export type UserName = string;
 export type UserPrefix = string;
 
@@ -14,22 +12,22 @@ export enum MatchUserSource {
   Path = 'path',
 }
 
-export interface SocialNetworkMatcher {
+export interface NetworkMatcher {
   domain: string | RegExp;
   userSource?: MatchUserSource;
   user?: string | RegExp;
 }
 
-export interface SocialNetwork {
-  id: SocialNetworkId;
-  matcher: SocialNetworkMatcher;
+export interface SocialiteNetwork {
+  id: NetworkId;
+  matcher: NetworkMatcher;
   preferredUrl: BasicUrl;
   appUrl?: BasicUrl;
   prefix?: UserPrefix;
 }
 
-export type SocialNetworkMap = Map<SocialNetworkId, SocialNetwork>;
-export type SocialNetworkSubset = Partial<SocialNetwork>;
+export type NetworkMap = Map<NetworkId, SocialiteNetwork>;
+export type NetworkSubset = Partial<SocialiteNetwork>;
 
-export type SocialNetworkProperty = keyof SocialNetwork;
-export type SocialNetworkProperties = SocialNetworkProperty[];
+export type SocialiteNetworkProperty = keyof SocialiteNetwork;
+export type SocialiteNetworkProperties = SocialiteNetworkProperty[];

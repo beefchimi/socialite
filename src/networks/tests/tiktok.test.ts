@@ -1,17 +1,16 @@
-import {allSocialNetworks} from '../../data';
 import {Socialite} from '../../socialite';
-import type {SocialProfile} from '../../types';
-import {mockGenericUser} from '../../tests/fixtures';
+import type {SocialiteProfile} from '../../types';
+import {allSocialiteNetworks, mockGenericUser} from '../../tests/fixtures';
 import {tiktok} from '../tiktok';
 
 describe('Social networks > tiktok', () => {
-  const mockSocialite = new Socialite(allSocialNetworks);
+  const mockSocialite = new Socialite(allSocialiteNetworks);
   const mockCommonUrl = `https://www.tiktok.com/${tiktok.prefix}${mockGenericUser}`;
 
   it('returns expected `id`, `user`, and `prefix` from common url', () => {
     const {id, user, prefix} = mockSocialite.parseProfile(
       mockCommonUrl,
-    ) as SocialProfile;
+    ) as SocialiteProfile;
 
     expect(id).toBe(tiktok.id);
     expect(user).toBe(mockGenericUser);
@@ -22,7 +21,7 @@ describe('Social networks > tiktok', () => {
     const mockUncommonUrl = `${mockCommonUrl}/trail-123`;
     const {id, user, prefix} = mockSocialite.parseProfile(
       mockUncommonUrl,
-    ) as SocialProfile;
+    ) as SocialiteProfile;
 
     expect(id).toBe(tiktok.id);
     expect(user).toBe(mockGenericUser);

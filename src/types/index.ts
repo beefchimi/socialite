@@ -5,15 +5,15 @@ export type {ParsedUrlGroups, UrlGroupSubset, UrlMinCriteria} from './capture';
 
 export {MatchUserSource} from './social-network';
 export type {
-  SocialNetworkId,
   UserName,
   UserPrefix,
-  SocialNetworkMatcher,
-  SocialNetwork,
-  SocialNetworkMap,
-  SocialNetworkSubset,
-  SocialNetworkProperty,
-  SocialNetworkProperties,
+  NetworkId,
+  NetworkMatcher,
+  NetworkMap,
+  NetworkSubset,
+  SocialiteNetwork,
+  SocialiteNetworkProperty,
+  SocialiteNetworkProperties,
 } from './social-network';
 
-export type {SocialProfile} from './social-profile';
+export type {SocialiteProfile} from './social-profile';

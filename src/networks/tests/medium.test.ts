@@ -1,17 +1,16 @@
-import {allSocialNetworks} from '../../data';
 import {Socialite} from '../../socialite';
-import type {SocialProfile} from '../../types';
-import {mockGenericUser} from '../../tests/fixtures';
+import type {SocialiteProfile} from '../../types';
+import {allSocialiteNetworks, mockGenericUser} from '../../tests/fixtures';
 import {medium} from '../medium';
 
 describe('Social networks > medium', () => {
-  const mockSocialite = new Socialite(allSocialNetworks);
+  const mockSocialite = new Socialite(allSocialiteNetworks);
   const mockCommonUrl = `https://www.medium.com/${medium.prefix}${mockGenericUser}`;
 
   it('returns expected `id`, `user`, and `prefix` from common url', () => {
     const {id, user, prefix} = mockSocialite.parseProfile(
       mockCommonUrl,
-    ) as SocialProfile;
+    ) as SocialiteProfile;
 
     expect(id).toBe(medium.id);
     expect(user).toBe(mockGenericUser);
@@ -22,7 +21,7 @@ describe('Social networks > medium', () => {
     const mockUncommonUrl = `${mockCommonUrl}/trail-123`;
     const {id, user, prefix} = mockSocialite.parseProfile(
       mockUncommonUrl,
-    ) as SocialProfile;
+    ) as SocialiteProfile;
 
     expect(id).toBe(medium.id);
     expect(user).toBe(mockGenericUser);

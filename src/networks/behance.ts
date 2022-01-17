@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const behance: SocialNetwork = {
+export const behance: SocialiteNetwork = {
   id: 'behance',
   preferredUrl: `https://behance.net/${profileReplacement.user}`,
   matcher: {

@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const telegram: SocialNetwork = {
+export const telegram: SocialiteNetwork = {
   id: 'telegram',
   preferredUrl: `https://t.me/${profileReplacement.user}`,
   matcher: {

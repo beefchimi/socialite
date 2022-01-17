@@ -1,7 +1,7 @@
 import {profileReplacement} from '../capture';
-import type {SocialNetwork} from '../types';
+import type {SocialiteNetwork} from '../types';
 
-export const keybase: SocialNetwork = {
+export const keybase: SocialiteNetwork = {
   id: 'keybase',
   preferredUrl: `https://keybase.io/${profileReplacement.user}`,
   matcher: {
