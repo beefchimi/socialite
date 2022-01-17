@@ -20,7 +20,7 @@ Simply install via the command-line or include in your `package.json`, just like
 
 ```sh
 # Alternatively install with `yarn` or `pnpm`
-npm install socialite
+npm install @beefchimi/socialite
 ```
 
 ## How to use
@@ -28,7 +28,7 @@ npm install socialite
 By default, `Socialite` includes only a small collection of the most common social networks. A typical use case looks like:
 
 ```ts
-import {Socialite} from 'socialite';
+import {Socialite} from '@beefchimi/socialite';
 
 const socialiteInstance = new Socialite();
 const mySocialUrl = 'https://www.twitter.com/@SomeFakeUserHandle';
@@ -61,7 +61,7 @@ The above will log the following `SocialProfile` _(object)_ to the console:
 For a more robust collection of social networks, you can import and pass in `allSocialNetworks`:
 
 ```ts
-import {Socialite, allSocialNetworks} from 'socialite';
+import {Socialite, allSocialNetworks} from '@beefchimi/socialite';
 
 const socialiteInstance = new Socialite(allSocialNetworks);
 console.log(socialiteInstance.getNetworks());
