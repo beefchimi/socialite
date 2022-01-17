@@ -8,7 +8,7 @@ export {
 export {socialiteNetworks, defaultSocialiteNetworks} from './data';
 export type {SocialiteId} from './data';
 
-export {socialNetworkPrefixes} from './prefixes';
+export {socialitePrefix} from './prefixes';
 
 export {Socialite} from './socialite';
 

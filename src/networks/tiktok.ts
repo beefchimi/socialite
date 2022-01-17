@@ -1,8 +1,8 @@
 import {profileReplacement} from '../capture';
-import {socialNetworkPrefixes} from '../prefixes';
+import {socialitePrefix} from '../prefixes';
 import type {SocialNetwork} from '../types';
 
-const {tiktok: prefix} = socialNetworkPrefixes;
+const {tiktok: prefix} = socialitePrefix;
 
 export const tiktok: SocialNetwork = {
   id: 'tiktok',

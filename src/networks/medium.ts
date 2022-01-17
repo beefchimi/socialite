@@ -1,8 +1,8 @@
 import {profileReplacement} from '../capture';
-import {socialNetworkPrefixes} from '../prefixes';
+import {socialitePrefix} from '../prefixes';
 import type {SocialNetwork} from '../types';
 
-const {medium: prefix} = socialNetworkPrefixes;
+const {medium: prefix} = socialitePrefix;
 
 export const medium: SocialNetwork = {
   id: 'medium',

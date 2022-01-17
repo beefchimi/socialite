@@ -1,4 +1,4 @@
-import {socialNetworkPrefixes} from '../../prefixes';
+import {socialitePrefix} from '../../prefixes';
 import {
   behance as networkBehance,
   facebook as networkFacebook,
@@ -115,7 +115,7 @@ export const mockSubstackProfile: SocialProfile = {
   preferredUrl: getUrlWithSubstitutions(networkSubstack.preferredUrl, ''),
 };
 
-export const mockTwitterPrefix = socialNetworkPrefixes.twitter;
+export const mockTwitterPrefix = socialitePrefix.twitter;
 export const mockTwitterUser: UserName = '123ABC=human0';
 export const mockTwitterUrl: BasicUrl = `https://mobile.twitter.com/${mockTwitterPrefix}${mockTwitterUser}/`;
 export const mockTwitterProfile: SocialProfile = {

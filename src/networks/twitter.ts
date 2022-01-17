@@ -1,8 +1,8 @@
 import {profileReplacement} from '../capture';
-import {socialNetworkPrefixes} from '../prefixes';
+import {socialitePrefix} from '../prefixes';
 import type {SocialNetwork} from '../types';
 
-const {twitter: prefix} = socialNetworkPrefixes;
+const {twitter: prefix} = socialitePrefix;
 
 export const twitter: SocialNetwork = {
   id: 'twitter',
