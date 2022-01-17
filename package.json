@@ -1,5 +1,5 @@
 {
-  "name": "socialite",
+  "name": "@beefchimi/socialite",
   "version": "0.0.1",
   "description": "Social network URL parsing for aristocrats ",
   "author": "Curtis Dulmage",
