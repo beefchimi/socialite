@@ -13,7 +13,7 @@ export type {
   NetworkMap,
   NetworkSubset,
   SocialiteNetworkProperty,
-  SocialNetworkProperties,
+  SocialiteNetworkProperties,
 } from './social-network';
 
 export type {SocialiteProfile} from './social-profile';

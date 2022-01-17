@@ -8,7 +8,7 @@ import type {
   NetworkId,
   SocialNetwork,
   NetworkMap,
-  SocialNetworkProperties,
+  SocialiteNetworkProperties,
   SocialiteProfile,
   UrlMinCriteria,
 } from './types';
@@ -52,7 +52,7 @@ export class Socialite {
     this._networks.clear();
   }
 
-  getNetworks(subset?: SocialNetworkProperties) {
+  getNetworks(subset?: SocialiteNetworkProperties) {
     return [...this._networks.values()].map((network) =>
       subset ? filterNetworkProperties(network, subset) : network,
     );

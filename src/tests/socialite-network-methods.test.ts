@@ -4,14 +4,17 @@ import type {
   SocialNetwork,
   NetworkMap,
   NetworkSubset,
-  SocialNetworkProperties,
+  SocialiteNetworkProperties,
 } from '../types';
 import {mockCustomNetworks} from './fixtures';
 
 describe('Socialite network methods', () => {
   describe('getNetworks() > subset', () => {
     it('returns only the properties requested', () => {
-      const mockSubset: SocialNetworkProperties = ['preferredUrl', 'matcher'];
+      const mockSubset: SocialiteNetworkProperties = [
+        'preferredUrl',
+        'matcher',
+      ];
       const mockSocialite = new Socialite();
 
       const networks = mockSocialite.getNetworks(mockSubset);

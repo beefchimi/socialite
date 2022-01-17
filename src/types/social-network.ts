@@ -30,4 +30,4 @@ export type NetworkMap = Map<NetworkId, SocialNetwork>;
 export type NetworkSubset = Partial<SocialNetwork>;
 
 export type SocialiteNetworkProperty = keyof SocialNetwork;
-export type SocialNetworkProperties = SocialiteNetworkProperty[];
+export type SocialiteNetworkProperties = SocialiteNetworkProperty[];
