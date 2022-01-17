@@ -2,7 +2,7 @@ import {defaultSocialiteNetworks} from '../data';
 import {Socialite} from '../socialite';
 import type {
   SocialNetwork,
-  SocialNetworkMap,
+  NetworkMap,
   SocialNetworkSubset,
   SocialNetworkProperties,
 } from '../types';
@@ -66,7 +66,7 @@ describe('Socialite network methods', () => {
       expect(mockSocialite.hasNetwork('foo')).toBe(true);
       expect(addedNetwork).toBeInstanceOf(Map);
 
-      const networkKeysFromMap = [...(addedNetwork as SocialNetworkMap).keys()];
+      const networkKeysFromMap = [...(addedNetwork as NetworkMap).keys()];
       const networkKeysFromObjects = filterNetworkIds(
         mockSocialite.getNetworks(),
       );
@@ -114,7 +114,7 @@ describe('Socialite network methods', () => {
       expect(updatedNetworks[0]).not.toBe(defaultSocialiteNetworks[0]);
       expect(updatedNetworks[0]).toBe(mockNetwork);
 
-      const networkKeysFromMap = [...(addedNetwork as SocialNetworkMap).keys()];
+      const networkKeysFromMap = [...(addedNetwork as NetworkMap).keys()];
       expect(networkKeysFromMap).toHaveLength(defaultSocialiteNetworks.length);
     });
   });

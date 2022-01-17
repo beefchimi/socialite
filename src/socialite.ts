@@ -7,7 +7,7 @@ import type {
   ParsedUrlGroups,
   NetworkId,
   SocialNetwork,
-  SocialNetworkMap,
+  NetworkMap,
   SocialNetworkProperties,
   SocialiteProfile,
   UrlMinCriteria,
@@ -22,7 +22,7 @@ export class Socialite {
   // Since this is a Map, we do not want to expose a getter.
   // That would allow users access to Map methods,
   // which circumvents how we want to control this data.
-  private _networks: SocialNetworkMap;
+  private _networks: NetworkMap;
 
   constructor(customNetworks: SocialNetwork[] = []) {
     const initialNetworks = customNetworks.length

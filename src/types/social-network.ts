@@ -26,7 +26,7 @@ export interface SocialNetwork {
   prefix?: UserPrefix;
 }
 
-export type SocialNetworkMap = Map<NetworkId, SocialNetwork>;
+export type NetworkMap = Map<NetworkId, SocialNetwork>;
 export type SocialNetworkSubset = Partial<SocialNetwork>;
 
 export type SocialNetworkProperty = keyof SocialNetwork;

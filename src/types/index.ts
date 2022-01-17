@@ -10,7 +10,7 @@ export type {
   UserPrefix,
   NetworkMatcher,
   SocialNetwork,
-  SocialNetworkMap,
+  NetworkMap,
   SocialNetworkSubset,
   SocialNetworkProperty,
   SocialNetworkProperties,
