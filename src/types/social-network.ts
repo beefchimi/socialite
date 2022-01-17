@@ -27,7 +27,7 @@ export interface SocialNetwork {
 }
 
 export type NetworkMap = Map<NetworkId, SocialNetwork>;
-export type SocialNetworkSubset = Partial<SocialNetwork>;
+export type NetworkSubset = Partial<SocialNetwork>;
 
 export type SocialNetworkProperty = keyof SocialNetwork;
 export type SocialNetworkProperties = SocialNetworkProperty[];

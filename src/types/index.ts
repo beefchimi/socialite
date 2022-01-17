@@ -11,7 +11,7 @@ export type {
   NetworkMatcher,
   SocialNetwork,
   NetworkMap,
-  SocialNetworkSubset,
+  NetworkSubset,
   SocialNetworkProperty,
   SocialNetworkProperties,
 } from './social-network';

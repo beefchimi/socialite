@@ -3,7 +3,7 @@ import {Socialite} from '../socialite';
 import type {
   SocialNetwork,
   NetworkMap,
-  SocialNetworkSubset,
+  NetworkSubset,
   SocialNetworkProperties,
 } from '../types';
 import {mockCustomNetworks} from './fixtures';
@@ -176,7 +176,7 @@ describe('Socialite network methods', () => {
   });
 });
 
-function filterNetworkIds(networks: SocialNetworkSubset[]) {
+function filterNetworkIds(networks: NetworkSubset[]) {
   // BUG: TypeScript thinks `undefined` could be in the array.
   // https://github.com/beefchimi/socialite/issues/8
   return networks.map(({id}) => id).filter(Boolean);
