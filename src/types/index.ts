@@ -8,7 +8,7 @@ export type {
   NetworkId,
   UserName,
   UserPrefix,
-  SocialNetworkMatcher,
+  NetworkMatcher,
   SocialNetwork,
   SocialNetworkMap,
   SocialNetworkSubset,

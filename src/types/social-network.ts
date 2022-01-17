@@ -12,7 +12,7 @@ export enum MatchUserSource {
   Path = 'path',
 }
 
-export interface SocialNetworkMatcher {
+export interface NetworkMatcher {
   domain: string | RegExp;
   userSource?: MatchUserSource;
   user?: string | RegExp;
@@ -20,7 +20,7 @@ export interface SocialNetworkMatcher {
 
 export interface SocialNetwork {
   id: NetworkId;
-  matcher: SocialNetworkMatcher;
+  matcher: NetworkMatcher;
   preferredUrl: BasicUrl;
   appUrl?: BasicUrl;
   prefix?: UserPrefix;
