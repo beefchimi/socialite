@@ -10,7 +10,8 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
 
       - name: Apply PR labels
         uses: actions/labeler@v3

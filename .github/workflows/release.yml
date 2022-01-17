@@ -15,25 +15,30 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Node 17.x
+      - name: Setup Node 17.x to install with private scope
         uses: actions/setup-node@v2
         with:
           node-version: 17.x
-          # Requires `scope` and `url` so I can install my
-          # private `@beefchimi` dependencies.
           registry-url: https://npm.pkg.github.com
           scope: '@beefchimi'
 
-      - name: Install dependencies and build (with cache)
-        uses: bahmutov/npm-install@v1
+      - name: Install Dependencies
+        run: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Point to NPM registry
+        uses: actions/setup-node@v2
+        with:
+          registry-url: https://registry.npmjs.org
+          scope: '@beefchimi'
 
       - name: Create Release Pull Request or Publish to NPM
         id: changesets
         uses: changesets/action@v1
         with:
-          registry-url: https://registry.npmjs.org
-          scope: '@beefchimi'
           publish: npm run release
         env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

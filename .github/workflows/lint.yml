@@ -10,15 +10,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Setup Node 17.x and write .npmrc
+      - name: Setup Node 17.x to install with private scope
         uses: actions/setup-node@v2
         with:
           version: 17.x
           registry-url: 'https://npm.pkg.github.com'
           scope: '@beefchimi'
 
-      - name: Install Dependencies and build (with cache)
-        uses: bahmutov/npm-install@v1
+      - name: Install Dependencies
+        run: npm install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
