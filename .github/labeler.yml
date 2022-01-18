@@ -1,6 +1,7 @@
 👽️ dependency:
   - any: ['package.json', 'package-lock.json', 'yarn.lock', '.pnp.*']
 📝 documentation: ['README.md', 'docs/**/*']
+📱 network: 'src/networks/**/*'
 🔖 release: 'CHANGELOG.md'
 🧪 testing: '**/*.test.ts'
 🔧 tooling:
