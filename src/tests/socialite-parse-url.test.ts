@@ -63,13 +63,13 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  it('returns `tldomain` with trailing `/` when present and not followed by anything', () => {
+  it('returns `tldomain` with trailing `/` removed', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[4]);
 
     expect(result).toMatchObject({
       ...urlMinCriteria,
-      tldomain: '.com/',
+      tldomain: '.com',
     });
   });
 
@@ -79,7 +79,7 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toMatchObject({
       ...urlMinCriteria,
-      port: '123',
+      port: ':123',
     });
   });
 
@@ -89,7 +89,7 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toMatchObject({
       ...urlMinCriteria,
-      port: '123',
+      port: ':123',
     });
   });
 
@@ -125,7 +125,7 @@ describe('Socialite > parseUrl()', () => {
     const result2 = mockSocialite.parseUrl(validUrls[12]);
     expect(result2).toMatchObject({
       ...urlMinCriteria,
-      tldomain: '.com/',
+      tldomain: '.com',
       parameters: '?query=param',
     });
   });
@@ -142,7 +142,7 @@ describe('Socialite > parseUrl()', () => {
     const result2 = mockSocialite.parseUrl(validUrls[14]);
     expect(result2).toMatchObject({
       ...urlMinCriteria,
-      tldomain: '.com/',
+      tldomain: '.com',
       anchor: '#hash-anchor',
     });
   });
@@ -156,7 +156,7 @@ describe('Socialite > parseUrl()', () => {
       subdomain: 'www.sub',
       domain: 'domain',
       tldomain: '.com',
-      port: '123',
+      port: ':123',
       path: '/path/to/',
       parameters: '?query=param',
       anchor: '#hash-anchor',
@@ -172,7 +172,7 @@ describe('Socialite > parseUrl()', () => {
       subdomain: 'www.sub1.sub2',
       domain: 'domain',
       tldomain: '.com',
-      port: '123',
+      port: ':123',
       path: '/!url*()-_.~[]&=+$%path@/@to!*()-_.~[]@&=+$%user!/!*()-_.~[]@&=+$%',
       parameters: '?query!*()-_.~[]@&=+$%param',
       anchor: '#hash!*()-_.~[]@&=+$%anchor',

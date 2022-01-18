@@ -16,6 +16,8 @@ export {
   filterNullishValuesFromObject,
   filterNetworkProperties,
   mergeRegExp,
+  buildUrlFromGroups,
+  fixUrlWithoutScheme,
   getUrlGroups,
   getUrlWithSubstitutions,
 } from './utilities';

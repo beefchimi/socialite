@@ -11,7 +11,11 @@ import {
   mockCustomProfile,
   mockFacebookUrl,
   mockFacebookProfile,
+  mockInstagramUser,
+  mockInstagramGroup,
+  mockInstagramProfile,
   mockMinimalUrl,
+  mockMinimalGroup,
   mockMinimalProfile,
   mockSubstackUrl,
   mockSubstackProfile,
@@ -46,18 +50,36 @@ describe('Socialite > parseProfile()', () => {
     expect(result).toStrictEqual(mockCustomProfile);
   });
 
-  it('returns profile for a default network', () => {
+  it('returns profile for a default network when passed as `url`', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseProfile(mockFacebookUrl);
 
     expect(result).toStrictEqual(mockFacebookProfile);
   });
 
-  it('returns minimum profile when no `path` is found', () => {
+  it('returns profile for a default network when passed as `group`', () => {
+    const mockSocialite = new Socialite();
+    const result = mockSocialite.parseProfile(mockInstagramGroup);
+
+    expect(result).toStrictEqual(mockInstagramProfile);
+  });
+
+  it('returns minimum profile from `url` when no `path` is found', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseProfile(mockMinimalUrl);
 
     expect(result).toStrictEqual(mockMinimalProfile);
+  });
+
+  it('returns minimum profile from `group` when no `path` is found', () => {
+    const mockSocialite = new Socialite();
+    const result = mockSocialite.parseProfile(mockMinimalGroup);
+
+    expect(result).toStrictEqual({
+      ...mockMinimalProfile,
+      // Rebuilding the url does not include the trailing `/`.
+      originalUrl: 'https://m.facebook.com',
+    });
   });
 
   it('returns minimum profile when no `subdomain` is found and `userSource` specifies `subdomain`', () => {

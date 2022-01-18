@@ -1,4 +1,9 @@
 export {filterNullishValuesFromObject} from './general';
 export {filterNetworkProperties} from './network';
 export {mergeRegExp} from './regexp';
-export {getUrlGroups, getUrlWithSubstitutions} from './url';
+export {
+  buildUrlFromGroups,
+  fixUrlWithoutScheme,
+  getUrlGroups,
+  getUrlWithSubstitutions,
+} from './url';

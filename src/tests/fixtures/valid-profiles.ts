@@ -2,6 +2,7 @@ import {socialitePrefix} from '../../prefixes';
 import {
   behance as networkBehance,
   facebook as networkFacebook,
+  instagram as networkInstagram,
   substack as networkSubstack,
   twitter as networkTwitter,
 } from '../../networks';
@@ -10,6 +11,7 @@ import type {
   SocialiteProfile,
   SocialiteNetwork,
   UserName,
+  UrlMinCriteria,
 } from '../../types';
 import {getUrlWithSubstitutions} from '../../utilities';
 
@@ -89,14 +91,40 @@ export const mockFacebookProfile: SocialiteProfile = {
   user: mockFacebookUser,
 };
 
-export const mockMinimalUrl: BasicUrl = `https://m.facebook.com/`;
+export const mockInstagramUser: UserName = 'insta-account';
+export const mockInstagramGroup: UrlMinCriteria = {
+  domain: 'instagram',
+  tldomain: '.com',
+  path: `/${mockInstagramUser}`,
+};
+export const mockInstagramProfile: SocialiteProfile = {
+  id: networkInstagram.id,
+  urlGroups: {
+    ...mockInstagramGroup,
+  },
+  originalUrl: `instagram.com/${mockInstagramUser}`,
+  preferredUrl: getUrlWithSubstitutions(
+    networkInstagram.preferredUrl,
+    mockInstagramUser,
+  ),
+  appUrl: getUrlWithSubstitutions(
+    networkInstagram.appUrl as BasicUrl,
+    mockInstagramUser,
+  ),
+  user: mockInstagramUser,
+};
+
+export const mockMinimalUrl: BasicUrl = 'https://m.facebook.com/';
+export const mockMinimalGroup: UrlMinCriteria = {
+  scheme: 'https://',
+  subdomain: 'm',
+  domain: 'facebook',
+  tldomain: '.com',
+};
 export const mockMinimalProfile: SocialiteProfile = {
   id: networkFacebook.id,
   urlGroups: {
-    scheme: 'https://',
-    subdomain: 'm',
-    domain: 'facebook',
-    tldomain: '.com/',
+    ...mockMinimalGroup,
   },
   originalUrl: mockMinimalUrl,
   preferredUrl: getUrlWithSubstitutions(networkFacebook.preferredUrl, ''),
@@ -109,7 +137,7 @@ export const mockSubstackProfile: SocialiteProfile = {
   urlGroups: {
     scheme: 'https://',
     domain: 'substack',
-    tldomain: '.com/',
+    tldomain: '.com',
   },
   originalUrl: mockSubstackUrl,
   preferredUrl: getUrlWithSubstitutions(networkSubstack.preferredUrl, ''),
