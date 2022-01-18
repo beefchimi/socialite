@@ -6,6 +6,6 @@ export const exercism: SocialiteNetwork = {
   preferredUrl: `https://exercism.io/profiles/${profileReplacement.user}`,
   matcher: {
     domain: /exercism/,
-    user: /^(?:\/profiles\/)?(?:\/)?([^/]+)/,
+    user: /^(?:\/profiles\/)([^/]+)/,
   },
 };
