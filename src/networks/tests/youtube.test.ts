@@ -37,9 +37,19 @@ describe('Social networks > youtube', () => {
   });
 
   it('does not match against the short url', () => {
-    const mockUncommonUrl = `https://youtu.be/c/${mockGenericUser}`;
-    const match = mockSocialite.parseProfile(mockUncommonUrl);
+    const mockShortUrl = `https://youtu.be/c/${mockGenericUser}`;
+    const match = mockSocialite.parseProfile(mockShortUrl);
 
     expect(match).toBe(false);
+  });
+
+  it('returns `id` with no `user` when provided an unrecognized leading path', () => {
+    const mockUnsupportedUrl = `https://youtube.com/foo/${mockGenericUser}`;
+    const match = mockSocialite.parseProfile(
+      mockUnsupportedUrl,
+    ) as SocialiteProfile;
+
+    expect(match.id).toBe(youtube.id);
+    expect(match.user).toBeUndefined();
   });
 });
