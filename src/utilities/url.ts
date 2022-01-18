@@ -1,6 +1,38 @@
-import {profileReplacement, urlRegExp} from '../capture';
-import type {BasicUrl, UrlGroupSubset, ParsedUrlGroups} from '../types';
+import {profileReplacement, urlRegExp, schemeRegExp} from '../capture';
+import type {
+  BasicUrl,
+  UrlGroupSubset,
+  UrlMinCriteria,
+  ParsedUrlGroups,
+} from '../types';
 import {filterNullishValuesFromObject} from './general';
+
+export function buildUrlFromGroups(groups: UrlMinCriteria): BasicUrl {
+  const domainJoiner =
+    Boolean(groups.domain && groups.subdomain) &&
+    !groups.subdomain?.endsWith('.')
+      ? '.'
+      : undefined;
+
+  const orderedValues = [
+    groups.scheme,
+    groups.subdomain,
+    domainJoiner,
+    groups.domain,
+    groups.tldomain,
+    groups.port,
+    groups.path,
+    groups.parameters,
+    groups.anchor,
+  ];
+
+  return orderedValues.filter((value) => value !== undefined).join('');
+}
+
+export function fixUrlWithoutScheme(url: BasicUrl) {
+  const hasScheme = schemeRegExp.test(url);
+  return hasScheme ? url : `https://${url}`;
+}
 
 function updateGroupsWithSubdomain(groups: UrlGroupSubset): UrlGroupSubset {
   const {domain} = groups;
@@ -21,11 +53,24 @@ function updateGroupsWithSubdomain(groups: UrlGroupSubset): UrlGroupSubset {
   };
 }
 
+function sanitizeTldomain({
+  tldomain,
+  ...groups
+}: UrlGroupSubset): UrlGroupSubset {
+  return tldomain
+    ? {
+        ...groups,
+        tldomain: tldomain.replace('/', ''),
+      }
+    : groups;
+}
+
 function sanitizePort({port, ...groups}: UrlGroupSubset): UrlGroupSubset {
   return port
     ? {
         ...groups,
-        port: port.replace(':', '').replace('/', ''),
+        // Not bothering to strip `:` prefix, as its a useful identifier.
+        port: port.replace('/', ''),
       }
     : groups;
 }
@@ -45,7 +90,8 @@ function sanitizePath({path, ...groups}: UrlGroupSubset): UrlGroupSubset {
 function sanitizeUrlGroups(groups: UrlGroupSubset): UrlGroupSubset {
   const filtered = filterNullishValuesFromObject<UrlGroupSubset>(groups);
   const updatedWithSubdomain = updateGroupsWithSubdomain(filtered);
-  const sanitizedWithPort = sanitizePort(updatedWithSubdomain);
+  const sanitizedWithTldomain = sanitizeTldomain(updatedWithSubdomain);
+  const sanitizedWithPort = sanitizePort(sanitizedWithTldomain);
 
   return sanitizePath(sanitizedWithPort);
 }

@@ -13,6 +13,7 @@ import type {
   UrlMinCriteria,
 } from './types';
 import {
+  buildUrlFromGroups,
   filterNetworkProperties,
   getUrlGroups,
   getUrlWithSubstitutions,
@@ -64,10 +65,13 @@ export class Socialite {
     return this.validateUrl(groups) ? (groups as UrlMinCriteria) : false;
   }
 
-  parseProfile(url: BasicUrl, id?: NetworkId): SocialiteProfile | false {
-    const matches = this.parseUrl(url);
+  parseProfile(
+    value: BasicUrl | UrlMinCriteria,
+    id?: NetworkId,
+  ): SocialiteProfile | false {
+    const groups = typeof value === 'string' ? this.parseUrl(value) : value;
 
-    if (!matches || (id && !this.hasNetwork(id))) {
+    if (!groups || (id && !this.hasNetwork(id))) {
       return false;
     }
 
@@ -76,20 +80,24 @@ export class Socialite {
     const targetNetwork =
       id && this.hasNetwork(id)
         ? this._networks.get(id)
-        : this.getNetworkFromDomain(matches.domain);
+        : this.getNetworkFromDomain(groups.domain);
 
     if (!targetNetwork) {
       return false;
     }
 
-    const minResult = this.getMinimumResult(targetNetwork, matches, url);
+    const minResult = this.getMinimumResult(
+      targetNetwork,
+      groups,
+      typeof value === 'string' ? value : undefined,
+    );
 
     // TODO: This logic should be improved if we ever want to
     // support addition `userSource` values.
     // https://github.com/beefchimi/socialite/issues/2
     const useSubdomain =
       targetNetwork.matcher.userSource === MatchUserSource.Subdomain;
-    const userSource = useSubdomain ? matches.subdomain : matches.path;
+    const userSource = useSubdomain ? groups.subdomain : groups.path;
 
     if (!userSource) {
       return minResult;
@@ -157,13 +165,15 @@ export class Socialite {
 
   private getMinimumResult(
     network: SocialiteNetwork,
-    matches: UrlMinCriteria,
-    url: BasicUrl,
+    groups: UrlMinCriteria,
+    url?: BasicUrl,
   ): SocialiteProfile {
+    const originalUrl = url ? url : buildUrlFromGroups(groups);
+
     return {
       id: network.id,
-      urlGroups: matches,
-      originalUrl: url,
+      urlGroups: groups,
+      originalUrl,
       preferredUrl: getUrlWithSubstitutions(network.preferredUrl),
       ...(network.appUrl
         ? {appUrl: getUrlWithSubstitutions(network.appUrl)}
