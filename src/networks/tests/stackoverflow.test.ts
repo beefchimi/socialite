@@ -26,13 +26,23 @@ describe('Social networks > stackoverflow', () => {
     expect(user).toBe(mockGenericUser);
   });
 
-  it('returns expected `id` and `user` when leading path is absent', () => {
-    const mockUncommonUrl = `https://stackoverflow.com/${mockGenericUser}/`;
+  it('returns expected `id` and `user` when digits path is present', () => {
+    const mockUncommonUrl = `https://stackoverflow.com/users/1234567890/${mockGenericUser}/`;
     const {id, user} = mockSocialite.parseProfile(
       mockUncommonUrl,
     ) as SocialiteProfile;
 
     expect(id).toBe(stackoverflow.id);
     expect(user).toBe(mockGenericUser);
+  });
+
+  it('returns `id` with no `user` when provided an unrecognized leading path', () => {
+    const mockUnsupportedUrl = `https://stackoverflow.com/foo/${mockGenericUser}`;
+    const match = mockSocialite.parseProfile(
+      mockUnsupportedUrl,
+    ) as SocialiteProfile;
+
+    expect(match.id).toBe(stackoverflow.id);
+    expect(match.user).toBeUndefined();
   });
 });

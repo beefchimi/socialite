@@ -6,6 +6,6 @@ export const stackoverflow: SocialiteNetwork = {
   preferredUrl: `https://stackoverflow.com/users/${profileReplacement.user}`,
   matcher: {
     domain: /stackoverflow/,
-    user: /^(?:\/users\/)?(?:[/]?\d+)?(?:\/)?([^/]+)/,
+    user: /^(?:\/users\/)(?:\d+?[/])?([^/]+)/,
   },
 };
