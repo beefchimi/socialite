@@ -6,6 +6,6 @@ export const reddit: SocialiteNetwork = {
   preferredUrl: `https://reddit.com/user/${profileReplacement.user}`,
   matcher: {
     domain: /reddit/,
-    user: /^(?:\/user\/)?(?:\/)?([^/]+)/,
+    user: /^(?:\/user\/)([^/]+)/,
   },
 };

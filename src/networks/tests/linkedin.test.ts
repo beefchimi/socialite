@@ -26,8 +26,8 @@ describe('Social networks > linkedin', () => {
     expect(user).toBe(mockGenericUser);
   });
 
-  it('returns expected `id` and `user` when url is from mobile app', () => {
-    const mockUncommonUrl = `https://linkedin.com/mwlite/in/${mockGenericUser}`;
+  it('returns expected `id` and `user` when provided app url', () => {
+    const mockUncommonUrl = `https://linkedin.com/mwlite/${mockGenericUser}`;
     const {id, user} = mockSocialite.parseProfile(
       mockUncommonUrl,
     ) as SocialiteProfile;
@@ -36,13 +36,13 @@ describe('Social networks > linkedin', () => {
     expect(user).toBe(mockGenericUser);
   });
 
-  it('returns expected `id` and `user` when leading path is absent', () => {
-    const mockUncommonUrl = `https://linkedin.com/${mockGenericUser}/`;
-    const {id, user} = mockSocialite.parseProfile(
-      mockUncommonUrl,
+  it('returns `id` with no `user` when provided an unrecognized leading path', () => {
+    const mockUnsupportedUrl = `https://linkedin.com/foo/${mockGenericUser}`;
+    const match = mockSocialite.parseProfile(
+      mockUnsupportedUrl,
     ) as SocialiteProfile;
 
-    expect(id).toBe(linkedin.id);
-    expect(user).toBe(mockGenericUser);
+    expect(match.id).toBe(linkedin.id);
+    expect(match.user).toBeUndefined();
   });
 });

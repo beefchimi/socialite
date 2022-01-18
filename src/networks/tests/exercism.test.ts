@@ -26,13 +26,13 @@ describe('Social networks > exercism', () => {
     expect(user).toBe(mockGenericUser);
   });
 
-  it('returns expected `id` and `user` when leading path is absent', () => {
-    const mockUncommonUrl = `https://exercism.io/${mockGenericUser}/`;
-    const {id, user} = mockSocialite.parseProfile(
-      mockUncommonUrl,
+  it('returns `id` with no `user` when provided an unrecognized leading path', () => {
+    const mockUnsupportedUrl = `https://exercism.io/foo/${mockGenericUser}`;
+    const match = mockSocialite.parseProfile(
+      mockUnsupportedUrl,
     ) as SocialiteProfile;
 
-    expect(id).toBe(exercism.id);
-    expect(user).toBe(mockGenericUser);
+    expect(match.id).toBe(exercism.id);
+    expect(match.user).toBeUndefined();
   });
 });
