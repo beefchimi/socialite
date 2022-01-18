@@ -11,7 +11,6 @@ import {
   mockCustomProfile,
   mockFacebookUrl,
   mockFacebookProfile,
-  mockInstagramUser,
   mockInstagramGroup,
   mockInstagramProfile,
   mockMinimalUrl,
