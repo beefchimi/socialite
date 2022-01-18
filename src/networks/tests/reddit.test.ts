@@ -26,13 +26,13 @@ describe('Social networks > reddit', () => {
     expect(user).toBe(mockGenericUser);
   });
 
-  it('returns expected `id` and `user` when leading path is absent', () => {
-    const mockUncommonUrl = `https://reddit.com/${mockGenericUser}/`;
-    const {id, user} = mockSocialite.parseProfile(
-      mockUncommonUrl,
+  it('returns `id` with no `user` when provided an unrecognized leading path', () => {
+    const mockUnsupportedUrl = `https://reddit.com/foo/${mockGenericUser}`;
+    const match = mockSocialite.parseProfile(
+      mockUnsupportedUrl,
     ) as SocialiteProfile;
 
-    expect(id).toBe(reddit.id);
-    expect(user).toBe(mockGenericUser);
+    expect(match.id).toBe(reddit.id);
+    expect(match.user).toBeUndefined();
   });
 });
