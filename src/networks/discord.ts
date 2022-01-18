@@ -6,6 +6,6 @@ export const discord: SocialiteNetwork = {
   preferredUrl: `https://discordapp.com/users/${profileReplacement.user}`,
   matcher: {
     domain: /discord/,
-    user: /^(?:\/users\/)?(?:\/)?([^/]+)/,
+    user: /^(?:\/users\/)([^/]+)/,
   },
 };

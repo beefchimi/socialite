@@ -26,13 +26,13 @@ describe('Social networks > discord', () => {
     expect(user).toBe(mockGenericUser);
   });
 
-  it('returns expected `id` and `user` when leading path is absent', () => {
-    const mockUncommonUrl = `https://discordapp.com/${mockGenericUser}/`;
-    const {id, user} = mockSocialite.parseProfile(
-      mockUncommonUrl,
+  it('returns `id` with no `user` when provided an unrecognized leading path', () => {
+    const mockUnsupportedUrl = `https://discordapp.com/foo/${mockGenericUser}`;
+    const match = mockSocialite.parseProfile(
+      mockUnsupportedUrl,
     ) as SocialiteProfile;
 
-    expect(id).toBe(discord.id);
-    expect(user).toBe(mockGenericUser);
+    expect(match.id).toBe(discord.id);
+    expect(match.user).toBeUndefined();
   });
 });
