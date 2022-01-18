@@ -7,6 +7,6 @@ export const linkedin: SocialiteNetwork = {
   appUrl: `https://linkedin.com/mwlite/in/${profileReplacement.user}`,
   matcher: {
     domain: /linkedin/,
-    user: /^(?:\/mwlite\/)?(?:[/]?in\/)?(?:\/)?([^/]+)/,
+    user: /^\/(?:mwlite|in)\/([^/]+)/,
   },
 };
