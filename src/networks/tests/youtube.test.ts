@@ -26,8 +26,8 @@ describe('Social networks > youtube', () => {
     expect(user).toBe(mockGenericUser);
   });
 
-  it('returns expected `id` and `user` when using the short url', () => {
-    const mockUncommonUrl = `https://youtu.be/c/${mockGenericUser}`;
+  it('returns expected `id` and `user` when provided app url', () => {
+    const mockUncommonUrl = `https://m.youtube.com/c/${mockGenericUser}/`;
     const {id, user} = mockSocialite.parseProfile(
       mockUncommonUrl,
     ) as SocialiteProfile;
@@ -36,13 +36,10 @@ describe('Social networks > youtube', () => {
     expect(user).toBe(mockGenericUser);
   });
 
-  it('returns expected `id` and `user` when leading path is absent', () => {
-    const mockUncommonUrl = `https://youtube.com/${mockGenericUser}/`;
-    const {id, user} = mockSocialite.parseProfile(
-      mockUncommonUrl,
-    ) as SocialiteProfile;
+  it('does not match against the short url', () => {
+    const mockUncommonUrl = `https://youtu.be/c/${mockGenericUser}`;
+    const match = mockSocialite.parseProfile(mockUncommonUrl);
 
-    expect(id).toBe(youtube.id);
-    expect(user).toBe(mockGenericUser);
+    expect(match).toBe(false);
   });
 });
