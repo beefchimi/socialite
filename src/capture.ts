@@ -11,9 +11,9 @@ function constructFullLineRegExp(...captureGroups: (string | RegExp)[]) {
 export const urlCaptureGroup = {
   scheme: `(?<${UrlCaptureId.Scheme}>https?://)?`,
   domain: `(?<${UrlCaptureId.Domain}>[\\w\\.-]+?)`,
-  tldomain: `(?<${UrlCaptureId.Tldomain}>\\.\\w{2,5}[/]?)?`,
-  port: `(?<${UrlCaptureId.Port}>:\\d+?[/]?)?`,
-  path: `(?<${UrlCaptureId.Path}>\\/.+?(?=[\\?|#]?))?`,
+  tldomain: `(?<${UrlCaptureId.Tldomain}>\\.\\w{2,5})?`,
+  port: `(?<${UrlCaptureId.Port}>:\\d+?)?`,
+  path: `(?<${UrlCaptureId.Path}>\\/.*?(?=[\\?|#]?))?`,
   parameters: `(?<${UrlCaptureId.Parameters}>\\?.+?(?=[#]?))?`,
   anchor: `(?<${UrlCaptureId.Anchor}>\\#.+?)?`,
 };

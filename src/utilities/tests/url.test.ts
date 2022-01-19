@@ -100,6 +100,7 @@ describe('Url utilities', () => {
         scheme: 'https://',
         domain: 'domain',
         tldomain: '.com',
+        path: '/',
       });
     });
 
@@ -109,14 +110,7 @@ describe('Url utilities', () => {
         domain: 'domain',
         tldomain: '.com',
         port: ':123',
-      });
-    });
-
-    it('does not include `path` if only `/`', () => {
-      const result = getUrlGroups('domain.com/');
-      expect(result).toStrictEqual({
-        domain: 'domain',
-        tldomain: '.com',
+        path: '/',
       });
     });
   });

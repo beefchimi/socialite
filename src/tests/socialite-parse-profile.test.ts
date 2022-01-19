@@ -74,11 +74,7 @@ describe('Socialite > parseProfile()', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseProfile(mockMinimalGroup);
 
-    expect(result).toStrictEqual({
-      ...mockMinimalProfile,
-      // Rebuilding the url does not include the trailing `/`.
-      originalUrl: 'https://m.facebook.com',
-    });
+    expect(result).toStrictEqual(mockMinimalProfile);
   });
 
   it('returns minimum profile when no `subdomain` is found and `userSource` specifies `subdomain`', () => {

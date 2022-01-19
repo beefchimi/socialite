@@ -53,49 +53,6 @@ function updateGroupsWithSubdomain(groups: UrlGroupSubset): UrlGroupSubset {
   };
 }
 
-function sanitizeTldomain({
-  tldomain,
-  ...groups
-}: UrlGroupSubset): UrlGroupSubset {
-  return tldomain
-    ? {
-        ...groups,
-        tldomain: tldomain.replace('/', ''),
-      }
-    : groups;
-}
-
-function sanitizePort({port, ...groups}: UrlGroupSubset): UrlGroupSubset {
-  return port
-    ? {
-        ...groups,
-        // Not bothering to strip `:` prefix, as its a useful identifier.
-        port: port.replace('/', ''),
-      }
-    : groups;
-}
-
-function sanitizePath({path, ...groups}: UrlGroupSubset): UrlGroupSubset {
-  // NOTE: Technically, a single `/` isn't a condition that will be met,
-  // since `tldomain` or `port` will capture that character.
-  // But, this condition may be relevant in the future.
-  return path && path !== '/'
-    ? {
-        ...groups,
-        path,
-      }
-    : groups;
-}
-
-function sanitizeUrlGroups(groups: UrlGroupSubset): UrlGroupSubset {
-  const filtered = filterNullishValuesFromObject<UrlGroupSubset>(groups);
-  const updatedWithSubdomain = updateGroupsWithSubdomain(filtered);
-  const sanitizedWithTldomain = sanitizeTldomain(updatedWithSubdomain);
-  const sanitizedWithPort = sanitizePort(sanitizedWithTldomain);
-
-  return sanitizePath(sanitizedWithPort);
-}
-
 export function getUrlGroups(url: BasicUrl): ParsedUrlGroups {
   const matched = url.trim().match(urlRegExp);
 
@@ -103,7 +60,11 @@ export function getUrlGroups(url: BasicUrl): ParsedUrlGroups {
     return null;
   }
 
-  return sanitizeUrlGroups(matched.groups);
+  const filtered = filterNullishValuesFromObject<UrlGroupSubset>(
+    matched.groups,
+  );
+
+  return updateGroupsWithSubdomain(filtered);
 }
 
 export function getUrlWithSubstitutions(url: BasicUrl, user = '', prefix = '') {

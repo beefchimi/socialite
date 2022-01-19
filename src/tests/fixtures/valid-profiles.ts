@@ -120,6 +120,7 @@ export const mockMinimalGroup: UrlMinCriteria = {
   subdomain: 'm',
   domain: 'facebook',
   tldomain: '.com',
+  path: '/',
 };
 export const mockMinimalProfile: SocialiteProfile = {
   id: networkFacebook.id,
@@ -138,6 +139,7 @@ export const mockSubstackProfile: SocialiteProfile = {
     scheme: 'https://',
     domain: 'substack',
     tldomain: '.com',
+    path: '/',
   },
   originalUrl: mockSubstackUrl,
   preferredUrl: getUrlWithSubstitutions(networkSubstack.preferredUrl, ''),
