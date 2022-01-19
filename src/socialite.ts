@@ -4,13 +4,14 @@ import {defaultUserMatcher, schemeRegExp} from './capture';
 import {MatchUserSource} from './types';
 import type {
   BasicUrl,
-  ParsedUrlGroups,
   NetworkId,
-  SocialiteNetwork,
   NetworkMap,
-  SocialiteNetworkProperties,
+  ParsedUrlGroups,
   SocialiteProfile,
+  SocialiteNetwork,
+  SocialiteNetworkProperties,
   UrlMinCriteria,
+  UserName,
 } from './types';
 import {
   filterNetworkProperties,
@@ -52,10 +53,27 @@ export class Socialite {
     this._networks.clear();
   }
 
-  getNetworks(subset?: SocialiteNetworkProperties) {
+  getNetwork(id: NetworkId) {
+    return this._networks.get(id);
+  }
+
+  getAllNetworks(subset?: SocialiteNetworkProperties) {
     return [...this._networks.values()].map((network) =>
       subset ? filterNetworkProperties(network, subset) : network,
     );
+  }
+
+  getPreferredUrl(id: NetworkId, user?: UserName) {
+    if (!this.hasNetwork(id)) {
+      return false;
+    }
+
+    // BUG: TypeScript doesn't understand that we have
+    // returned early if the `id` does not exist.
+    // https://github.com/beefchimi/socialite/issues/4
+    const {preferredUrl, prefix} = this.getNetwork(id) as SocialiteNetwork;
+
+    return getUrlWithSubstitutions(preferredUrl, user, prefix);
   }
 
   parseUrl(url: BasicUrl) {
@@ -78,7 +96,7 @@ export class Socialite {
     // https://github.com/beefchimi/socialite/issues/4
     const targetNetwork =
       id && this.hasNetwork(id)
-        ? this._networks.get(id)
+        ? this.getNetwork(id)
         : this.getNetworkFromDomain(groups.domain);
 
     if (!targetNetwork) {

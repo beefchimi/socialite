@@ -68,7 +68,7 @@ import type {SocialiteId} from 'socialitejs';
 const allNetworksInstance = new Socialite(Object.values(socialiteNetworks));
 
 // Logs to the console all social networks included in the code base.
-console.log(allNetworksInstance.getNetworks());
+console.log(allNetworksInstance.getAllNetworks());
 
 // Initializing `Socialite` without any networks (pass empty `array`):
 const selectiveNetworksInstance = new Socialite([]);
@@ -81,7 +81,7 @@ Object.keys(socialiteNetworks).forEach((network) => {
 });
 
 // Logs to the console all social networks not found in `excludedNetworks`.
-console.log(selectiveNetworksInstance.getNetworks());
+console.log(selectiveNetworksInstance.getAllNetworks());
 ```
 
 ## Features

@@ -1,4 +1,8 @@
 import {defaultSocialiteNetworks} from '../data';
+import {
+  facebook as networkFacebook,
+  twitter as networkTwitter,
+} from '../networks';
 import {Socialite} from '../socialite';
 import type {
   SocialiteNetwork,
@@ -6,44 +10,13 @@ import type {
   NetworkSubset,
   SocialiteNetworkProperties,
 } from '../types';
-import {mockCustomNetworks} from './fixtures';
+import {mockCustomNetworks, mockGenericUser} from './fixtures';
 
 describe('Socialite network methods', () => {
-  describe('getNetworks() > subset', () => {
-    it('returns only the properties requested', () => {
-      const mockSubset: SocialiteNetworkProperties = [
-        'preferredUrl',
-        'matcher',
-      ];
-      const mockSocialite = new Socialite();
-
-      const networks = mockSocialite.getNetworks(mockSubset);
-
-      const defaultFirstNetwork = defaultSocialiteNetworks[0];
-      const defaultLastNetwork =
-        defaultSocialiteNetworks[defaultSocialiteNetworks.length - 1];
-
-      const firstNetworkSubset = networks[0];
-      const defaultFirstNetworkSubset = {
-        preferredUrl: defaultFirstNetwork.preferredUrl,
-        matcher: defaultFirstNetwork.matcher,
-      };
-
-      const lastNetworkSubset = networks[networks.length - 1];
-      const defaultLastNetworkSubset = {
-        preferredUrl: defaultLastNetwork.preferredUrl,
-        matcher: defaultLastNetwork.matcher,
-      };
-
-      expect(firstNetworkSubset).toStrictEqual(defaultFirstNetworkSubset);
-      expect(lastNetworkSubset).toStrictEqual(defaultLastNetworkSubset);
-    });
-  });
-
   describe('hasNetwork()', () => {
     it('returns `true` when requesting a default network', () => {
       const mockSocialite = new Socialite();
-      expect(mockSocialite.hasNetwork('facebook')).toBe(true);
+      expect(mockSocialite.hasNetwork(networkFacebook.id)).toBe(true);
     });
 
     it('returns `true` when requesting a non-default network that has been added', () => {
@@ -71,7 +44,7 @@ describe('Socialite network methods', () => {
 
       const networkKeysFromMap = [...(addedNetwork as NetworkMap).keys()];
       const networkKeysFromObjects = filterNetworkIds(
-        mockSocialite.getNetworks(),
+        mockSocialite.getAllNetworks(),
       );
 
       expect(networkKeysFromMap).toStrictEqual(networkKeysFromObjects);
@@ -87,14 +60,14 @@ describe('Socialite network methods', () => {
       };
 
       const mockSocialite = new Socialite();
-      const initialNetworks = mockSocialite.getNetworks();
+      const initialNetworks = mockSocialite.getAllNetworks();
 
       expect(initialNetworks[0]).toBe(defaultSocialiteNetworks[0]);
 
       const addedNetwork = mockSocialite.addNetwork(mockNetwork);
       expect(addedNetwork).toBe(false);
 
-      const updatedNetworks = mockSocialite.getNetworks();
+      const updatedNetworks = mockSocialite.getAllNetworks();
 
       expect(updatedNetworks[0]).toBe(defaultSocialiteNetworks[0]);
       expect(updatedNetworks[0]).not.toBe(mockNetwork);
@@ -107,12 +80,12 @@ describe('Socialite network methods', () => {
       };
 
       const mockSocialite = new Socialite();
-      const initialNetworks = mockSocialite.getNetworks();
+      const initialNetworks = mockSocialite.getAllNetworks();
 
       expect(initialNetworks[0]).toBe(defaultSocialiteNetworks[0]);
 
       const addedNetwork = mockSocialite.addNetwork(mockNetwork, true);
-      const updatedNetworks = mockSocialite.getNetworks();
+      const updatedNetworks = mockSocialite.getAllNetworks();
 
       expect(updatedNetworks[0]).not.toBe(defaultSocialiteNetworks[0]);
       expect(updatedNetworks[0]).toBe(mockNetwork);
@@ -127,15 +100,15 @@ describe('Socialite network methods', () => {
       const mockRemovedId = defaultSocialiteNetworks[0].id;
       const mockSocialite = new Socialite();
 
-      expect(mockSocialite.hasNetwork('facebook')).toBe(true);
+      expect(mockSocialite.hasNetwork(networkFacebook.id)).toBe(true);
 
       const removedNetwork = mockSocialite.removeNetwork(mockRemovedId);
 
       expect(removedNetwork).toBe(true);
-      expect(mockSocialite.hasNetwork('facebook')).toBe(false);
+      expect(mockSocialite.hasNetwork(networkFacebook.id)).toBe(false);
 
       const networkKeysFromObjects = filterNetworkIds(
-        mockSocialite.getNetworks(),
+        mockSocialite.getAllNetworks(),
       );
 
       expect(networkKeysFromObjects).toHaveLength(
@@ -155,7 +128,7 @@ describe('Socialite network methods', () => {
       expect(mockSocialite.hasNetwork(mockRemovedId)).toBe(false);
 
       const networkKeysFromObjects = filterNetworkIds(
-        mockSocialite.getNetworks(),
+        mockSocialite.getAllNetworks(),
       );
 
       expect(networkKeysFromObjects).toHaveLength(
@@ -168,13 +141,93 @@ describe('Socialite network methods', () => {
     it('completely empties the network Map', () => {
       const mockSocialite = new Socialite();
 
-      const initialNetworks = mockSocialite.getNetworks();
+      const initialNetworks = mockSocialite.getAllNetworks();
       expect(initialNetworks).toHaveLength(defaultSocialiteNetworks.length);
 
       mockSocialite.emptyNetworks();
 
-      const updatedNetworks = mockSocialite.getNetworks();
+      const updatedNetworks = mockSocialite.getAllNetworks();
       expect(updatedNetworks).toHaveLength(0);
+    });
+  });
+
+  describe('getNetwork()', () => {
+    it('returns the requested network', () => {
+      const mockSocialite = new Socialite();
+
+      const network = mockSocialite.getNetwork(networkFacebook.id);
+      expect(network).toStrictEqual(networkFacebook);
+    });
+
+    it('returns `undefined` if the network does not exist', () => {
+      const mockSocialite = new Socialite();
+
+      const network = mockSocialite.getNetwork('foo');
+      expect(network).toBeUndefined();
+    });
+  });
+
+  describe('getAllNetworks()', () => {
+    it('returns everything by default', () => {
+      const mockSocialite = new Socialite();
+      const networks = mockSocialite.getAllNetworks();
+
+      // TODO: There are likely better patterns for looping
+      // over assertings in Jest / Vitest.
+      networks.forEach((network, index) => {
+        expect(network).toStrictEqual(defaultSocialiteNetworks[index]);
+      });
+    });
+
+    it('returns only the properties requested', () => {
+      const mockSubset: SocialiteNetworkProperties = [
+        'preferredUrl',
+        'matcher',
+      ];
+      const mockSocialite = new Socialite();
+
+      const networks = mockSocialite.getAllNetworks(mockSubset);
+
+      const defaultNetworkSubsets: NetworkSubset[] =
+        defaultSocialiteNetworks.map(({preferredUrl, matcher}) => ({
+          preferredUrl,
+          matcher,
+        }));
+
+      // TODO: There are likely better patterns for looping
+      // over assertings in Jest / Vitest.
+      networks.forEach((network, index) => {
+        expect(network).toStrictEqual(defaultNetworkSubsets[index]);
+      });
+    });
+  });
+
+  describe('getPreferredUrl()', () => {
+    it('returns the `preferredUrl` with only `user` replaced', () => {
+      const mockSocialite = new Socialite();
+
+      const preferredUrl = mockSocialite.getPreferredUrl(
+        networkFacebook.id,
+        mockGenericUser,
+      );
+      expect(preferredUrl).toBe(`https://facebook.com/${mockGenericUser}`);
+    });
+
+    it('returns the `preferredUrl` with both `user` and `prefix` replaced', () => {
+      const mockSocialite = new Socialite();
+
+      const preferredUrl = mockSocialite.getPreferredUrl(
+        networkTwitter.id,
+        mockGenericUser,
+      );
+      expect(preferredUrl).toBe(`https://twitter.com/@${mockGenericUser}`);
+    });
+
+    it('returns `false` if the network does not exist', () => {
+      const mockSocialite = new Socialite();
+
+      const network = mockSocialite.getPreferredUrl('foo');
+      expect(network).toBe(false);
     });
   });
 });
