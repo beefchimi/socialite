@@ -202,6 +202,22 @@ describe('Socialite network methods', () => {
     });
   });
 
+  describe('getNetworkFromDomain()', () => {
+    it('returns the requested network', () => {
+      const mockSocialite = new Socialite();
+
+      const network = mockSocialite.getNetworkFromDomain(networkFacebook.id);
+      expect(network).toStrictEqual(networkFacebook);
+    });
+
+    it('returns `undefined` if the network does not exist', () => {
+      const mockSocialite = new Socialite();
+
+      const network = mockSocialite.getNetwork('foo');
+      expect(network).toBeUndefined();
+    });
+  });
+
   describe('getPreferredUrl()', () => {
     it('returns the `preferredUrl` with only `user` replaced', () => {
       const mockSocialite = new Socialite();
