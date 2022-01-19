@@ -28,7 +28,7 @@ export const urlRegExp = constructFullLineRegExp(
   urlCaptureGroup.anchor,
 );
 
-export const schemeRegExp = /^(?<scheme>https?:\/\/)/;
+export const schemeRegExp = /^https?:\/\//;
 
 export const profileReplacement = {
   user: '{REPLACE_PROFILE_USER}',

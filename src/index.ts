@@ -1,6 +1,7 @@
 export {
   urlCaptureGroup,
   urlRegExp,
+  schemeRegExp,
   profileReplacement,
   defaultUserMatcher,
 } from './capture';
