@@ -11,19 +11,23 @@ describe('Socialite class instance', () => {
 
   it('contains the default networks', () => {
     const mockSocialite = new Socialite();
-    expect(mockSocialite.getNetworks()).toStrictEqual(defaultSocialiteNetworks);
+    expect(mockSocialite.getAllNetworks()).toStrictEqual(
+      defaultSocialiteNetworks,
+    );
   });
 
   it('constructor argument overwrites the default networks', () => {
     const mockSocialite = new Socialite(mockCustomNetworks);
-    expect(mockSocialite.getNetworks()).toStrictEqual(mockCustomNetworks);
+    expect(mockSocialite.getAllNetworks()).toStrictEqual(mockCustomNetworks);
   });
 
   it('constructor argument ignores an empty array', () => {
     const mockNetworks: SocialiteNetwork[] = [];
     const mockSocialite = new Socialite(mockNetworks);
 
-    expect(mockSocialite.getNetworks()).toStrictEqual(defaultSocialiteNetworks);
+    expect(mockSocialite.getAllNetworks()).toStrictEqual(
+      defaultSocialiteNetworks,
+    );
   });
 
   describe('fixUrlScheme()', () => {
