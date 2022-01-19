@@ -63,6 +63,21 @@ export class Socialite {
     );
   }
 
+  getNetworkFromDomain(domain: string) {
+    let matchedNetwork: SocialiteNetwork | undefined;
+
+    for (const [_id, network] of this._networks) {
+      const match = new RegExp(network.matcher.domain).test(domain);
+
+      if (match) {
+        matchedNetwork = network;
+        break;
+      }
+    }
+
+    return matchedNetwork;
+  }
+
   getPreferredUrl(id: NetworkId, user?: UserName) {
     if (!this.hasNetwork(id)) {
       return false;
@@ -182,21 +197,6 @@ export class Socialite {
     // we for sure have an object with `domain` and `tldomain`.
     // https://github.com/beefchimi/socialite/issues/5
     return Boolean(groups?.domain && groups?.tldomain);
-  }
-
-  private getNetworkFromDomain(domain: string) {
-    let matchedNetwork: SocialiteNetwork | undefined;
-
-    for (const [_id, network] of this._networks) {
-      const match = new RegExp(network.matcher.domain).test(domain);
-
-      if (match) {
-        matchedNetwork = network;
-        break;
-      }
-    }
-
-    return matchedNetwork;
   }
 
   private getMinimumResult(
