@@ -36,7 +36,7 @@ export const mockPartialUrlGroups: UrlMinCriteria = {
 
 export const mockFullUrlGroups: UrlMinCriteria = {
   scheme: 'https://',
-  subdomain: 'www.sub',
+  subdomain: 'www.sub.',
   domain: 'domain',
   tldomain: '.com',
   port: ':123',

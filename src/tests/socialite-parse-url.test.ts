@@ -39,7 +39,7 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toStrictEqual({
       ...urlMinCriteria,
-      subdomain: 'www',
+      subdomain: 'www.',
     });
   });
 
@@ -63,29 +63,9 @@ describe('Socialite > parseUrl()', () => {
     });
   });
 
-  it('returns `tldomain` with trailing `/` removed', () => {
-    const mockSocialite = new Socialite();
-    const result = mockSocialite.parseUrl(validUrls[4]);
-
-    expect(result).toMatchObject({
-      ...urlMinCriteria,
-      tldomain: '.com',
-    });
-  });
-
   it('returns with `port` when present', () => {
     const mockSocialite = new Socialite();
     const result = mockSocialite.parseUrl(validUrls[5]);
-
-    expect(result).toMatchObject({
-      ...urlMinCriteria,
-      port: ':123',
-    });
-  });
-
-  it('returns `port` with trailing `/` removed', () => {
-    const mockSocialite = new Socialite();
-    const result = mockSocialite.parseUrl(validUrls[8]);
 
     expect(result).toMatchObject({
       ...urlMinCriteria,
@@ -153,7 +133,7 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toStrictEqual({
       scheme: 'https://',
-      subdomain: 'www.sub',
+      subdomain: 'www.sub.',
       domain: 'domain',
       tldomain: '.com',
       port: ':123',
@@ -169,7 +149,7 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toStrictEqual({
       scheme: 'https://',
-      subdomain: 'www.sub1.sub2',
+      subdomain: 'www.sub1.sub2.',
       domain: 'domain',
       tldomain: '.com',
       port: ':123',

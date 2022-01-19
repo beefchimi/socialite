@@ -23,7 +23,7 @@ export const mockBehanceProfile: SocialiteProfile = {
   id: networkBehance.id,
   urlGroups: {
     scheme: 'https://',
-    subdomain: 'www',
+    subdomain: 'www.',
     domain: 'behance',
     tldomain: '.net',
     path: `/${mockBehanceUser}/`,
@@ -51,7 +51,7 @@ export const mockCustomProfile: SocialiteProfile = {
   id: mockCustomNetwork.id,
   urlGroups: {
     scheme: 'https://',
-    subdomain: 'social',
+    subdomain: 'social.',
     domain: 'foo',
     tldomain: '.biz',
     path: `/user/${mockCustomUser}/profile`,
@@ -74,7 +74,7 @@ export const mockFacebookProfile: SocialiteProfile = {
   id: networkFacebook.id,
   urlGroups: {
     scheme: 'https://',
-    subdomain: 'sub',
+    subdomain: 'sub.',
     domain: 'facebook',
     tldomain: '.com',
     path: `/${mockFacebookUser}`,
@@ -117,9 +117,10 @@ export const mockInstagramProfile: SocialiteProfile = {
 export const mockMinimalUrl: BasicUrl = 'https://m.facebook.com/';
 export const mockMinimalGroup: UrlMinCriteria = {
   scheme: 'https://',
-  subdomain: 'm',
+  subdomain: 'm.',
   domain: 'facebook',
   tldomain: '.com',
+  path: '/',
 };
 export const mockMinimalProfile: SocialiteProfile = {
   id: networkFacebook.id,
@@ -138,6 +139,7 @@ export const mockSubstackProfile: SocialiteProfile = {
     scheme: 'https://',
     domain: 'substack',
     tldomain: '.com',
+    path: '/',
   },
   originalUrl: mockSubstackUrl,
   preferredUrl: getUrlWithSubstitutions(networkSubstack.preferredUrl, ''),
@@ -150,7 +152,7 @@ export const mockTwitterProfile: SocialiteProfile = {
   id: networkTwitter.id,
   urlGroups: {
     scheme: 'https://',
-    subdomain: 'mobile',
+    subdomain: 'mobile.',
     domain: 'twitter',
     tldomain: '.com',
     path: `/${mockTwitterPrefix}${mockTwitterUser}/`,

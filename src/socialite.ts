@@ -99,7 +99,7 @@ export class Socialite {
       targetNetwork.matcher.userSource === MatchUserSource.Subdomain;
     const userSource = useSubdomain ? groups.subdomain : groups.path;
 
-    if (!userSource) {
+    if (!userSource || Boolean(!useSubdomain && groups.path === '/')) {
       return minResult;
     }
 
