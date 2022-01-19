@@ -1,31 +1,6 @@
-import {profileReplacement, urlRegExp, schemeRegExp} from '../capture';
-import type {
-  BasicUrl,
-  UrlGroupSubset,
-  UrlMinCriteria,
-  ParsedUrlGroups,
-} from '../types';
+import {profileReplacement, urlRegExp} from '../capture';
+import type {BasicUrl, UrlGroupSubset, ParsedUrlGroups} from '../types';
 import {filterNullishValuesFromObject} from './general';
-
-export function buildUrlFromGroups(groups: UrlMinCriteria): BasicUrl {
-  const orderedValues = [
-    groups.scheme,
-    groups.subdomain,
-    groups.domain,
-    groups.tldomain,
-    groups.port,
-    groups.path,
-    groups.parameters,
-    groups.anchor,
-  ];
-
-  return orderedValues.filter((value) => value !== undefined).join('');
-}
-
-export function fixUrlWithoutScheme(url: BasicUrl) {
-  const hasScheme = schemeRegExp.test(url);
-  return hasScheme ? url : `https://${url}`;
-}
 
 function updateGroupsWithSubdomain(groups: UrlGroupSubset): UrlGroupSubset {
   const {domain} = groups;
