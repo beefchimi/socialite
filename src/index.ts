@@ -18,7 +18,6 @@ export {
   filterNetworkProperties,
   mergeRegExp,
   getUrlGroups,
-  getUrlWithSubstitutions,
 } from './utilities';
 
 export {MatchUserSource, UrlCaptureId} from './types';
