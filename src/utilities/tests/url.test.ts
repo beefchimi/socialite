@@ -25,14 +25,6 @@ describe('Url utilities', () => {
         'https://www.sub.domain.com:123/path/to/folder?query=param#hash-anchor',
       );
     });
-
-    it('does not append an additional `.` when `subdomain` trails with a `.`', () => {
-      const result = buildUrlFromGroups({
-        ...mockPartialUrlGroups,
-        subdomain: 'www.sub1.',
-      });
-      expect(result).toBe('www.sub1.domain.com?query=param');
-    });
   });
 
   describe('fixUrlWithoutScheme()', () => {
@@ -65,7 +57,7 @@ describe('Url utilities', () => {
       const result = getUrlGroups(mockFullUrl);
       expect(result).toStrictEqual({
         scheme: 'https://',
-        subdomain: 'www',
+        subdomain: 'www.',
         domain: 'domain',
         tldomain: '.com',
         port: ':123',
@@ -88,7 +80,7 @@ describe('Url utilities', () => {
     it('includes multiple subdomains when present', () => {
       const result = getUrlGroups('www.sub1.sub2.domain.com');
       expect(result).toStrictEqual({
-        subdomain: 'www.sub1.sub2',
+        subdomain: 'www.sub1.sub2.',
         domain: 'domain',
         tldomain: '.com',
       });

@@ -39,7 +39,7 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toStrictEqual({
       ...urlMinCriteria,
-      subdomain: 'www',
+      subdomain: 'www.',
     });
   });
 
@@ -133,7 +133,7 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toStrictEqual({
       scheme: 'https://',
-      subdomain: 'www.sub',
+      subdomain: 'www.sub.',
       domain: 'domain',
       tldomain: '.com',
       port: ':123',
@@ -149,7 +149,7 @@ describe('Socialite > parseUrl()', () => {
 
     expect(result).toStrictEqual({
       scheme: 'https://',
-      subdomain: 'www.sub1.sub2',
+      subdomain: 'www.sub1.sub2.',
       domain: 'domain',
       tldomain: '.com',
       port: ':123',

@@ -8,16 +8,9 @@ import type {
 import {filterNullishValuesFromObject} from './general';
 
 export function buildUrlFromGroups(groups: UrlMinCriteria): BasicUrl {
-  const domainJoiner =
-    Boolean(groups.domain && groups.subdomain) &&
-    !groups.subdomain?.endsWith('.')
-      ? '.'
-      : undefined;
-
   const orderedValues = [
     groups.scheme,
     groups.subdomain,
-    domainJoiner,
     groups.domain,
     groups.tldomain,
     groups.port,
@@ -42,8 +35,10 @@ function updateGroupsWithSubdomain(groups: UrlGroupSubset): UrlGroupSubset {
 
   if (domain) {
     const lastDot = domain.lastIndexOf('.');
-    updatedSubdomain = lastDot === -1 ? undefined : domain.slice(0, lastDot);
-    updatedDomain = lastDot === -1 ? undefined : domain.slice(lastDot + 1);
+    const bypass = lastDot === -1;
+
+    updatedSubdomain = bypass ? undefined : domain.slice(0, lastDot + 1);
+    updatedDomain = bypass ? undefined : domain.slice(lastDot + 1);
   }
 
   return {
