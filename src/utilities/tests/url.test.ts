@@ -1,52 +1,7 @@
-import {
-  buildUrlFromGroups,
-  fixUrlWithoutScheme,
-  getUrlGroups,
-  getUrlWithSubstitutions,
-} from '../url';
-import {
-  mockFullUrl,
-  mockPartialUrl,
-  mockReplacementUrl,
-  mockPartialUrlGroups,
-  mockFullUrlGroups,
-} from './fixtures';
+import {getUrlGroups, getUrlWithSubstitutions} from '../url';
+import {mockFullUrl, mockPartialUrl, mockReplacementUrl} from './fixtures';
 
 describe('Url utilities', () => {
-  describe('buildUrlFromGroups()', () => {
-    it('joins a subset of properties', () => {
-      const result = buildUrlFromGroups(mockPartialUrlGroups);
-      expect(result).toBe('domain.com?query=param');
-    });
-
-    it('joins a full set of properties', () => {
-      const result = buildUrlFromGroups(mockFullUrlGroups);
-      expect(result).toBe(
-        'https://www.sub.domain.com:123/path/to/folder?query=param#hash-anchor',
-      );
-    });
-  });
-
-  describe('fixUrlWithoutScheme()', () => {
-    it('returns the `url` unchanged when a `scheme` (http://) is present', () => {
-      const mockUrl = 'http://domain.com';
-      const result = fixUrlWithoutScheme(mockUrl);
-      expect(result).toBe(mockUrl);
-    });
-
-    it('returns the `url` unchanged when a `scheme` (https://) is present', () => {
-      const mockUrl = 'https://domain.com';
-      const result = fixUrlWithoutScheme(mockUrl);
-      expect(result).toBe(mockUrl);
-    });
-
-    it('appends `https://` when no `scheme` is found', () => {
-      const mockUrl = 'www.domain.com';
-      const result = fixUrlWithoutScheme(mockUrl);
-      expect(result).toBe(`https://${mockUrl}`);
-    });
-  });
-
   describe('getUrlGroups()', () => {
     it('returns `null` when provided an empty string', () => {
       const result = getUrlGroups('');

@@ -1,5 +1,4 @@
 import {profileReplacement} from '../../capture';
-import type {UrlMinCriteria} from '../../types';
 
 export const mockObject = {
   one: 1,
@@ -27,20 +26,3 @@ export const mockFullUrl =
 export const mockPartialUrl = 'http://website.ca?query=param';
 
 export const mockReplacementUrl = `https://domain.com/${profileReplacement.prefix}${profileReplacement.user}`;
-
-export const mockPartialUrlGroups: UrlMinCriteria = {
-  domain: 'domain',
-  tldomain: '.com',
-  parameters: '?query=param',
-};
-
-export const mockFullUrlGroups: UrlMinCriteria = {
-  scheme: 'https://',
-  subdomain: 'www.sub.',
-  domain: 'domain',
-  tldomain: '.com',
-  port: ':123',
-  path: '/path/to/folder',
-  parameters: '?query=param',
-  anchor: '#hash-anchor',
-};

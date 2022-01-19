@@ -1,5 +1,5 @@
 import {defaultSocialiteNetworks} from './data';
-import {defaultUserMatcher} from './capture';
+import {defaultUserMatcher, schemeRegExp} from './capture';
 
 import {MatchUserSource} from './types';
 import type {
@@ -13,7 +13,6 @@ import type {
   UrlMinCriteria,
 } from './types';
 import {
-  buildUrlFromGroups,
   filterNetworkProperties,
   getUrlGroups,
   getUrlWithSubstitutions,
@@ -141,6 +140,25 @@ export class Socialite {
     };
   }
 
+  fixUrlScheme(url: BasicUrl) {
+    return schemeRegExp.test(url) ? url : `https://${url}`;
+  }
+
+  mergeGroupsToUrl(groups: UrlMinCriteria): BasicUrl {
+    const orderedValues = [
+      groups.scheme,
+      groups.subdomain,
+      groups.domain,
+      groups.tldomain,
+      groups.port,
+      groups.path,
+      groups.parameters,
+      groups.anchor,
+    ];
+
+    return orderedValues.filter((value) => value !== undefined).join('');
+  }
+
   private validateUrl(groups: ParsedUrlGroups) {
     // TODO: We need a way to tell TypeScript that, if this returns `true`,
     // we for sure have an object with `domain` and `tldomain`.
@@ -168,7 +186,7 @@ export class Socialite {
     groups: UrlMinCriteria,
     url?: BasicUrl,
   ): SocialiteProfile {
-    const originalUrl = url ? url : buildUrlFromGroups(groups);
+    const originalUrl = url ? url : this.mergeGroupsToUrl(groups);
 
     return {
       id: network.id,
