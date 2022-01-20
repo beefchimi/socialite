@@ -145,6 +145,14 @@ export class Socialite {
 
     const prefix = targetNetwork.prefix;
     const matchedUser = userSource.match(userRegExp);
+
+    // TODO: This could be where we parse for an exact match of
+    // channel vs user vs etc and perform a replacement.
+    const leadingPath =
+      matchedUser.length > 1 && targetNetwork.leadingPath
+        ? getLeadingPathRepalcement(targetNetwork.leadingPath)
+        : null;
+
     // Grab the last "match", since its common for `.match()`
     // to include the full string as its first "match".
     const user = matchedUser
