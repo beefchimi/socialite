@@ -10,7 +10,6 @@ export const twitter: SocialiteNetwork = {
   appUrl: `https://mobile.twitter.com/${prefix}${profileReplacement.user}`,
   matcher: {
     domain: /twitter/,
-    user: `${prefix}[^\\/]+`,
   },
   prefix,
 };

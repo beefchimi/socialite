@@ -15,7 +15,7 @@ import type {
 } from '../../types';
 import {getUrlWithSubstitutions} from '../../utilities';
 
-export const mockGenericUser = '~f00+96%Hum@n_123-!';
+export const mockGenericUser = '~f00+96%Hum^n_123-!';
 
 export const mockBehanceUser: UserName = 'Uz3r_N@me!';
 export const mockBehanceUrl: BasicUrl = `https://www.behance.net/${mockBehanceUser}/`;
