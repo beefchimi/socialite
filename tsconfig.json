@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "rootDir": ".",
-    "types": ["vitest/global"],
+    "types": ["vitest/globals"],
     "declarationDir": "dist/types",
     "declarationMap": false,
     "allowJs": false,
