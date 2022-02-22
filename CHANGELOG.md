@@ -1,5 +1,13 @@
 # Socialite
 
+## 0.0.3
+
+### Patch Changes
+
+- d28299c: Another round of minor dependency bumps.
+- ade6193: Twitter `@` prefix is now optionally matched.
+- a738fbc: Minor dependency bumps.
+
 ## 0.0.2
 
 ### Patch Changes
