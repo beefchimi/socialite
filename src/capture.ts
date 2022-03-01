@@ -39,3 +39,13 @@ export const defaultUserMatcher = {
   subdomain: /[^.]+/,
   path: /[^/]+/,
 };
+
+// TODO: This should probably be re-located elsewhere
+// https://github.com/beefchimi/socialite/issues/35
+export const discordPreferredUrls = {
+  users: `https://discordapp.com/users/${profileReplacement.user}`,
+  channels: `https://discord.com/channels/${profileReplacement.user}`,
+  vanity: `https://discord.gg/${profileReplacement.user}`,
+  // TODO: This result should not be supported
+  default: `https://discord.com/${profileReplacement.user}`,
+};

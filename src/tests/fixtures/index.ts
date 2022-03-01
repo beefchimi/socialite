@@ -1,5 +1,7 @@
 export {allSocialiteNetworks, mockCustomNetworks} from './networks';
 
+export {discordValidUrls} from './discord-urls';
+
 export {invalidProfileUrls} from './invalid-profiles';
 export {
   mockGenericUser,

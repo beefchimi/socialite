@@ -10,3 +10,9 @@ export interface SocialiteProfile {
   user?: UserName;
   prefix?: UserPrefix;
 }
+
+export interface DiscordUrlCriteria {
+  tldomain?: UrlAnatomy['tldomain'];
+  path?: UrlAnatomy['path'];
+  user?: UserName;
+}
