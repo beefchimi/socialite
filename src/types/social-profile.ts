@@ -11,6 +11,8 @@ export interface SocialiteProfile {
   prefix?: UserPrefix;
 }
 
-export interface DiscordProfile extends SocialiteProfile {
-  id: 'discord';
+export interface DiscordUrlCriteria {
+  tldomain?: UrlAnatomy['tldomain'];
+  path?: UrlAnatomy['path'];
+  user?: UserName;
 }

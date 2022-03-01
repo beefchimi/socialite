@@ -16,4 +16,4 @@ export type {
   SocialiteNetworkProperties,
 } from './social-network';
 
-export type {DiscordProfile, SocialiteProfile} from './social-profile';
+export type {DiscordUrlCriteria, SocialiteProfile} from './social-profile';

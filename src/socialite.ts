@@ -4,7 +4,6 @@ import {defaultUserMatcher, schemeRegExp} from './capture';
 import {MatchUserSource} from './types';
 import type {
   BasicUrl,
-  DiscordProfile,
   NetworkId,
   NetworkMap,
   ParsedUrlGroups,
@@ -161,7 +160,11 @@ export class Socialite {
     // https://github.com/beefchimi/socialite/issues/35
     const preferredUrl =
       targetNetwork.id === 'discord'
-        ? getDiscordPreferredUrl({...minResult, user} as DiscordProfile)
+        ? getDiscordPreferredUrl({
+            tldomain: minResult.urlGroups.tldomain,
+            path: minResult.urlGroups.path,
+            user,
+          })
         : getUrlWithSubstitutions(targetNetwork.preferredUrl, user, prefix);
 
     const appUrl = targetNetwork.appUrl

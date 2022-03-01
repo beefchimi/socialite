@@ -17,12 +17,14 @@ export {
   filterNullishValuesFromObject,
   filterNetworkProperties,
   mergeRegExp,
+  getDiscordPreferredUrl,
   getUrlGroups,
   getUrlWithSubstitutions,
 } from './utilities';
 
 export {MatchUserSource, UrlCaptureId} from './types';
 export type {
+  DiscordUrlCriteria,
   UrlAnatomy,
   SocialiteNetwork,
   SocialiteProfile,

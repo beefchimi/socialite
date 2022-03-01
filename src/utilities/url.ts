@@ -1,7 +1,7 @@
 import {discordPreferredUrls, profileReplacement, urlRegExp} from '../capture';
 import type {
   BasicUrl,
-  DiscordProfile,
+  DiscordUrlCriteria,
   UrlGroupSubset,
   ParsedUrlGroups,
 } from '../types';
@@ -48,16 +48,20 @@ export function getUrlWithSubstitutions(url: BasicUrl, user = '', prefix = '') {
     .replace(profileReplacement.prefix, prefix);
 }
 
-export function getDiscordPreferredUrl({urlGroups, user}: DiscordProfile) {
-  if (urlGroups.path?.startsWith('/users/')) {
+export function getDiscordPreferredUrl({
+  tldomain,
+  path,
+  user,
+}: DiscordUrlCriteria) {
+  if (path?.startsWith('/users/')) {
     return getUrlWithSubstitutions(discordPreferredUrls.users, user);
   }
 
-  if (urlGroups.path?.startsWith('/channels/')) {
+  if (path?.startsWith('/channels/')) {
     return getUrlWithSubstitutions(discordPreferredUrls.channels, user);
   }
 
-  if (urlGroups.tldomain === '.gg') {
+  if (tldomain === '.gg') {
     return getUrlWithSubstitutions(discordPreferredUrls.vanity, user);
   }
 
