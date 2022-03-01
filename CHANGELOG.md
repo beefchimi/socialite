@@ -1,5 +1,11 @@
 # Socialite
 
+## 0.0.4
+
+### Patch Changes
+
+- ca2d059: Support more variations for Discord urls.
+
 ## 0.0.3
 
 ### Patch Changes
