@@ -1,5 +1,16 @@
-import {getUrlGroups, getUrlWithSubstitutions} from '../url';
-import {mockFullUrl, mockPartialUrl, mockReplacementUrl} from './fixtures';
+import {
+  getUrlGroups,
+  getUrlWithSubstitutions,
+  getDiscordPreferredUrl,
+} from '../url';
+import {
+  mockFullUrl,
+  mockPartialUrl,
+  mockReplacementUrl,
+  mockDiscordUsersProfile,
+  mockDiscordChannelsProfile,
+  mockDiscordVanityProfile,
+} from './fixtures';
 
 describe('Url utilities', () => {
   describe('getUrlGroups()', () => {
@@ -72,6 +83,29 @@ describe('Url utilities', () => {
         mockPrefix,
       );
       expect(result).toBe(`https://domain.com/${mockPrefix}${mockUser}`);
+    });
+  });
+
+  describe('getDiscordPreferredUrl()', () => {
+    it('returns `preferredUrl` for `users`', () => {
+      const result = getDiscordPreferredUrl(mockDiscordUsersProfile);
+      expect(result).toBe(
+        `https://discordapp.com/users/${mockDiscordUsersProfile.user}`,
+      );
+    });
+
+    it('returns `preferredUrl` for `channels`', () => {
+      const result = getDiscordPreferredUrl(mockDiscordChannelsProfile);
+      expect(result).toBe(
+        `https://discord.com/channels/${mockDiscordChannelsProfile.user}`,
+      );
+    });
+
+    it('returns `preferredUrl` for `vanity`', () => {
+      const result = getDiscordPreferredUrl(mockDiscordVanityProfile);
+      expect(result).toBe(
+        `https://discord.gg/${mockDiscordVanityProfile.user}`,
+      );
     });
   });
 });

@@ -10,3 +10,7 @@ export interface SocialiteProfile {
   user?: UserName;
   prefix?: UserPrefix;
 }
+
+export interface DiscordProfile extends SocialiteProfile {
+  id: 'discord';
+}

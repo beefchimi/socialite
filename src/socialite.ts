@@ -4,6 +4,7 @@ import {defaultUserMatcher, schemeRegExp} from './capture';
 import {MatchUserSource} from './types';
 import type {
   BasicUrl,
+  DiscordProfile,
   NetworkId,
   NetworkMap,
   ParsedUrlGroups,
@@ -15,6 +16,7 @@ import type {
 } from './types';
 import {
   filterNetworkProperties,
+  getDiscordPreferredUrl,
   getUrlGroups,
   getUrlWithSubstitutions,
 } from './utilities';
@@ -155,11 +157,13 @@ export class Socialite {
       return minResult;
     }
 
-    const preferredUrl = getUrlWithSubstitutions(
-      targetNetwork.preferredUrl,
-      user,
-      prefix,
-    );
+    // TODO: Resolve this special condition
+    // https://github.com/beefchimi/socialite/issues/35
+    const preferredUrl =
+      targetNetwork.id === 'discord'
+        ? getDiscordPreferredUrl({...minResult, user} as DiscordProfile)
+        : getUrlWithSubstitutions(targetNetwork.preferredUrl, user, prefix);
+
     const appUrl = targetNetwork.appUrl
       ? getUrlWithSubstitutions(targetNetwork.appUrl, user, prefix)
       : undefined;
