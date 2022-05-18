@@ -33,6 +33,7 @@ export const schemeRegExp = /^https?:\/\//;
 export const profileReplacement = {
   user: '{REPLACE_PROFILE_USER}',
   prefix: '{REPLACE_PROFILE_PREFIX}',
+  leadingPath: '{REPLACE_PROFILE_LEADING_PATH}',
 };
 
 export const defaultUserMatcher = {
