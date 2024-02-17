@@ -1,3 +1,5 @@
+import {describe, it, expect} from 'vitest';
+
 import {defaultSocialiteNetworks} from '../data';
 import {
   facebook as networkFacebook,

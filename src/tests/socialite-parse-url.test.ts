@@ -1,3 +1,5 @@
+import {describe, it, expect} from 'vitest';
+
 import {Socialite} from '../socialite';
 import type {UrlAnatomy} from '../types';
 import {invalidUrls, validUrls} from './fixtures';

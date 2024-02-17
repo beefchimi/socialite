@@ -7,18 +7,17 @@ import {
   twitter as networkTwitter,
 } from '../../networks';
 import type {
-  BasicUrl,
   SocialiteProfile,
   SocialiteNetwork,
   UserName,
-  UrlMinCriteria,
+  UrlAnatomy,
 } from '../../types';
 import {getUrlWithSubstitutions} from '../../utilities';
 
 export const mockGenericUser = '~f00+96%Hum^n_123-!';
 
 export const mockBehanceUser: UserName = 'Uz3r_N@me!';
-export const mockBehanceUrl: BasicUrl = `https://www.behance.net/${mockBehanceUser}/`;
+export const mockBehanceUrl = `https://www.behance.net/${mockBehanceUser}/`;
 export const mockBehanceProfile: SocialiteProfile = {
   id: networkBehance.id,
   urlGroups: {
@@ -37,7 +36,7 @@ export const mockBehanceProfile: SocialiteProfile = {
 };
 
 export const mockCustomUser: UserName = '_F00z-+-Uz3r_';
-export const mockCustomUrl: BasicUrl = `https://social.foo.biz/user/${mockCustomUser}/profile`;
+export const mockCustomUrl = `https://social.foo.biz/user/${mockCustomUser}/profile`;
 export const mockCustomNetwork: SocialiteNetwork = {
   id: 'custom',
   preferredUrl: `https://custom.com/user-profile/${mockCustomUser}`,
@@ -61,15 +60,12 @@ export const mockCustomProfile: SocialiteProfile = {
     mockCustomNetwork.preferredUrl,
     mockCustomUser,
   ),
-  appUrl: getUrlWithSubstitutions(
-    mockCustomNetwork.appUrl as BasicUrl,
-    mockCustomUser,
-  ),
+  appUrl: getUrlWithSubstitutions(mockCustomNetwork.appUrl, mockCustomUser),
   user: mockCustomUser,
 };
 
 export const mockFacebookUser: UserName = 'FacebookUser1';
-export const mockFacebookUrl: BasicUrl = `https://sub.facebook.com/${mockFacebookUser}`;
+export const mockFacebookUrl = `https://sub.facebook.com/${mockFacebookUser}`;
 export const mockFacebookProfile: SocialiteProfile = {
   id: networkFacebook.id,
   urlGroups: {
@@ -84,15 +80,12 @@ export const mockFacebookProfile: SocialiteProfile = {
     networkFacebook.preferredUrl,
     mockFacebookUser,
   ),
-  appUrl: getUrlWithSubstitutions(
-    networkFacebook.appUrl as BasicUrl,
-    mockFacebookUser,
-  ),
+  appUrl: getUrlWithSubstitutions(networkFacebook.appUrl, mockFacebookUser),
   user: mockFacebookUser,
 };
 
 export const mockInstagramUser: UserName = 'insta-account';
-export const mockInstagramGroup: UrlMinCriteria = {
+export const mockInstagramGroup: UrlAnatomy = {
   domain: 'instagram',
   tldomain: '.com',
   path: `/${mockInstagramUser}`,
@@ -107,15 +100,12 @@ export const mockInstagramProfile: SocialiteProfile = {
     networkInstagram.preferredUrl,
     mockInstagramUser,
   ),
-  appUrl: getUrlWithSubstitutions(
-    networkInstagram.appUrl as BasicUrl,
-    mockInstagramUser,
-  ),
+  appUrl: getUrlWithSubstitutions(networkInstagram.appUrl, mockInstagramUser),
   user: mockInstagramUser,
 };
 
-export const mockMinimalUrl: BasicUrl = 'https://m.facebook.com/';
-export const mockMinimalGroup: UrlMinCriteria = {
+export const mockMinimalUrl = 'https://m.facebook.com/';
+export const mockMinimalGroup: UrlAnatomy = {
   scheme: 'https://',
   subdomain: 'm.',
   domain: 'facebook',
@@ -129,7 +119,7 @@ export const mockMinimalProfile: SocialiteProfile = {
   },
   originalUrl: mockMinimalUrl,
   preferredUrl: getUrlWithSubstitutions(networkFacebook.preferredUrl, ''),
-  appUrl: getUrlWithSubstitutions(networkFacebook.appUrl as BasicUrl, ''),
+  appUrl: getUrlWithSubstitutions(networkFacebook.appUrl, ''),
 };
 
 export const mockSubstackUrl = 'https://substack.com/';
@@ -147,7 +137,7 @@ export const mockSubstackProfile: SocialiteProfile = {
 
 export const mockTwitterPrefix = socialitePrefix.twitter;
 export const mockTwitterUser: UserName = '123ABC=human0';
-export const mockTwitterUrl: BasicUrl = `https://mobile.twitter.com/${mockTwitterPrefix}${mockTwitterUser}/`;
+export const mockTwitterUrl = `https://mobile.twitter.com/${mockTwitterPrefix}${mockTwitterUser}/`;
 export const mockTwitterProfile: SocialiteProfile = {
   id: networkTwitter.id,
   urlGroups: {
@@ -164,7 +154,7 @@ export const mockTwitterProfile: SocialiteProfile = {
     mockTwitterPrefix,
   ),
   appUrl: getUrlWithSubstitutions(
-    networkTwitter.appUrl as BasicUrl,
+    networkTwitter.appUrl,
     mockTwitterUser,
     mockTwitterPrefix,
   ),
