@@ -1,7 +1,7 @@
-export type {BasicObject, BasicUrl, MergedRegExp, UrlAnatomy} from './general';
+export type {BasicObject, Primitive, MergedRegExp, UrlAnatomy} from './general';
 
 export {UrlCaptureId} from './capture';
-export type {ParsedUrlGroups, UrlGroupSubset, UrlMinCriteria} from './capture';
+export type {ParsedUrlGroups, UrlGroupSubset} from './capture';
 
 export {MatchUserSource} from './social-network';
 export type {
