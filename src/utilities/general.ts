@@ -1,10 +1,18 @@
 import type {BasicObject} from '../types';
 
-// TODO: Consider a recursive version of this function.
-// https://github.com/beefchimi/socialite/issues/7
-export function filterNullishValuesFromObject<T = BasicObject>(obj: T) {
-  const keys = Object.keys(obj) as (keyof typeof obj)[];
+export function arrayDedupe<T extends unknown[]>(...arrays: T[]) {
+  // Not recursive (will not dedupe nested arrays).
+  return [...new Set([...arrays.flat()])];
+}
 
+export const typedObjectKeys = Object.keys as <T extends object>(
+  obj: T,
+) => Array<keyof T>;
+
+export function objFilterNullish<T = BasicObject>(obj = {}): T {
+  const keys = typedObjectKeys(obj);
+
+  // NOTE: This filter function is not recursive!
   return keys.reduce<T>((accumulator, current) => {
     return obj[current] == null
       ? accumulator
@@ -12,5 +20,6 @@ export function filterNullishValuesFromObject<T = BasicObject>(obj: T) {
           ...accumulator,
           [current]: obj[current],
         };
+    // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter, @typescript-eslint/consistent-type-assertions
   }, {} as T);
 }

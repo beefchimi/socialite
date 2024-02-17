@@ -1,4 +1,4 @@
-export {filterNullishValuesFromObject} from './general';
+export {objFilterNullish} from './general';
 export {filterNetworkProperties} from './network';
 export {mergeRegExp} from './regexp';
 export {

@@ -3,13 +3,14 @@ import type {
   NetworkSubset,
   SocialiteNetworkProperties,
 } from '../types';
+import {arrayDedupe, typedObjectKeys} from './general';
 
 export function filterNetworkProperties(
   network: SocialiteNetwork,
   subset: SocialiteNetworkProperties,
 ) {
-  const uniqueProperties: SocialiteNetworkProperties = [...new Set(subset)];
-  const keys = Object.keys(network) as SocialiteNetworkProperties;
+  const uniqueProperties: SocialiteNetworkProperties = arrayDedupe(subset);
+  const keys = typedObjectKeys(network);
 
   return uniqueProperties.length
     ? keys.reduce<NetworkSubset>(
@@ -23,7 +24,7 @@ export function filterNetworkProperties(
                 [property]: network[property],
               }
             : filtered,
-        {} as NetworkSubset,
+        {},
       )
     : network;
 }

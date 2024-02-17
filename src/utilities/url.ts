@@ -1,11 +1,10 @@
 import {discordPreferredUrls, profileReplacement, urlRegExp} from '../capture';
 import type {
-  BasicUrl,
   DiscordUrlCriteria,
   UrlGroupSubset,
   ParsedUrlGroups,
 } from '../types';
-import {filterNullishValuesFromObject} from './general';
+import {objFilterNullish} from './general';
 
 function updateGroupsWithSubdomain(groups: UrlGroupSubset): UrlGroupSubset {
   const {domain} = groups;
@@ -28,21 +27,17 @@ function updateGroupsWithSubdomain(groups: UrlGroupSubset): UrlGroupSubset {
   };
 }
 
-export function getUrlGroups(url: BasicUrl): ParsedUrlGroups {
+export function getUrlGroups(url = ''): ParsedUrlGroups {
   const matched = url.trim().match(urlRegExp);
 
-  if (!matched?.groups) {
-    return null;
-  }
+  if (!matched?.groups) return null;
 
-  const filtered = filterNullishValuesFromObject<UrlGroupSubset>(
-    matched.groups,
-  );
+  const filtered = objFilterNullish<UrlGroupSubset>(matched.groups);
 
   return updateGroupsWithSubdomain(filtered);
 }
 
-export function getUrlWithSubstitutions(url: BasicUrl, user = '', prefix = '') {
+export function getUrlWithSubstitutions(url = '', user = '', prefix = '') {
   return url
     .replace(profileReplacement.user, user)
     .replace(profileReplacement.prefix, prefix);
