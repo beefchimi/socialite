@@ -4,7 +4,7 @@ import {UrlCaptureId} from './types';
 // This is a consequence of embedding within a `string`.
 // Once constructed by `RegExp()`, it will be properly reduced to a single `\`.
 
-function constructFullLineRegExp(...captureGroups: (string | RegExp)[]) {
+function constructFullLineRegExp(...captureGroups: Array<string | RegExp>) {
   return new RegExp(['^', ...captureGroups, '$'].join(''));
 }
 

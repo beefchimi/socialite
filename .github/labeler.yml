@@ -1,20 +1,42 @@
-👽️ dependency:
-  - any: ['package.json', 'package-lock.json', 'yarn.lock', '.pnp.*']
-📝 documentation: ['README.md', 'docs/**/*']
-📱 network: 'src/networks/**/*'
-🔖 release: 'CHANGELOG.md'
-🧪 testing: '**/*.test.ts'
-🔧 tooling:
-  - any:
-      [
-        '*',
-        '.github/**/*',
-        '.vscode/**/*',
-        '.yarn*',
-        '.yarn/**/*',
-        'config/**/*',
-        'scripts/**/*',
-        '!package*',
-        '!yarn.lock',
-        '!*.@(md|mdx)',
-      ]
+🧰 Dependency:
+  - changed-files:
+      - any-glob-to-any-file: 'package-lock.json'
+
+📚 Documentation:
+  - changed-files:
+      - any-glob-to-any-file: ['README.md', 'docs/**']
+
+⚖️ Legal:
+  - changed-files:
+      - any-glob-to-any-file: 'LICENSE'
+
+📱 Network:
+  - changed-files:
+      - any-glob-to-any-file: 'src/networks/**'
+
+🔖 Release:
+  - changed-files:
+      - any-glob-to-any-file: 'CHANGELOG.md'
+
+🧪 Testing:
+  - changed-files:
+      - any-glob-to-any-file: '**/*.test.ts'
+
+🛠️ Tooling:
+  - changed-files:
+      - any-glob-to-any-file:
+          [
+            '.github/**',
+            '.vscode/**',
+            '.editorconfig',
+            '.eslintignore',
+            '.eslintrc',
+            '.gitignore',
+            '.npmignore',
+            '.nvmrc',
+            '.prettierrc',
+            'config/**',
+            'package.json',
+            'tsconfig.json',
+            'vite.config.ts',
+          ]

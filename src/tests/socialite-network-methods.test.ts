@@ -1,3 +1,5 @@
+import {describe, it, expect} from 'vitest';
+
 import {defaultSocialiteNetworks} from '../data';
 import {
   facebook as networkFacebook,
@@ -11,6 +13,14 @@ import type {
   SocialiteNetworkProperties,
 } from '../types';
 import {mockCustomNetworks, mockGenericUser} from './fixtures';
+
+function assertNetworkId(value?: string): value is string {
+  return Boolean(value?.length);
+}
+
+function filterNetworkIds(networks: NetworkSubset[]) {
+  return networks.map(({id}) => id).filter(assertNetworkId);
+}
 
 describe('Socialite network methods', () => {
   describe('hasNetwork()', () => {
@@ -247,9 +257,3 @@ describe('Socialite network methods', () => {
     });
   });
 });
-
-function filterNetworkIds(networks: NetworkSubset[]) {
-  // BUG: TypeScript thinks `undefined` could be in the array.
-  // https://github.com/beefchimi/socialite/issues/8
-  return networks.map(({id}) => id).filter(Boolean);
-}

@@ -2,7 +2,14 @@ export interface BasicObject {
   [key: string]: unknown;
 }
 
-export type BasicUrl = string;
+export type Primitive =
+  | string
+  | number
+  | bigint
+  | boolean
+  | symbol
+  | undefined
+  | null;
 
 export interface MergedRegExp {
   source: RegExp['source'];

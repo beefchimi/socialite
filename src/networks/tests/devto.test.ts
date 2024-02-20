@@ -1,3 +1,5 @@
+import {describe, it, expect} from 'vitest';
+
 import {Socialite} from '../../socialite';
 import type {SocialiteProfile} from '../../types';
 import {allSocialiteNetworks, mockGenericUser} from '../../tests/fixtures';

@@ -1,19 +1,6 @@
 import {profileReplacement} from '../../capture';
 import type {DiscordUrlCriteria} from '../../types';
 
-export const mockObject = {
-  one: 1,
-  two: 1 + 1,
-  three: undefined,
-  four: '4',
-  five: 'five',
-  six: true,
-  seven: false,
-  eight: ['e', 'i', 'g', 'h', 't'],
-  nine: null,
-  ten: {eleven: 11},
-};
-
 export const mockRegExps = [
   /^(abc|123)/,
   /(?<Group>https?:\/\/)?/g,

@@ -3,14 +3,13 @@ import {defaultUserMatcher, schemeRegExp} from './capture';
 
 import {MatchUserSource} from './types';
 import type {
-  BasicUrl,
   NetworkId,
   NetworkMap,
   ParsedUrlGroups,
   SocialiteProfile,
   SocialiteNetwork,
   SocialiteNetworkProperties,
-  UrlMinCriteria,
+  UrlAnatomy,
   UserName,
 } from './types';
 import {
@@ -24,42 +23,42 @@ export class Socialite {
   // Since this is a Map, we do not want to expose a getter.
   // That would allow users access to Map methods,
   // which circumvents how we want to control this data.
-  private _networks: NetworkMap;
+  readonly #networks: NetworkMap;
 
   constructor(customNetworks: SocialiteNetwork[] = []) {
     const initialNetworks = customNetworks.length
       ? customNetworks
       : defaultSocialiteNetworks;
 
-    this._networks = new Map();
+    this.#networks = new Map();
 
     initialNetworks.forEach((network) => this.addNetwork(network));
   }
 
   hasNetwork(id: NetworkId) {
-    return this._networks.has(id);
+    return this.#networks.has(id);
   }
 
   addNetwork(network: SocialiteNetwork, overwrite = false) {
     return !overwrite && this.hasNetwork(network.id)
       ? false
-      : this._networks.set(network.id, network);
+      : this.#networks.set(network.id, network);
   }
 
   removeNetwork(id: NetworkId) {
-    return this._networks.delete(id);
+    return this.#networks.delete(id);
   }
 
   emptyNetworks() {
-    this._networks.clear();
+    this.#networks.clear();
   }
 
   getNetwork(id: NetworkId) {
-    return this._networks.get(id);
+    return this.#networks.get(id);
   }
 
   getAllNetworks(subset?: SocialiteNetworkProperties) {
-    return [...this._networks.values()].map((network) =>
+    return [...this.#networks.values()].map((network) =>
       subset ? filterNetworkProperties(network, subset) : network,
     );
   }
@@ -67,7 +66,7 @@ export class Socialite {
   getNetworkFromDomain(domain: string) {
     let matchedNetwork: SocialiteNetwork | undefined;
 
-    for (const [_id, network] of this._networks) {
+    for (const [_id, network] of this.#networks) {
       const match = new RegExp(network.matcher.domain).test(domain);
 
       if (match) {
@@ -87,19 +86,19 @@ export class Socialite {
     // BUG: TypeScript doesn't understand that we have
     // returned early if the `id` does not exist.
     // https://github.com/beefchimi/socialite/issues/4
-    const {preferredUrl, prefix} = this.getNetwork(id) as SocialiteNetwork;
+    const {preferredUrl, prefix} = this.getNetwork(id) ?? {};
 
     return getUrlWithSubstitutions(preferredUrl, user, prefix);
   }
 
-  parseUrl(url: BasicUrl) {
+  parseUrl(url = '') {
     const groups = getUrlGroups(url);
     // TODO: https://github.com/beefchimi/socialite/issues/5
-    return this.validateUrl(groups) ? (groups as UrlMinCriteria) : false;
+    return this.validateUrl(groups) ? (groups as UrlAnatomy) : false;
   }
 
   parseProfile(
-    value: BasicUrl | UrlMinCriteria,
+    value: string | UrlAnatomy,
     id?: NetworkId,
   ): SocialiteProfile | false {
     const groups = typeof value === 'string' ? this.parseUrl(value) : value;
@@ -180,11 +179,11 @@ export class Socialite {
     };
   }
 
-  fixUrlScheme(url: BasicUrl) {
+  fixUrlScheme(url = '') {
     return schemeRegExp.test(url) ? url : `https://${url}`;
   }
 
-  mergeGroupsToUrl(groups: UrlMinCriteria): BasicUrl {
+  mergeGroupsToUrl(groups: UrlAnatomy) {
     const orderedValues = [
       groups.scheme,
       groups.subdomain,
@@ -208,10 +207,10 @@ export class Socialite {
 
   private getMinimumResult(
     network: SocialiteNetwork,
-    groups: UrlMinCriteria,
-    url?: BasicUrl,
+    groups: UrlAnatomy,
+    url = '',
   ): SocialiteProfile {
-    const originalUrl = url ? url : this.mergeGroupsToUrl(groups);
+    const originalUrl = url.length ? url : this.mergeGroupsToUrl(groups);
 
     return {
       id: network.id,

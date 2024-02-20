@@ -11,8 +11,8 @@
 
 The minimum criteria for parsing a `url` is:
 
-1. **`domain`**: _https:// www. **domain** .com /path_
-2. **`tldomain`**: _https:// www. domain **.com** /path_
+1. **domain**: `https://www.{{domain}}.com/path`
+2. **tldomain**: `https://www.domain{{.com}}/path`
 
 ## Installation
 
@@ -61,8 +61,7 @@ The above will log the following `SocialiteProfile` _(object)_ to the console:
 For a more robust collection of social networks, you can import the `socialiteNetworks` object and use it _(at least)_ one of two ways:
 
 ```ts
-import {Socialite, socialiteNetworks} from 'socialitejs';
-import type {SocialiteId} from 'socialitejs';
+import {Socialite, socialiteNetworks, type SocialiteId} from 'socialitejs';
 
 // Adding all social networks in bulk:
 const allNetworksInstance = new Socialite(Object.values(socialiteNetworks));

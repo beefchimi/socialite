@@ -1,6 +1,8 @@
+import {describe, it, expect} from 'vitest';
+
 import {defaultSocialiteNetworks} from '../data';
 import {Socialite} from '../socialite';
-import type {SocialiteNetwork, UrlMinCriteria} from '../types';
+import type {SocialiteNetwork, UrlAnatomy} from '../types';
 import {mockCustomNetworks} from './fixtures';
 
 describe('Socialite class instance', () => {
@@ -61,7 +63,7 @@ describe('Socialite class instance', () => {
 
   describe('mergeGroupsToUrl()', () => {
     it('joins a subset of properties', () => {
-      const mockPartialUrlGroups: UrlMinCriteria = {
+      const mockPartialUrlGroups: UrlAnatomy = {
         domain: 'domain',
         tldomain: '.com',
         parameters: '?query=param',
@@ -74,7 +76,7 @@ describe('Socialite class instance', () => {
     });
 
     it('joins a full set of properties', () => {
-      const mockFullUrlGroups: UrlMinCriteria = {
+      const mockFullUrlGroups: UrlAnatomy = {
         scheme: 'https://',
         subdomain: 'www.sub.',
         domain: 'domain',

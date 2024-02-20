@@ -14,7 +14,7 @@ export {socialitePrefix} from './prefixes';
 export {Socialite} from './socialite';
 
 export {
-  filterNullishValuesFromObject,
+  objFilterNullish,
   filterNetworkProperties,
   mergeRegExp,
   getDiscordPreferredUrl,

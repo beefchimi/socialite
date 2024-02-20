@@ -1,5 +1,3 @@
-import {BasicUrl} from './general';
-
 export type NetworkId = string;
 export type UserName = string;
 export type UserPrefix = string;
@@ -21,8 +19,8 @@ export interface NetworkMatcher {
 export interface SocialiteNetwork {
   id: NetworkId;
   matcher: NetworkMatcher;
-  preferredUrl: BasicUrl;
-  appUrl?: BasicUrl;
+  preferredUrl: string;
+  appUrl?: string;
   prefix?: UserPrefix;
 }
 
