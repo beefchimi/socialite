@@ -1,5 +1,12 @@
 # Socialite
 
+## 0.0.5
+
+### Patch Changes
+
+- 239184b: Update all dev dependencies.
+- 5021cb9: Many methods will now accept an undefined argument.
+
 ## 0.0.4
 
 ### Patch Changes
