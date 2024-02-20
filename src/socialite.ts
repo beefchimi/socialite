@@ -3,14 +3,12 @@ import {defaultUserMatcher, schemeRegExp} from './capture';
 
 import {MatchUserSource} from './types';
 import type {
-  NetworkId,
   NetworkMap,
   ParsedUrlGroups,
   SocialiteProfile,
   SocialiteNetwork,
   SocialiteNetworkProperties,
   UrlAnatomy,
-  UserName,
 } from './types';
 import {
   filterNetworkProperties,
@@ -20,9 +18,6 @@ import {
 } from './utilities';
 
 export class Socialite {
-  // Since this is a Map, we do not want to expose a getter.
-  // That would allow users access to Map methods,
-  // which circumvents how we want to control this data.
   readonly #networks: NetworkMap;
 
   constructor(customNetworks: SocialiteNetwork[] = []) {
@@ -35,7 +30,7 @@ export class Socialite {
     initialNetworks.forEach((network) => this.addNetwork(network));
   }
 
-  hasNetwork(id: NetworkId) {
+  hasNetwork(id = '') {
     return this.#networks.has(id);
   }
 
@@ -45,7 +40,7 @@ export class Socialite {
       : this.#networks.set(network.id, network);
   }
 
-  removeNetwork(id: NetworkId) {
+  removeNetwork(id = '') {
     return this.#networks.delete(id);
   }
 
@@ -53,7 +48,7 @@ export class Socialite {
     this.#networks.clear();
   }
 
-  getNetwork(id: NetworkId) {
+  getNetwork(id = '') {
     return this.#networks.get(id);
   }
 
@@ -63,7 +58,7 @@ export class Socialite {
     );
   }
 
-  getNetworkFromDomain(domain: string) {
+  getNetworkFromDomain(domain = '') {
     let matchedNetwork: SocialiteNetwork | undefined;
 
     for (const [_id, network] of this.#networks) {
@@ -78,10 +73,8 @@ export class Socialite {
     return matchedNetwork;
   }
 
-  getPreferredUrl(id: NetworkId, user?: UserName) {
-    if (!this.hasNetwork(id)) {
-      return false;
-    }
+  getPreferredUrl(id = '', user = '') {
+    if (!this.hasNetwork(id)) return false;
 
     // BUG: TypeScript doesn't understand that we have
     // returned early if the `id` does not exist.
@@ -93,32 +86,23 @@ export class Socialite {
 
   parseUrl(url = '') {
     const groups = getUrlGroups(url);
-    // TODO: https://github.com/beefchimi/socialite/issues/5
-    return this.validateUrl(groups) ? (groups as UrlAnatomy) : false;
+    return this.#validateUrl(groups) ? groups : false;
   }
 
-  parseProfile(
-    value: string | UrlAnatomy,
-    id?: NetworkId,
-  ): SocialiteProfile | false {
+  parseProfile(value: string | UrlAnatomy, id = '') {
     const groups = typeof value === 'string' ? this.parseUrl(value) : value;
 
-    if (!groups || (id && !this.hasNetwork(id))) {
-      return false;
-    }
+    if (!groups || (id.length && !this.hasNetwork(id))) return false;
 
     // BUG: TypeScript thinks that `.get(id)` can return `undefined`.
     // https://github.com/beefchimi/socialite/issues/4
-    const targetNetwork =
-      id && this.hasNetwork(id)
-        ? this.getNetwork(id)
-        : this.getNetworkFromDomain(groups.domain);
+    const targetNetwork = this.hasNetwork(id)
+      ? this.getNetwork(id)
+      : this.getNetworkFromDomain(groups.domain);
 
-    if (!targetNetwork) {
-      return false;
-    }
+    if (!targetNetwork) return false;
 
-    const minResult = this.getMinimumResult(
+    const minResult = this.#getMinimumResult(
       targetNetwork,
       groups,
       typeof value === 'string' ? value : undefined,
@@ -151,9 +135,7 @@ export class Socialite {
       ? matchedUser[matchedUser.length - 1].replace(prefix ?? '', '')
       : undefined;
 
-    if (!user) {
-      return minResult;
-    }
+    if (!user) return minResult;
 
     // TODO: Resolve this special condition
     // https://github.com/beefchimi/socialite/issues/35
@@ -198,14 +180,12 @@ export class Socialite {
     return orderedValues.filter((value) => value !== undefined).join('');
   }
 
-  private validateUrl(groups: ParsedUrlGroups) {
-    // TODO: We need a way to tell TypeScript that, if this returns `true`,
-    // we for sure have an object with `domain` and `tldomain`.
-    // https://github.com/beefchimi/socialite/issues/5
-    return Boolean(groups?.domain && groups?.tldomain);
+  #validateUrl(groups?: ParsedUrlGroups): groups is UrlAnatomy {
+    const {domain, tldomain} = groups ?? {};
+    return Boolean(domain?.length && tldomain?.length);
   }
 
-  private getMinimumResult(
+  #getMinimumResult(
     network: SocialiteNetwork,
     groups: UrlAnatomy,
     url = '',

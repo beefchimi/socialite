@@ -7,7 +7,6 @@ export {MatchUserSource} from './social-network';
 export type {
   UserName,
   UserPrefix,
-  NetworkId,
   NetworkMatcher,
   NetworkMap,
   NetworkSubset,

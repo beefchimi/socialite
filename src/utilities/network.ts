@@ -9,7 +9,7 @@ export function filterNetworkProperties(
   network: SocialiteNetwork,
   subset: SocialiteNetworkProperties,
 ) {
-  const uniqueProperties: SocialiteNetworkProperties = arrayDedupe(subset);
+  const uniqueProperties = arrayDedupe(subset);
   const keys = typedObjectKeys(network);
 
   return uniqueProperties.length
