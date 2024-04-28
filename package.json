@@ -58,6 +58,9 @@
     "release:version": "changeset version",
     "release:publish": "changeset publish"
   },
+  "dependencies": {
+    "beeftools": "^0.0.5"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@vitest/coverage-v8": "^1.5.2",
