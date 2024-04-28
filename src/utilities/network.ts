@@ -1,9 +1,9 @@
+import {arrayDedupe, typedObjectKeys} from 'beeftools';
 import type {
   SocialiteNetwork,
   NetworkSubset,
   SocialiteNetworkProperties,
 } from '../types';
-import {arrayDedupe, typedObjectKeys} from './general';
 
 export function filterNetworkProperties(
   network: SocialiteNetwork,
