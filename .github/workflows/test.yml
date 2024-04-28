@@ -1,4 +1,4 @@
-name: Test
+name: 🧪 Test
 on: [push]
 
 jobs:
@@ -7,17 +7,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: 🗳️ Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node 20.x to install with private scope
+      - name: 🔧 Setup Node 20.x
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: npm ci
 
-      - name: Test
+      - name: 🧑‍🔬 Test
         run: npm run test
