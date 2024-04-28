@@ -9,6 +9,7 @@ export {instagram} from './instagram';
 export {keybase} from './keybase';
 export {linkedin} from './linkedin';
 export {medium} from './medium';
+export {onlyfans} from './onlyfans';
 export {patreon} from './patreon';
 export {pinterest} from './pinterest';
 export {reddit} from './reddit';

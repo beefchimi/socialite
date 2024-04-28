@@ -4,6 +4,7 @@ export const defaultSocialiteNetworks = [
   networks.facebook,
   networks.instagram,
   networks.linkedin,
+  networks.onlyfans,
   networks.reddit,
   networks.tiktok,
   networks.twitch,
