@@ -1,5 +1,11 @@
 # Socialite
 
+## 0.0.6
+
+### Patch Changes
+
+- dad0125: Add onlyfans network and update some dependencies.
+
 ## 0.0.5
 
 ### Patch Changes
