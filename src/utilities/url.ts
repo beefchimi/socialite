@@ -1,10 +1,11 @@
+import {objFilterNullish} from 'beeftools';
+
 import {discordPreferredUrls, profileReplacement, urlRegExp} from '../capture';
 import type {
   DiscordUrlCriteria,
   UrlGroupSubset,
   ParsedUrlGroups,
 } from '../types';
-import {objFilterNullish} from './general';
 
 function updateGroupsWithSubdomain(groups: UrlGroupSubset): UrlGroupSubset {
   const {domain} = groups;

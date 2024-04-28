@@ -6,6 +6,8 @@ export const onlyfans: SocialiteNetwork = {
   preferredUrl: `https://onlyfans.com/${profileReplacement.user}`,
   matcher: {
     domain: /onlyfans/,
+    // Unless we want to qualify this with a `prefix`,
+    // we probably do not need to include the `user` prop.
     user: `[^\\/]+`,
   },
 };
