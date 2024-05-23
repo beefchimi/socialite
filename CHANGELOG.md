@@ -1,5 +1,11 @@
 # Socialite
 
+## 0.0.7
+
+### Patch Changes
+
+- 9d1e86d: Mark beeftools as a external peer dependency.
+
 ## 0.0.6
 
 ### Patch Changes
