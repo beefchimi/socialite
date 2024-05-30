@@ -1,5 +1,11 @@
 # Socialite
 
+## 0.0.8
+
+### Patch Changes
+
+- a6600b5: Switch to eslint flat config.
+
 ## 0.0.7
 
 ### Patch Changes
