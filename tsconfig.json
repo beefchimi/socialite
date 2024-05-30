@@ -18,6 +18,6 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
-  "include": ["./vite.config.ts", "./src/**/*", "./config/**/*"],
+  "include": ["./src/**/*", "./config/**/*", "./vite.config.ts", "./eslint.config.mjs"],
   "exclude": ["./node_modules/**/*"]
 }
