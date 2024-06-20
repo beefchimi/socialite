@@ -14,6 +14,7 @@ export interface NetworkMatcher {
   domain: string | RegExp;
   userSource?: MatchUserSource;
   user?: string | RegExp;
+  leadingPath?: string | RegExp;
 }
 
 export interface SocialiteNetwork {
